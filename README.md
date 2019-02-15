@@ -4,11 +4,7 @@
 
 This is a starter React dApp that uses the Rimble UI component library to call methods on a smart contract deployed to the Ethereum Rinkeby testnet.
 
-[Live Demo](https://consensys.github.io/rimble-app-demo)
-
-## Instant start
-
-[![Edit web3-react](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/ConsenSys/rimble-app-demo)
+[Live Demo](https://consensys.github.io/rimble-app-demo/)
 
 ## Overview
 
