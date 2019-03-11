@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import { ThemeProvider, Box, ToastMessage, Text, Flex } from "rimble-ui";
+import { ThemeProvider, Box, Text, Flex } from "rimble-ui";
+
+import RimbleWeb3 from "./utilities/RimbleWeb3";
+
 import Header from "./components/Header";
 import PrimaryCard from "./components/PrimaryCard";
-import RimbleWeb3 from "./components/RimbleWeb3";
 import InstructionsCard from "./components/InstructionsCard";
 import MissingWeb3Provider from "./components/MissingWeb3Provider";
+
 import theme from "./theme";
 import { createGlobalStyle } from "styled-components";
 
@@ -39,7 +42,6 @@ class App extends Component {
             )}
           </RimbleWeb3.Consumer>
         </RimbleWeb3>
-        <ToastMessage.Provider ref={node => (window.toastProvider = node)} />
         <InstructionsCard />
         <GlobalStyle />
       </ThemeProvider>

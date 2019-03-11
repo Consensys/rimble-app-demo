@@ -1,0 +1,1751 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> should render single Text 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <App />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <Header />,
+        <ForwardRef
+          justifyContent="center"
+          p={4}
+        >
+          <ForwardRef
+            color="copyColor"
+            fontFamily="sansSerif"
+            fontSize={2}
+            fontWeight={2}
+            lineHeight="copy"
+            textAlign="left"
+            width="400px"
+          >
+            This is a starter React dApp that uses the Rimble UI component library to call methods on a smart contract deployed to the Ethereum Rinkeby testnet.
+          </ForwardRef>
+        </ForwardRef>,
+        <RimbleTransaction>
+          <Context.Consumer>
+            [Function]
+          </Context.Consumer>
+        </RimbleTransaction>,
+        <InstructionsCard />,
+        <GlobalStyleComponent />,
+      ],
+      "className": "App",
+      "theme": Object {
+        "borders": Array [
+          0,
+          "1px solid",
+        ],
+        "colors": Object {
+          "black": "#000e1a",
+          "blacks": Array [
+            "rgba(0,0,0,.0125)",
+            "rgba(0,0,0,.025)",
+            "rgba(0,0,0,.05)",
+            "rgba(0,0,0,.1)",
+            "rgba(0,0,0,.2)",
+            "rgba(0,0,0,.3)",
+            "rgba(0,0,0,.4)",
+            "rgba(0,0,0,.5)",
+            "rgba(0,0,0,.6)",
+            "rgba(0,0,0,.7)",
+            "rgba(0,0,0,.8)",
+            "rgba(0,0,0,.9)",
+          ],
+          "blue": "#007ce0",
+          "copyColor": "#3F3D4B",
+          "dark-gray": "#333",
+          "grey": "#CCC",
+          "light-gray": "#eee",
+          "light-silver": "#aaa",
+          "mid-gray": "#555",
+          "moon-gray": "#ccc",
+          "navy": "#004175",
+          "near-black": "#111",
+          "near-white": "#f4f4f4",
+          "primary": "#4E3FCE",
+          "silver": "#999",
+          "transparent": "transparent",
+          "white": "#fff",
+          "whites": Array [
+            "rgba(255,255,255,.0125)",
+            "rgba(255,255,255,.025)",
+            "rgba(255,255,255,.05)",
+            "rgba(255,255,255,.1)",
+            "rgba(255,255,255,.2)",
+            "rgba(255,255,255,.3)",
+            "rgba(255,255,255,.4)",
+            "rgba(255,255,255,.5)",
+            "rgba(255,255,255,.6)",
+            "rgba(255,255,255,.7)",
+            "rgba(255,255,255,.8)",
+            "rgba(255,255,255,.9)",
+          ],
+        },
+        "fontSizes": Array [
+          12,
+          14,
+          16,
+          20,
+          24,
+          32,
+          48,
+          64,
+        ],
+        "fontWeights": Array [
+          0,
+          300,
+          400,
+          600,
+          700,
+        ],
+        "fonts": Object {
+          "sansSerif": "\\"Source Sans Pro\\", -apple-system, sans-serif",
+          "serif": "athelas, georgia, times, serif",
+        },
+        "heights": Array [
+          0,
+          16,
+          32,
+          64,
+          128,
+          256,
+        ],
+        "lineHeights": Object {
+          "copy": 1.5,
+          "solid": 1,
+          "title": 1.25,
+        },
+        "maxHeights": Array [
+          0,
+          16,
+          32,
+          64,
+          128,
+          256,
+        ],
+        "maxWidths": Array [
+          0,
+          16,
+          32,
+          64,
+          128,
+          256,
+          512,
+          768,
+          1024,
+          1536,
+        ],
+        "minHeights": Array [
+          0,
+          16,
+          32,
+          64,
+          128,
+          256,
+        ],
+        "minWidths": Array [
+          0,
+          16,
+          32,
+          64,
+          128,
+          256,
+        ],
+        "opacity": Object {
+          "disabled": 0.4,
+        },
+        "radii": Array [
+          "0",
+          "4px",
+          "8px",
+          "16px",
+        ],
+        "shadows": Array [
+          "0",
+          "0px 2px 4px rgba(0, 0, 0, 0.1)",
+          "0 7px 14px rgba(50,50,93,.1)",
+        ],
+        "space": Array [
+          0,
+          4,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256,
+        ],
+        "width": Array [
+          0,
+          16,
+          32,
+          64,
+          128,
+          256,
+        ],
+      },
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {},
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": <ForwardRef
+            color="copyColor"
+            fontFamily="sansSerif"
+            fontSize={2}
+            fontWeight={2}
+            lineHeight="copy"
+            textAlign="left"
+            width="400px"
+          >
+            This is a starter React dApp that uses the Rimble UI component library to call methods on a smart contract deployed to the Ethereum Rinkeby testnet.
+          </ForwardRef>,
+          "justifyContent": "center",
+          "p": 4,
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": "This is a starter React dApp that uses the Rimble UI component library to call methods on a smart contract deployed to the Ethereum Rinkeby testnet.",
+            "color": "copyColor",
+            "fontFamily": "sansSerif",
+            "fontSize": 2,
+            "fontWeight": 2,
+            "lineHeight": "copy",
+            "textAlign": "left",
+            "width": "400px",
+          },
+          "ref": null,
+          "rendered": "This is a starter React dApp that uses the Rimble UI component library to call methods on a smart contract deployed to the Ethereum Rinkeby testnet.",
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-TPgYF",
+              "isStatic": false,
+              "lastClassName": "iZkMVG",
+              "rules": Array [
+                "
+  & {
+    box-sizing: border-box;
+    text-align: left;
+  }
+  ",
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                "
+  ",
+                "
+  ",
+                [Function],
+                "
+",
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+",
+              ],
+            },
+            "defaultProps": Object {
+              "color": "copyColor",
+              "fontFamily": "sansSerif",
+              "fontSize": 2,
+              "fontWeight": 2,
+              "lineHeight": "copy",
+              "textAlign": "left",
+            },
+            "displayName": "Text",
+            "foldedComponentIds": Array [
+              "sc-bdVaJa",
+            ],
+            "p": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-kOdLDR",
+                "isStatic": false,
+                "rules": Array [
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+",
+                ],
+              },
+              "defaultProps": Object {
+                "color": "copyColor",
+                "fontFamily": "sansSerif",
+                "fontSize": 2,
+                "fontWeight": 2,
+                "lineHeight": "copy",
+                "textAlign": "left",
+              },
+              "displayName": "styled.p",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-kOdLDR",
+              "target": "p",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+            "render": [Function],
+            "s": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-eZbwru",
+                "isStatic": false,
+                "rules": Array [
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+",
+                ],
+              },
+              "defaultProps": Object {
+                "color": "copyColor",
+                "fontFamily": "sansSerif",
+                "fontSize": 2,
+                "fontWeight": 2,
+                "lineHeight": "copy",
+                "textAlign": "left",
+              },
+              "displayName": "styled.s",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-eZbwru",
+              "target": "s",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+            "span": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-iBNZrS",
+                "isStatic": false,
+                "rules": Array [
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+",
+                ],
+              },
+              "defaultProps": Object {
+                "color": "copyColor",
+                "fontFamily": "sansSerif",
+                "fontSize": 2,
+                "fontWeight": 2,
+                "lineHeight": "copy",
+                "textAlign": "left",
+              },
+              "displayName": "styled.span",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-iBNZrS",
+              "target": "span",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+            "styledComponentId": "sc-TPgYF",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": false,
+            "lastClassName": "djxatk",
+            "rules": Array [
+              "
+  & {
+    box-sizing: border-box;
+    text-align: left;
+  }
+  ",
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              "
+  ",
+              "
+  ",
+              [Function],
+              "
+",
+              "
+  & {
+    display: flex;
+  }
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+  ",
+              [Function],
+              "
+",
+            ],
+          },
+          "displayName": "Flex",
+          "foldedComponentIds": Array [
+            "sc-bdVaJa",
+          ],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <Context.Consumer>
+            [Function]
+          </Context.Consumer>,
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": [Function],
+          },
+          "ref": null,
+          "rendered": [Function],
+          "type": Object {
+            "$$typeof": Symbol(react.context),
+            "_calculateChangedBits": null,
+            "_context": Object {
+              "$$typeof": Symbol(react.context),
+              "Consumer": [Circular],
+              "Provider": Object {
+                "$$typeof": Symbol(react.provider),
+                "_context": [Circular],
+              },
+              "_calculateChangedBits": null,
+              "_currentRenderer": Object {},
+              "_currentRenderer2": null,
+              "_currentValue": Object {
+                "account": Object {},
+                "contract": Object {},
+                "initAccount": [Function],
+                "initContract": [Function],
+                "initWeb3": [Function],
+                "transactions": Object {},
+                "web3": Object {},
+              },
+              "_currentValue2": Object {
+                "account": Object {},
+                "contract": Object {},
+                "initAccount": [Function],
+                "initContract": [Function],
+                "initWeb3": [Function],
+                "transactions": Object {},
+                "web3": Object {},
+              },
+              "_threadCount": 0,
+            },
+          },
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {},
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {},
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <Header />,
+          <ForwardRef
+            justifyContent="center"
+            p={4}
+          >
+            <ForwardRef
+              color="copyColor"
+              fontFamily="sansSerif"
+              fontSize={2}
+              fontWeight={2}
+              lineHeight="copy"
+              textAlign="left"
+              width="400px"
+            >
+              This is a starter React dApp that uses the Rimble UI component library to call methods on a smart contract deployed to the Ethereum Rinkeby testnet.
+            </ForwardRef>
+          </ForwardRef>,
+          <RimbleTransaction>
+            <Context.Consumer>
+              [Function]
+            </Context.Consumer>
+          </RimbleTransaction>,
+          <InstructionsCard />,
+          <GlobalStyleComponent />,
+        ],
+        "className": "App",
+        "theme": Object {
+          "borders": Array [
+            0,
+            "1px solid",
+          ],
+          "colors": Object {
+            "black": "#000e1a",
+            "blacks": Array [
+              "rgba(0,0,0,.0125)",
+              "rgba(0,0,0,.025)",
+              "rgba(0,0,0,.05)",
+              "rgba(0,0,0,.1)",
+              "rgba(0,0,0,.2)",
+              "rgba(0,0,0,.3)",
+              "rgba(0,0,0,.4)",
+              "rgba(0,0,0,.5)",
+              "rgba(0,0,0,.6)",
+              "rgba(0,0,0,.7)",
+              "rgba(0,0,0,.8)",
+              "rgba(0,0,0,.9)",
+            ],
+            "blue": "#007ce0",
+            "copyColor": "#3F3D4B",
+            "dark-gray": "#333",
+            "grey": "#CCC",
+            "light-gray": "#eee",
+            "light-silver": "#aaa",
+            "mid-gray": "#555",
+            "moon-gray": "#ccc",
+            "navy": "#004175",
+            "near-black": "#111",
+            "near-white": "#f4f4f4",
+            "primary": "#4E3FCE",
+            "silver": "#999",
+            "transparent": "transparent",
+            "white": "#fff",
+            "whites": Array [
+              "rgba(255,255,255,.0125)",
+              "rgba(255,255,255,.025)",
+              "rgba(255,255,255,.05)",
+              "rgba(255,255,255,.1)",
+              "rgba(255,255,255,.2)",
+              "rgba(255,255,255,.3)",
+              "rgba(255,255,255,.4)",
+              "rgba(255,255,255,.5)",
+              "rgba(255,255,255,.6)",
+              "rgba(255,255,255,.7)",
+              "rgba(255,255,255,.8)",
+              "rgba(255,255,255,.9)",
+            ],
+          },
+          "fontSizes": Array [
+            12,
+            14,
+            16,
+            20,
+            24,
+            32,
+            48,
+            64,
+          ],
+          "fontWeights": Array [
+            0,
+            300,
+            400,
+            600,
+            700,
+          ],
+          "fonts": Object {
+            "sansSerif": "\\"Source Sans Pro\\", -apple-system, sans-serif",
+            "serif": "athelas, georgia, times, serif",
+          },
+          "heights": Array [
+            0,
+            16,
+            32,
+            64,
+            128,
+            256,
+          ],
+          "lineHeights": Object {
+            "copy": 1.5,
+            "solid": 1,
+            "title": 1.25,
+          },
+          "maxHeights": Array [
+            0,
+            16,
+            32,
+            64,
+            128,
+            256,
+          ],
+          "maxWidths": Array [
+            0,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512,
+            768,
+            1024,
+            1536,
+          ],
+          "minHeights": Array [
+            0,
+            16,
+            32,
+            64,
+            128,
+            256,
+          ],
+          "minWidths": Array [
+            0,
+            16,
+            32,
+            64,
+            128,
+            256,
+          ],
+          "opacity": Object {
+            "disabled": 0.4,
+          },
+          "radii": Array [
+            "0",
+            "4px",
+            "8px",
+            "16px",
+          ],
+          "shadows": Array [
+            "0",
+            "0px 2px 4px rgba(0, 0, 0, 0.1)",
+            "0 7px 14px rgba(50,50,93,.1)",
+          ],
+          "space": Array [
+            0,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+          ],
+          "width": Array [
+            0,
+            16,
+            32,
+            64,
+            128,
+            256,
+          ],
+        },
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": <ForwardRef
+              color="copyColor"
+              fontFamily="sansSerif"
+              fontSize={2}
+              fontWeight={2}
+              lineHeight="copy"
+              textAlign="left"
+              width="400px"
+            >
+              This is a starter React dApp that uses the Rimble UI component library to call methods on a smart contract deployed to the Ethereum Rinkeby testnet.
+            </ForwardRef>,
+            "justifyContent": "center",
+            "p": 4,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": "This is a starter React dApp that uses the Rimble UI component library to call methods on a smart contract deployed to the Ethereum Rinkeby testnet.",
+              "color": "copyColor",
+              "fontFamily": "sansSerif",
+              "fontSize": 2,
+              "fontWeight": 2,
+              "lineHeight": "copy",
+              "textAlign": "left",
+              "width": "400px",
+            },
+            "ref": null,
+            "rendered": "This is a starter React dApp that uses the Rimble UI component library to call methods on a smart contract deployed to the Ethereum Rinkeby testnet.",
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-TPgYF",
+                "isStatic": false,
+                "lastClassName": "iZkMVG",
+                "rules": Array [
+                  "
+  & {
+    box-sizing: border-box;
+    text-align: left;
+  }
+  ",
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  "
+  ",
+                  "
+  ",
+                  [Function],
+                  "
+",
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+  ",
+                  [Function],
+                  "
+",
+                ],
+              },
+              "defaultProps": Object {
+                "color": "copyColor",
+                "fontFamily": "sansSerif",
+                "fontSize": 2,
+                "fontWeight": 2,
+                "lineHeight": "copy",
+                "textAlign": "left",
+              },
+              "displayName": "Text",
+              "foldedComponentIds": Array [
+                "sc-bdVaJa",
+              ],
+              "p": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-kOdLDR",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+",
+                  ],
+                },
+                "defaultProps": Object {
+                  "color": "copyColor",
+                  "fontFamily": "sansSerif",
+                  "fontSize": 2,
+                  "fontWeight": 2,
+                  "lineHeight": "copy",
+                  "textAlign": "left",
+                },
+                "displayName": "styled.p",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-kOdLDR",
+                "target": "p",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+              "render": [Function],
+              "s": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-eZbwru",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+",
+                  ],
+                },
+                "defaultProps": Object {
+                  "color": "copyColor",
+                  "fontFamily": "sansSerif",
+                  "fontSize": 2,
+                  "fontWeight": 2,
+                  "lineHeight": "copy",
+                  "textAlign": "left",
+                },
+                "displayName": "styled.s",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-eZbwru",
+                "target": "s",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+              "span": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-iBNZrS",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+  ",
+                    [Function],
+                    "
+",
+                  ],
+                },
+                "defaultProps": Object {
+                  "color": "copyColor",
+                  "fontFamily": "sansSerif",
+                  "fontSize": 2,
+                  "fontWeight": 2,
+                  "lineHeight": "copy",
+                  "textAlign": "left",
+                },
+                "displayName": "styled.span",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-iBNZrS",
+                "target": "span",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
+              "styledComponentId": "sc-TPgYF",
+              "target": "div",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
+          },
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": false,
+              "lastClassName": "djxatk",
+              "rules": Array [
+                "
+  & {
+    box-sizing: border-box;
+    text-align: left;
+  }
+  ",
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                "
+  ",
+                "
+  ",
+                [Function],
+                "
+",
+                "
+  & {
+    display: flex;
+  }
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+  ",
+                [Function],
+                "
+",
+              ],
+            },
+            "displayName": "Flex",
+            "foldedComponentIds": Array [
+              "sc-bdVaJa",
+            ],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <Context.Consumer>
+              [Function]
+            </Context.Consumer>,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": [Function],
+            },
+            "ref": null,
+            "rendered": [Function],
+            "type": Object {
+              "$$typeof": Symbol(react.context),
+              "_calculateChangedBits": null,
+              "_context": Object {
+                "$$typeof": Symbol(react.context),
+                "Consumer": [Circular],
+                "Provider": Object {
+                  "$$typeof": Symbol(react.provider),
+                  "_context": [Circular],
+                },
+                "_calculateChangedBits": null,
+                "_currentRenderer": Object {},
+                "_currentRenderer2": null,
+                "_currentValue": Object {
+                  "account": Object {},
+                  "contract": Object {},
+                  "initAccount": [Function],
+                  "initContract": [Function],
+                  "initWeb3": [Function],
+                  "transactions": Object {},
+                  "web3": Object {},
+                },
+                "_currentValue2": Object {
+                  "account": Object {},
+                  "contract": Object {},
+                  "initAccount": [Function],
+                  "initContract": [Function],
+                  "initWeb3": [Function],
+                  "transactions": Object {},
+                  "web3": Object {},
+                },
+                "_threadCount": 0,
+              },
+            },
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+  Symbol(enzyme.__childContext__): null,
+}
+`;
