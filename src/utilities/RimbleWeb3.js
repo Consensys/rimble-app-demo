@@ -100,6 +100,9 @@ class RimbleTransaction extends React.Component {
         const account = wallets[0];
         this.setState({ account });
         console.log("wallet address:", this.state.account);
+        
+        // Watch for account change
+        this.pollAccountUpdates();
       });
     } catch (error) {
       // User denied account access...
@@ -161,20 +164,39 @@ class RimbleTransaction extends React.Component {
   }
 
   checkNetwork = async () => {
-    console.log("initial state: ", this.state);
-
     let isCorrectNetwork = null;
     await this.getNetworkId();
     await this.getNetworkName();
 
-    console.log("post-await state: ", this.state.currentNetwork, this.state.requiredNetwork);
-    console.log("comparator", (this.state.currentNetwork.id === this.state.requiredNetwork.id))
+    console.log("this.state.web3.currentProvider", this.state.web3.currentProvider);
+    this.state.web3.currentProvider.publicConfigStore.on('update', ({selectedAddress, networkVersion}) => {
+      console.log("selectedAddress", selectedAddress, "networkVersion", networkVersion);
+    });
 
     isCorrectNetwork = this.state.currentNetwork.id === this.state.requiredNetwork.id
       ? true
       : false;
   
     this.setState({ isCorrectNetwork: isCorrectNetwork });
+  }
+
+  pollAccountUpdates = () => {
+    let account = this.state.account;
+    let requiresUpdate = false;
+    let accountInterval = setInterval(() => {
+      window.ethereum.enable().then(wallets => {
+        const updatedAccount = wallets[0];
+        
+        if (updatedAccount !== account) {
+          requiresUpdate = true;
+        }
+
+        if (requiresUpdate) {
+          clearInterval(accountInterval);
+          this.initAccount();
+        }
+      });
+    }, 1000);
   }
 
   contractMethodSendWrapper = contractMethod => {
