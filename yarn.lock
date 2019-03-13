@@ -1779,6 +1779,11 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
 
+bowser@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/bowser/-/bowser-2.1.2.tgz#35cba0487362ab6a8cea8fd094bf5670b408c8d3"
+  integrity sha512-K64ZigDayqlptyKVEiCDPPKQ2/SyPT/jsgJPwZOcpR3WA2bYojlHLeTHN+IRc/vbMz3F6CV62nnAo01+0zYrsQ==
+
 brace-expansion@^1.1.7:
   version "1.1.11"
   resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.11.tgz#3c7fcbf529d87226f3d2f52b966ff5271eb441dd"
@@ -8441,10 +8446,10 @@ rgba-regex@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/rgba-regex/-/rgba-regex-1.0.0.tgz#43374e2e2ca0968b0ef1523460b7d730ff22eeb3"
 
-rimble-ui@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/rimble-ui/-/rimble-ui-0.4.2.tgz#cf1540d35616c823c62b9a3dd26ac4f2898465ea"
-  integrity sha512-NrbW65mOUgvccWkWJ2DTRMZleFVEC4JlYKVOg5lrz+3SDAKyBmoWpnAyPYeklHsKpoQyU2RyOhCK2xeTowNz9A==
+rimble-ui@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/rimble-ui/-/rimble-ui-0.5.0.tgz#efc9264f6cb43abcb5d66777f6ad3e7f4e77e301"
+  integrity sha512-C/tg4nygSrGVbEXiujwLBx5zKKK5iWW6CHpilx6djGGqWTSx3hJQNt5vl1e7pr6zonWNJ4FIvIQxsMD57dDLqw==
   dependencies:
     "@d8660091/react-popper" "^1.0.4"
     "@svgr/rollup" "^4.1.0"

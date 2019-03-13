@@ -34,10 +34,10 @@ class App extends Component {
 
         <RimbleWeb3>
           <RimbleWeb3.Consumer>
-            {({ web3 }) => (
+            {({ needsPreflight, validBrowser, userAgent, web3, account }) => (
               <Box>
                 {/* Conditionally render child comonents dependent on web3 being loaded */}
-                {!web3 ? <MissingWeb3Provider /> : <PrimaryCard />}
+                {validBrowser && web3 && account ?  <PrimaryCard /> : <MissingWeb3Provider validBrowser={validBrowser} userAgent={userAgent} web3={web3} account={account} /> }
               </Box>
             )}
           </RimbleWeb3.Consumer>

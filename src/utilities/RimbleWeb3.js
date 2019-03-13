@@ -1,11 +1,13 @@
 import React from "react";
 import Web3 from "web3"; // uses latest 1.x.x version
+import bowser from "bowser";
 
 const RimbleTransactionContext = React.createContext({
   contract: {},
   account: {},
   web3: {},
   transactions: {},
+  checkPreflight: () => {},
   initWeb3: () => {},
   initContract: () => {},
   initAccount: () => {}
@@ -13,6 +15,36 @@ const RimbleTransactionContext = React.createContext({
 
 class RimbleTransaction extends React.Component {
   static Consumer = RimbleTransactionContext.Consumer;
+  
+  // Performs 
+  checkPreflight = () => {
+    this.checkModernBrowser();
+    this.initWeb3();
+    // Only do this if/when initWeb3 is true...
+    this.initAccount();
+  }
+
+  // Validates user's browser is web3 capable
+  checkModernBrowser = async () => {
+    // User Agent
+    const browser = bowser.getParser(window.navigator.userAgent);
+    const userAgent = browser.parse().parsedResult;
+
+    const validBrowser = browser.satisfies({
+      desktop: {
+        chrome: '>49',
+        firefox: '>52',
+        opera: '>36'
+      }
+    }) ? true : false;
+
+    this.setState({ 
+      userAgent,
+      validBrowser
+    });
+
+    return validBrowser;
+  }
 
   // Initialize a web3 provider
   initWeb3 = async () => {
@@ -189,6 +221,7 @@ class RimbleTransaction extends React.Component {
     account: null,
     web3: null,
     transactions: {},
+    checkPreflight: this.checkPreflight,
     initWeb3: this.initWeb3,
     initContract: this.initContract,
     initAccount: this.initAccount,
@@ -196,7 +229,7 @@ class RimbleTransaction extends React.Component {
   };
 
   componentDidMount() {
-    this.initWeb3();
+    this.checkPreflight();
   }
 
   render() {
