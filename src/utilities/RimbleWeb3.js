@@ -14,6 +14,10 @@ const RimbleTransactionContext = React.createContext({
   userRejectedConnect: {},
   accountValidated: {},
   validateAccount: () => {},
+  checkNetwork: () => {},
+  requiredNetwork: {},
+  currentNetwork: {},
+  isCorrectNetwork: {},
 });
 
 class RimbleTransaction extends React.Component {
@@ -113,7 +117,7 @@ class RimbleTransaction extends React.Component {
       await this.initAccount();
     }
 
-    window.web3.personal.sign(
+    return window.web3.personal.sign(
       window.web3.fromUtf8(`I am signing my one-time nonce: 012345`),
       this.state.account,
       (err, signature) => {
@@ -124,14 +128,53 @@ class RimbleTransaction extends React.Component {
             variant: "failure"
           });
           this.setState({ accountValidated: false })
-          return err;
         } else {
           console.log("Account validation successful.", signature);
           this.setState({ accountValidated: true })
-          return (signature);
         }
       }
     )
+  }
+
+  getNetworkId = async () => {
+    try {
+      return this.state.web3.eth.net.getId((error, networkId) => {
+        let currentNetwork = { ...this.state.currentNetwork };
+        currentNetwork.id = networkId;
+        this.setState({ currentNetwork });
+      });
+    } catch (error) {
+      console.log("Could not get network ID: ", error);
+    }
+  }
+
+  getNetworkName = async () => {
+    try {
+      return this.state.web3.eth.net.getNetworkType((error, networkName) => {
+        let currentNetwork = { ...this.state.currentNetwork };
+        currentNetwork.name = networkName;
+        this.setState({ currentNetwork });
+      });
+    } catch (error) {
+      console.log("Could not get network Name: ", error);
+    }
+  }
+
+  checkNetwork = async () => {
+    console.log("initial state: ", this.state);
+
+    let isCorrectNetwork = null;
+    await this.getNetworkId();
+    await this.getNetworkName();
+
+    console.log("post-await state: ", this.state.currentNetwork, this.state.requiredNetwork);
+    console.log("comparator", (this.state.currentNetwork.id === this.state.requiredNetwork.id))
+
+    isCorrectNetwork = this.state.currentNetwork.id === this.state.requiredNetwork.id
+      ? true
+      : false;
+  
+    this.setState({ isCorrectNetwork: isCorrectNetwork });
   }
 
   contractMethodSendWrapper = contractMethod => {
@@ -260,6 +303,13 @@ class RimbleTransaction extends React.Component {
     userRejectedConnect: null,
     accountValidated: null,
     validateAccount: this.validateAccount,
+    checkNetwork: this.checkNetwork,
+    requiredNetwork: {
+      name: "Rinkby",
+      id: 4,
+    },
+    currentNetwork: {},
+    isCorrectNetwork: null,
   };
 
   componentDidMount() {

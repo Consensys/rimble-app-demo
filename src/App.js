@@ -44,11 +44,15 @@ class App extends Component {
               userRejectedConnect,
               accountValidated,
               validateAccount,
+              checkNetwork,
+              requiredNetwork,
+              currentNetwork,
+              isCorrectNetwork,
             }) => (
               <Box>
                 {/* Conditionally render child comonents dependent on web3 being loaded */}
                 {/* TODO: How can we combine these together to use a single prop? */}
-                { validBrowser && web3 && account && accountValidated ?  
+                { validBrowser && web3 && account && accountValidated && isCorrectNetwork ?  
                   <PrimaryCard /> 
                 : <MissingWeb3Provider 
                     validBrowser={validBrowser} 
@@ -59,6 +63,10 @@ class App extends Component {
                     userRejectedConnect={userRejectedConnect}
                     accountValidated={accountValidated} 
                     validateAccount={validateAccount} 
+                    checkNetwork={checkNetwork}
+                    requiredNetwork={requiredNetwork}
+                    currentNetwork={currentNetwork}
+                    isCorrectNetwork={isCorrectNetwork}
                   /> 
                 }
               </Box>

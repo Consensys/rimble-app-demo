@@ -80,6 +80,31 @@ class MissingWeb3Provider extends React.Component {
           :
             null
         }
+
+        <Box>
+          <Flex alignItems={"center"}>
+            { this.props.isCorrectNetwork ? 
+              <Icon name='Check' color={"green"} mr={2} /> 
+            :
+              <Icon name='Close' color={"red"} mr={2} />
+            }
+            <Text>Correct Network</Text>
+          </Flex>
+
+          { !this.props.account && this.props.web3 && !this.props.isCorrectNetwork
+            ? 
+              <Flex ml={4} alignItems={"center"} justifyContent={"space-between"}>
+                <Flex alignItems={"center"}>
+                  <Icon name='Info' mr={2} color="#999" />
+                  <Text color="#999">Current network: {this.props.currentNetwork.name} - Required network: {this.props.requiredNetwork.name}</Text>
+                </Flex>
+                
+                <OutlineButton size="small" onClick={this.props.checkNetwork}>Check Network</OutlineButton>
+              </Flex>
+            : 
+              null 
+          }
+        </Box>
         
         <Box>
           <Flex alignItems={"center"}>
@@ -140,16 +165,7 @@ class MissingWeb3Provider extends React.Component {
               null
           }
         </Box>
-
-        <Flex alignItems={"center"}>
-          { this.props.network ? 
-            <Icon name='Check' color={"green"} mr={2} /> 
-          :
-            <Icon name='Close' color={"red"} mr={2} />
-          }
-          <Text>Correct Network</Text>
-        </Flex>
-
+        
         {/* <Text>You will need to <Link href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en" target="_blank">install MetaMask</Link> to use this dApp.</Text> */}
         <ToastMessage.Provider ref={node => (window.toastProvider = node)} />
       </Card>
