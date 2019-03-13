@@ -10,7 +10,10 @@ const RimbleTransactionContext = React.createContext({
   checkPreflight: () => {},
   initWeb3: () => {},
   initContract: () => {},
-  initAccount: () => {}
+  initAccount: () => {},
+  userRejectedConnect: {},
+  accountValidated: {},
+  validateAccount: () => {},
 });
 
 class RimbleTransaction extends React.Component {
@@ -20,8 +23,8 @@ class RimbleTransaction extends React.Component {
   checkPreflight = () => {
     this.checkModernBrowser();
     this.initWeb3();
+    
     // Only do this if/when initWeb3 is true...
-    this.initAccount();
   }
 
   // Validates user's browser is web3 capable
@@ -96,12 +99,40 @@ class RimbleTransaction extends React.Component {
       });
     } catch (error) {
       // User denied account access...
-      console.log("error:", error);
+      console.log("User cancelled connect request. Error:", error);
       window.toastProvider.addMessage("User needs to CONNECT wallet", {
         variant: "failure"
       });
+      this.setState({ userRejectedConnect: true })
     }
   };
+
+  validateAccount = async () => {
+    console.log("Account: ", this.state.account)
+    if (!this.state.account) {
+      await this.initAccount();
+    }
+
+    window.web3.personal.sign(
+      window.web3.fromUtf8(`I am signing my one-time nonce: 012345`),
+      this.state.account,
+      (err, signature) => {
+        if (err) {
+          // User rejected account validation.
+          console.log("Wallet account not validated. Error:", err);
+          window.toastProvider.addMessage("Wallet account was not validated", {
+            variant: "failure"
+          });
+          this.setState({ accountValidated: false })
+          return err;
+        } else {
+          console.log("Account validation successful.", signature);
+          this.setState({ accountValidated: true })
+          return (signature);
+        }
+      }
+    )
+  }
 
   contractMethodSendWrapper = contractMethod => {
     // Create new tx and add to collection
@@ -225,7 +256,10 @@ class RimbleTransaction extends React.Component {
     initWeb3: this.initWeb3,
     initContract: this.initContract,
     initAccount: this.initAccount,
-    contractMethodSendWrapper: this.contractMethodSendWrapper
+    contractMethodSendWrapper: this.contractMethodSendWrapper,
+    userRejectedConnect: null,
+    accountValidated: null,
+    validateAccount: this.validateAccount,
   };
 
   componentDidMount() {

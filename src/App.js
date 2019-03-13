@@ -34,10 +34,33 @@ class App extends Component {
 
         <RimbleWeb3>
           <RimbleWeb3.Consumer>
-            {({ needsPreflight, validBrowser, userAgent, web3, account }) => (
+            {({ 
+              needsPreflight, 
+              validBrowser, 
+              userAgent, 
+              web3, 
+              account, 
+              initAccount, 
+              userRejectedConnect,
+              accountValidated,
+              validateAccount,
+            }) => (
               <Box>
                 {/* Conditionally render child comonents dependent on web3 being loaded */}
-                {validBrowser && web3 && account ?  <PrimaryCard /> : <MissingWeb3Provider validBrowser={validBrowser} userAgent={userAgent} web3={web3} account={account} /> }
+                {/* TODO: How can we combine these together to use a single prop? */}
+                { validBrowser && web3 && account && accountValidated ?  
+                  <PrimaryCard /> 
+                : <MissingWeb3Provider 
+                    validBrowser={validBrowser} 
+                    userAgent={userAgent} 
+                    web3={web3} 
+                    account={account} 
+                    initAccount={initAccount} 
+                    userRejectedConnect={userRejectedConnect}
+                    accountValidated={accountValidated} 
+                    validateAccount={validateAccount} 
+                  /> 
+                }
               </Box>
             )}
           </RimbleWeb3.Consumer>
