@@ -27,8 +27,14 @@ class RimbleTransaction extends React.Component {
   checkPreflight = () => {
     this.checkModernBrowser();
     this.initWeb3();
+
+    // Prevent MetaMask from reloading page on network change
+    // TODO: Throwing too many system dialogs, possible to resolve?
+    // window.onbeforeunload = function() {
+    //   console.log("Suppresing page reload");
+    //   return "Prevent reload"
+    // }
     
-    // Only do this if/when initWeb3 is true...
   }
 
   // Validates user's browser is web3 capable
@@ -54,29 +60,37 @@ class RimbleTransaction extends React.Component {
   }
 
   // Initialize a web3 provider
+  // TODO: Make async work
   initWeb3 = async () => {
-    let web3 = {};
+    return new Promise ((resolve, reject) => {
+      let web3 = {};
 
-    // Check for modern web3 provider
-    if (window.ethereum) {
-      console.log("Using modern web3 provider.");
-      web3 = new Web3(window.ethereum);
-    }
-    // Legacy dapp browsers, public wallet address always exposed
-    else if (window.web3) {
-      console.log("Legacy web3 provider. Try updating.");
-      web3 = new Web3(window.web3.currentProvider);
-    }
-    // Non-dapp browsers...
-    else {
-      console.log(
-        "Non-Ethereum browser detected. You should consider trying MetaMask!"
-      );
+      // Check for modern web3 provider
+      if (window.ethereum) {
+        console.log("Using modern web3 provider.");
+        web3 = new Web3(window.ethereum);
+      }
+      // Legacy dapp browsers, public wallet address always exposed
+      else if (window.web3) {
+        console.log("Legacy web3 provider. Try updating.");
+        web3 = new Web3(window.web3.currentProvider);
+      }
+      // Non-dapp browsers...
+      else {
+        console.log(
+          "Non-Ethereum browser detected. You should consider trying MetaMask!"
+        );
 
-      web3 = false;
-    }
+        web3 = false;
+      }
 
-    this.setState({ web3 });
+      this.setState({ web3 }, () => {
+        // After setting the web3 provider, check network
+        this.checkNetwork();
+      });
+    }, error => {
+      console.log("Error initializing web3");
+    });
   };
 
   initContract = async (address, abi) => {
@@ -168,16 +182,11 @@ class RimbleTransaction extends React.Component {
     await this.getNetworkId();
     await this.getNetworkName();
 
-    console.log("this.state.web3.currentProvider", this.state.web3.currentProvider);
-    this.state.web3.currentProvider.publicConfigStore.on('update', ({selectedAddress, networkVersion}) => {
-      console.log("selectedAddress", selectedAddress, "networkVersion", networkVersion);
-    });
-
     isCorrectNetwork = this.state.currentNetwork.id === this.state.requiredNetwork.id
       ? true
       : false;
   
-    this.setState({ isCorrectNetwork: isCorrectNetwork });
+    this.setState({ isCorrectNetwork });
   }
 
   pollAccountUpdates = () => {
@@ -193,7 +202,13 @@ class RimbleTransaction extends React.Component {
 
         if (requiresUpdate) {
           clearInterval(accountInterval);
-          this.initAccount();
+          this.setState({
+            userRejectedConnect: null,
+            account: {},
+            accountValidated: null,
+          }, () => {
+            this.initAccount()
+          });
         }
       });
     }, 1000);
