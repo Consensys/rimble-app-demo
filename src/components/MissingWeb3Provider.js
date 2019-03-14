@@ -1,5 +1,7 @@
 import React from "react";
-import { Card, Heading, Text, Link, Icon, Flex, ToastMessage, OutlineButton, Box, Button } from "rimble-ui"
+import { Card, Heading, Text, Icon, Flex, ToastMessage, OutlineButton, Box, Button } from "rimble-ui"
+import WrongNetworkBanner from "./WrongNetworkBanner"
+import NetworkOverview from "./NetworkOverview"
 
 class MissingWeb3Provider extends React.Component {
   render() {
@@ -26,7 +28,7 @@ class MissingWeb3Provider extends React.Component {
                   <Text color="#999">You current browser is not web3 capable.</Text>
                 </Flex>
                 
-                <OutlineButton size="small">Download Chrome</OutlineButton>
+                <OutlineButton size="small" href="https://www.google.com/chrome/browser/">Download Chrome</OutlineButton>
               </Flex>
             : null 
           }
@@ -51,7 +53,7 @@ class MissingWeb3Provider extends React.Component {
                   <Text color="#999">You do not have a wallet.</Text>
                 </Flex>
                 
-                <OutlineButton size="small">Get MetaMask Extension</OutlineButton>
+                <OutlineButton size="small" href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en">Get MetaMask Extension</OutlineButton>
               </Flex>
             : null 
           }
@@ -96,13 +98,24 @@ class MissingWeb3Provider extends React.Component {
               <Flex ml={4} alignItems={"center"} justifyContent={"space-between"}>
                 <Flex alignItems={"center"}>
                   <Icon name='Info' mr={2} color="#999" />
-                  <Text color="#999">Current network: {this.props.currentNetwork.name} - Required network: {this.props.requiredNetwork.name}</Text>
+                  <Box>
+                    <Flex alignItems={"center"}>
+                      <Text mr={2} color="#999" style={{ textTransform: "capitalize" }}>Current network:</Text>
+                      <NetworkOverview network={this.props.currentNetwork}/>
+                    </Flex>
+                    <Flex alignItems={"center"}>
+                      <Text mr={2} color="#999" style={{ textTransform: "capitalize" }}>Required network:</Text>
+                      <NetworkOverview network={this.props.requiredNetwork}/>
+                    </Flex>
+                  </Box>
                 </Flex>
                 
                 <OutlineButton size="small" onClick={this.props.checkNetwork}>Check Network</OutlineButton>
               </Flex>
             : 
-              null 
+              <Flex ml={4} alignItems={"center"} >
+                <NetworkOverview network={this.props.currentNetwork}/>
+              </Flex>
           }
         </Box>
         
@@ -128,7 +141,10 @@ class MissingWeb3Provider extends React.Component {
                 <OutlineButton size="small" onClick={this.props.initAccount}>Connect</OutlineButton>
               </Flex>
             : 
-              null 
+              <Flex ml={4} alignItems={"center"}>
+                <Icon name='Check' color={"green"} mr={2} /> 
+                <Text color="#999">Connected wallet {this.props.account}</Text>
+              </Flex>
           }
 
           { this.props.userRejectedConnect 
@@ -166,8 +182,13 @@ class MissingWeb3Provider extends React.Component {
           }
         </Box>
         
-        {/* <Text>You will need to <Link href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en" target="_blank">install MetaMask</Link> to use this dApp.</Text> */}
         <ToastMessage.Provider ref={node => (window.toastProvider = node)} />
+        { !this.props.isCorrectNetwork && this.props.web3
+          ?
+            <WrongNetworkBanner requiredNetwork={this.props.requiredNetwork} currentNetwork={this.props.currentNetwork}></WrongNetworkBanner>
+          :
+            null
+        }
       </Card>
     )
   }
