@@ -28,7 +28,7 @@ class WrongNetworkModal extends React.Component {
             <Text my={4}>Looks like your account is connected to {this.props.currentNetwork.name} network. Head to MetaMask and switch to the {this.props.requiredNetwork.name} network.</Text>
             
             <ToastMessage
-              message={'Waiting for the right network.'}
+              message={'Waiting for the right network...'}
               icon={'InfoOutline'}
             />
           </Flex>

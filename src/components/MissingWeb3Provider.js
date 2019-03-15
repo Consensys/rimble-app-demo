@@ -1,14 +1,16 @@
 import React from "react";
-import { Card, Heading, Text, Icon, Flex, ToastMessage, OutlineButton, Box, Button, Modal, Link } from "rimble-ui"
-import WrongNetworkBanner from "./WrongNetworkBanner"
-import NetworkOverview from "./NetworkOverview"
-import WrongNetworkModal from "./WrongNetworkModal"
+import { Card, Heading, Text, Icon, Flex, ToastMessage, OutlineButton, Box, Button, Modal, Link } from "rimble-ui";
+import WrongNetworkBanner from "./WrongNetworkBanner";
+import NetworkOverview from "./NetworkOverview";
+import WrongNetworkModal from "./WrongNetworkModal";
+import ConnectionModal from "./ConnectionModal";
 
 class MissingWeb3Provider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      wrongNetworkModalIsOpen: false
+      wrongNetworkModalIsOpen: false,
+      connectionModalIsOpen: true
     }
   }
 
@@ -23,6 +25,20 @@ class MissingWeb3Provider extends React.Component {
     e.preventDefault()
     this.setState((state, props) => ({
       wrongNetworkModalIsOpen: true
+    }))
+  }
+
+  closeConnectionModal = (e) => {
+    e.preventDefault()
+    this.setState((state, props) => ({
+      connectionModalIsOpen: false
+    }))
+  }
+
+  openConnectionModal = (e) => {
+    e.preventDefault()
+    this.setState((state, props) => ({
+      connectionModalIsOpen: true
     }))
   }
 
@@ -119,7 +135,7 @@ class MissingWeb3Provider extends React.Component {
             <Text>Correct Network</Text>
           </Flex>
 
-          { !this.props.account && this.props.web3 && !this.props.isCorrectNetwork
+          { this.props.web3 && !this.props.isCorrectNetwork
             ? 
               <Flex ml={4} alignItems={"center"} justifyContent={"space-between"}>
                 <Flex alignItems={"center"}>
@@ -225,10 +241,12 @@ class MissingWeb3Provider extends React.Component {
         <Box>
           <Heading.h4 textAlign={"center"}>Show Modal</Heading.h4>
           <Button size="small" onClick={this.openWrongNetworkModal}>Blocking Wrong Network</Button>
+          <Button size="small" onClick={this.openConnectionModal}>Connection</Button>
         </Box>
 
         {/* Modals */}
         <WrongNetworkModal closeWrongNetworkModal={this.closeWrongNetworkModal} isOpen={this.state.wrongNetworkModalIsOpen} requiredNetwork={this.props.requiredNetwork} currentNetwork={this.props.currentNetwork} />
+        <ConnectionModal  closeConnectionModal={this.closeConnectionModal} isOpen={this.state.connectionModalIsOpen} currentNetwork={this.props.currentNetwork} />
         
         <ToastMessage.Provider ref={node => (window.toastProvider = node)} />
         { !this.props.isCorrectNetwork && this.props.web3
