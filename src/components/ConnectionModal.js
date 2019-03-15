@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Heading, Text, ToastMessage, Icon, TextButton, Modal, Flex, Image, Box } from "rimble-ui";
+import { Card, Heading, Text, ToastMessage, Icon, TextButton, Modal, Flex, Image, Box, MetaMaskButton } from "rimble-ui";
 import NetworkOverview from "./NetworkOverview"
 import theme from "./../theme";
 
@@ -57,11 +57,7 @@ class ConnectionModal extends React.Component {
 
               <Text my={3}>Make sure you've set up MetaMask or your mobile wallet before you continue.</Text>
               
-              <ToastMessage
-                message={'Connect with MetaMask'}
-                secondaryMessage={'Make sure the account you want to use is active in your MetaMask extension.'}
-                icon={'InfoOutline'}
-              />
+              <MetaMaskButton onClick={this.props.validateAccount}>Connect with MetaMask</MetaMaskButton>
 
               <Flex mt={3} mx={4} alignItems="center">
                 <Image src="/images/phone.png" alt="mobile phone" width={"60"} height={"92"} mr={3} />

@@ -10,7 +10,7 @@ class MissingWeb3Provider extends React.Component {
     super(props);
     this.state = {
       wrongNetworkModalIsOpen: false,
-      connectionModalIsOpen: true
+      connectionModalIsOpen: false
     }
   }
 
@@ -246,7 +246,7 @@ class MissingWeb3Provider extends React.Component {
 
         {/* Modals */}
         <WrongNetworkModal closeWrongNetworkModal={this.closeWrongNetworkModal} isOpen={this.state.wrongNetworkModalIsOpen} requiredNetwork={this.props.requiredNetwork} currentNetwork={this.props.currentNetwork} />
-        <ConnectionModal  closeConnectionModal={this.closeConnectionModal} isOpen={this.state.connectionModalIsOpen} currentNetwork={this.props.currentNetwork} />
+        <ConnectionModal closeConnectionModal={this.closeConnectionModal} validateAccount={this.props.validateAccount} isOpen={this.state.connectionModalIsOpen && !this.props.accountValidated} currentNetwork={this.props.currentNetwork} />
         
         <ToastMessage.Provider ref={node => (window.toastProvider = node)} />
         { !this.props.isCorrectNetwork && this.props.web3
