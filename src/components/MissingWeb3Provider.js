@@ -4,13 +4,15 @@ import WrongNetworkBanner from "./WrongNetworkBanner";
 import NetworkOverview from "./NetworkOverview";
 import WrongNetworkModal from "./WrongNetworkModal";
 import ConnectionModal from "./ConnectionModal";
+import TransactionConnectionModal from "./TransactionConnectionModal";
 
 class MissingWeb3Provider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       wrongNetworkModalIsOpen: false,
-      connectionModalIsOpen: false
+      connectionModalIsOpen: false,
+      transactionConnectionModalIsOpen: true,
     }
   }
 
@@ -39,6 +41,20 @@ class MissingWeb3Provider extends React.Component {
     e.preventDefault()
     this.setState((state, props) => ({
       connectionModalIsOpen: true
+    }))
+  }
+
+  closeTransactionConnectionModal = (e) => {
+    e.preventDefault()
+    this.setState((state, props) => ({
+      transactionConnectionModalIsOpen: false
+    }))
+  }
+
+  openTransactionConnectionModal = (e) => {
+    e.preventDefault()
+    this.setState((state, props) => ({
+      transactionConnectionModalIsOpen: true
     }))
   }
 
@@ -242,11 +258,13 @@ class MissingWeb3Provider extends React.Component {
           <Heading.h4 textAlign={"center"}>Show Modal</Heading.h4>
           <Button size="small" onClick={this.openWrongNetworkModal}>Blocking Wrong Network</Button>
           <Button size="small" onClick={this.openConnectionModal}>Connection</Button>
+          <Button size="small" onClick={this.openTransactionConnectionModal}>Transaction Connection</Button>
         </Box>
 
         {/* Modals */}
         <WrongNetworkModal closeWrongNetworkModal={this.closeWrongNetworkModal} isOpen={this.state.wrongNetworkModalIsOpen} requiredNetwork={this.props.requiredNetwork} currentNetwork={this.props.currentNetwork} />
         <ConnectionModal closeConnectionModal={this.closeConnectionModal} validateAccount={this.props.validateAccount} isOpen={this.state.connectionModalIsOpen && !this.props.accountValidated} currentNetwork={this.props.currentNetwork} />
+        <TransactionConnectionModal closeTransactionConnectionModal={this.closeTransactionConnectionModal} validateAccount={this.props.validateAccount} isOpen={this.state.transactionConnectionModalIsOpen && !this.props.accountValidated} currentNetwork={this.props.currentNetwork} />
         
         <ToastMessage.Provider ref={node => (window.toastProvider = node)} />
         { !this.props.isCorrectNetwork && this.props.web3
