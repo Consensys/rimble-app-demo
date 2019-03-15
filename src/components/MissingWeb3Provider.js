@@ -1,9 +1,31 @@
 import React from "react";
-import { Card, Heading, Text, Icon, Flex, ToastMessage, OutlineButton, Box, Button } from "rimble-ui"
+import { Card, Heading, Text, Icon, Flex, ToastMessage, OutlineButton, Box, Button, Modal, Link } from "rimble-ui"
 import WrongNetworkBanner from "./WrongNetworkBanner"
 import NetworkOverview from "./NetworkOverview"
+import WrongNetworkModal from "./WrongNetworkModal"
 
 class MissingWeb3Provider extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      wrongNetworkModalIsOpen: false
+    }
+  }
+
+  closeWrongNetworkModal = (e) => {
+    e.preventDefault()
+    this.setState((state, props) => ({
+      wrongNetworkModalIsOpen: false
+    }))
+  }
+
+  openWrongNetworkModal = (e) => {
+    e.preventDefault()
+    this.setState((state, props) => ({
+      wrongNetworkModalIsOpen: true
+    }))
+  }
+
   render() {
     return(
       <Card width={"600px"} mx={"auto"} px={4}>
@@ -28,7 +50,9 @@ class MissingWeb3Provider extends React.Component {
                   <Text color="#999">You current browser is not web3 capable.</Text>
                 </Flex>
                 
-                <OutlineButton size="small" href="https://www.google.com/chrome/browser/">Download Chrome</OutlineButton>
+                <Link href="https://www.google.com/chrome/browser/" target="_blank">
+                  <OutlineButton size="small">Download Chrome</OutlineButton>
+                </Link>
               </Flex>
             : null 
           }
@@ -53,7 +77,9 @@ class MissingWeb3Provider extends React.Component {
                   <Text color="#999">You do not have a wallet.</Text>
                 </Flex>
                 
-                <OutlineButton size="small" href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en">Get MetaMask Extension</OutlineButton>
+                <Link href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en" target="_blank">
+                  <OutlineButton size="small">Get MetaMask Extension</OutlineButton>
+                </Link>
               </Flex>
             : null 
           }
@@ -113,9 +139,16 @@ class MissingWeb3Provider extends React.Component {
                 <OutlineButton size="small" onClick={this.props.checkNetwork}>Check Network</OutlineButton>
               </Flex>
             : 
+              null
+          }
+          { 
+            this.props.web3 && this.props.isCorrectNetwork
+            ?
               <Flex ml={4} alignItems={"center"} >
                 <NetworkOverview network={this.props.currentNetwork}/>
               </Flex>
+            :
+              null
           }
         </Box>
         
@@ -141,10 +174,17 @@ class MissingWeb3Provider extends React.Component {
                 <OutlineButton size="small" onClick={this.props.initAccount}>Connect</OutlineButton>
               </Flex>
             : 
+              null
+          }
+          {
+            this.props.account && this.props.web3
+            ?
               <Flex ml={4} alignItems={"center"}>
                 <Icon name='Check' color={"green"} mr={2} /> 
                 <Text color="#999">Connected wallet {this.props.account}</Text>
               </Flex>
+            :
+              null
           }
 
           { this.props.userRejectedConnect 
@@ -181,6 +221,14 @@ class MissingWeb3Provider extends React.Component {
               null
           }
         </Box>
+
+        <Box>
+          <Heading.h4 textAlign={"center"}>Show Modal</Heading.h4>
+          <Button size="small" onClick={this.openWrongNetworkModal}>Blocking Wrong Network</Button>
+        </Box>
+
+        {/* Modals */}
+        <WrongNetworkModal closeWrongNetworkModal={this.closeWrongNetworkModal} isOpen={this.state.wrongNetworkModalIsOpen} requiredNetwork={this.props.requiredNetwork} currentNetwork={this.props.currentNetwork} />
         
         <ToastMessage.Provider ref={node => (window.toastProvider = node)} />
         { !this.props.isCorrectNetwork && this.props.web3

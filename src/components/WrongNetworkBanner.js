@@ -16,7 +16,7 @@ class WrongNetworkBanner extends React.Component {
       <Box style={bannerStyle} p={3}>
         <Flex alignItems={"center"}>
           <Box p={4}>
-            <Icon name="Warning" color="red" size="30" />
+            <Icon name="Warning" color="gold" size="30" />
           </Box>
           <Flex flexDirection={"column"}>
             <Text fontWeight={"bold"}>Looks like you're on the wrong network</Text>
