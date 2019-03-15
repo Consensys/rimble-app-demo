@@ -204,7 +204,7 @@ class RimbleTransaction extends React.Component {
           clearInterval(accountInterval);
           this.setState({
             userRejectedConnect: null,
-            account: {},
+            account: '',
             accountValidated: null,
           }, () => {
             this.initAccount()
