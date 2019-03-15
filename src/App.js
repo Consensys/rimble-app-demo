@@ -43,6 +43,7 @@ class App extends Component {
               initAccount, 
               userRejectedConnect,
               accountValidated,
+              accountValidationPending,
               validateAccount,
               checkNetwork,
               requiredNetwork,
@@ -62,6 +63,7 @@ class App extends Component {
                     initAccount={initAccount} 
                     userRejectedConnect={userRejectedConnect}
                     accountValidated={accountValidated} 
+                    accountValidationPending={accountValidationPending} 
                     validateAccount={validateAccount} 
                     checkNetwork={checkNetwork}
                     requiredNetwork={requiredNetwork}

@@ -1,10 +1,11 @@
 import React from "react";
-import { Card, Heading, Text, Icon, Flex, ToastMessage, OutlineButton, Box, Button, Modal, Link } from "rimble-ui";
+import { Card, Heading, Text, Icon, Flex, ToastMessage, OutlineButton, Box, Button, Link } from "rimble-ui";
 import WrongNetworkBanner from "./WrongNetworkBanner";
 import NetworkOverview from "./NetworkOverview";
 import WrongNetworkModal from "./WrongNetworkModal";
 import ConnectionModal from "./ConnectionModal";
 import TransactionConnectionModal from "./TransactionConnectionModal";
+import ConnectionPendingModal from "./ConnectionPendingModal";
 
 class MissingWeb3Provider extends React.Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class MissingWeb3Provider extends React.Component {
     this.state = {
       wrongNetworkModalIsOpen: false,
       connectionModalIsOpen: false,
-      transactionConnectionModalIsOpen: true,
+      transactionConnectionModalIsOpen: false,
+      accountValidationPending: this.props.accountValidationPending
     }
   }
 
@@ -57,6 +59,25 @@ class MissingWeb3Provider extends React.Component {
       transactionConnectionModalIsOpen: true
     }))
   }
+
+  closeConnectionPendingModal = (e) => {
+    e.preventDefault()
+    this.setState((state, props) => ({
+      accountValidationPending: false
+    }))
+  }
+
+  openConnectionPendingModal = (e) => {
+    e.preventDefault()
+    this.setState((state, props) => ({
+      accountValidationPending: true
+    }))
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({ accountValidationPending: props.accountValidationPending });
+  }
+
 
   render() {
     return(
@@ -259,12 +280,14 @@ class MissingWeb3Provider extends React.Component {
           <Button size="small" onClick={this.openWrongNetworkModal}>Blocking Wrong Network</Button>
           <Button size="small" onClick={this.openConnectionModal}>Connection</Button>
           <Button size="small" onClick={this.openTransactionConnectionModal}>Transaction Connection</Button>
+          <Button size="small" onClick={this.openConnectionPendingModal}>Connection Pending</Button>
         </Box>
 
         {/* Modals */}
         <WrongNetworkModal closeWrongNetworkModal={this.closeWrongNetworkModal} isOpen={this.state.wrongNetworkModalIsOpen} requiredNetwork={this.props.requiredNetwork} currentNetwork={this.props.currentNetwork} />
         <ConnectionModal closeConnectionModal={this.closeConnectionModal} validateAccount={this.props.validateAccount} isOpen={this.state.connectionModalIsOpen && !this.props.accountValidated} currentNetwork={this.props.currentNetwork} />
         <TransactionConnectionModal closeTransactionConnectionModal={this.closeTransactionConnectionModal} validateAccount={this.props.validateAccount} isOpen={this.state.transactionConnectionModalIsOpen && !this.props.accountValidated} currentNetwork={this.props.currentNetwork} />
+        <ConnectionPendingModal closeConnectionPendingModal={this.closeConnectionPendingModal} isOpen={ this.state.accountValidationPending } currentNetwork={this.props.currentNetwork} />
         
         <ToastMessage.Provider ref={node => (window.toastProvider = node)} />
         { !this.props.isCorrectNetwork && this.props.web3

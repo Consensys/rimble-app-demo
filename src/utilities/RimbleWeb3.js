@@ -13,6 +13,7 @@ const RimbleTransactionContext = React.createContext({
   initAccount: () => {},
   userRejectedConnect: {},
   accountValidated: {},
+  accountValidationPending: {},
   validateAccount: () => {},
   checkNetwork: () => {},
   requiredNetwork: {},
@@ -129,6 +130,9 @@ class RimbleTransaction extends React.Component {
   };
 
   validateAccount = async () => {
+    // Show blocking modal
+    this.setState({ accountValidationPending: true });
+
     console.log("Account: ", this.state.account)
     if (!this.state.account) {
       await this.initAccount();
@@ -144,10 +148,17 @@ class RimbleTransaction extends React.Component {
           window.toastProvider.addMessage("Wallet account was not validated", {
             variant: "failure"
           });
-          this.setState({ accountValidated: false })
+          this.setState({ 
+            accountValidated: false, 
+            accountValidationPending: false,
+            userRejectedConnect: true,
+          });
         } else {
           console.log("Account validation successful.", signature);
-          this.setState({ accountValidated: true })
+          this.setState({ 
+            accountValidated: true, 
+            accountValidationPending: false 
+          });
         }
       }
     )
@@ -339,6 +350,7 @@ class RimbleTransaction extends React.Component {
     contractMethodSendWrapper: this.contractMethodSendWrapper,
     userRejectedConnect: null,
     accountValidated: null,
+    accountValidationPending: null,
     validateAccount: this.validateAccount,
     checkNetwork: this.checkNetwork,
     requiredNetwork: {

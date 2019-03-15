@@ -1,9 +1,9 @@
 import React from "react";
-import { Card, Heading, Text, Icon, TextButton, Modal, Flex, Box, MetaMaskButton } from "rimble-ui";
+import { Card, Heading, Text, Icon, TextButton, Modal, Flex, Box, ToastMessage } from "rimble-ui";
 import NetworkOverview from "./NetworkOverview"
 import theme from "./../theme";
 
-class TransactionConnectionModal extends React.Component {
+class ConnectionPendingModal extends React.Component {
   render() {
     return (
       <Modal isOpen={this.props.isOpen}>
@@ -17,7 +17,7 @@ class TransactionConnectionModal extends React.Component {
             right={0}
             mt={3}
             mr={3}
-            onClick={this.props.closeTransactionConnectionModal}
+            onClick={this.props.closeConnectionPendingModal}
           />
 
           <Flex justifyContent={"center"} alignContent={"stretch"}>
@@ -30,12 +30,14 @@ class TransactionConnectionModal extends React.Component {
                 
                 <Box my={4}>
                   <Text color={theme.colors.primary} caps>New to Bounties Explorer?</Text>
-                  <Text>You need to be connected so you can use the funds stored in your Etherum account.</Text>
-                  <Text>Every blockchain action requires a small network fee.</Text>
+                  <Text>It's possible to use your account's address to see all your blockchain activity. Only connect accounts you don't mind being linked to your Bounties Explorer profile.</Text>
                 </Box>
 
-                <Text fontWeight={3}>What's a network fee?</Text>
-                <Text>This fee pays for a person or group to add a record of your action to the blockchain and let the network know. It doesn't go to us.</Text>
+                <Text fontWeight={3}>What does connection mean?</Text>
+                <ul>
+                  <li>Shares your Ethereum account address with us</li>
+                  <li>Allows us to start transactions on the blockchain (at your request)</li>
+                </ul>
               </Flex>
             </Box>
 
@@ -48,11 +50,15 @@ class TransactionConnectionModal extends React.Component {
                 <Icon name="Link" color="#666" size="40"/>
               </Flex>
               
-              <Heading.h2>Connect to continue</Heading.h2>
+              <Heading.h2>Connect your account</Heading.h2>
 
-              <Text mb={4}>This action uses the blockchain, so you'll need to connect your Ethereum account to continue. That's the long code starting with <Text.span fontWeight={3}>0x</Text.span>.</Text>
+              <Text mb={4}>A connection request should automatically appear. If not, open it using the MetaMask extension icon in your browser.</Text>
               
-              <MetaMaskButton onClick={this.props.validateAccount}>Connect with MetaMask</MetaMaskButton>
+              <ToastMessage
+                message={'Waiting for connection confirmation...'}
+                secondaryMessage={'This won\'t cost your any Ether'}
+                icon={'InfoOutline'}
+              />
 
             </Flex>
           </Flex>
@@ -62,4 +68,4 @@ class TransactionConnectionModal extends React.Component {
   }
 }
 
-export default TransactionConnectionModal;
+export default ConnectionPendingModal;
