@@ -20,6 +20,10 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 class App extends Component {
+  // Optional parameters to pass into RimbleWeb3
+  config = {
+    accountBalanceMinimum: 1000
+  }
   render() {
     return (
       <ThemeProvider theme={theme} className="App">
@@ -32,7 +36,7 @@ class App extends Component {
           </Text>
         </Flex>
 
-        <RimbleWeb3>
+        <RimbleWeb3 config={this.config}>
           <RimbleWeb3.Consumer>
             {({ 
               needsPreflight, 
@@ -40,6 +44,8 @@ class App extends Component {
               userAgent, 
               web3, 
               account, 
+              accountBalance,
+              accountBalanceLow,
               initAccount, 
               userRejectedConnect,
               accountValidated,
@@ -61,6 +67,8 @@ class App extends Component {
                     userAgent={userAgent} 
                     web3={web3} 
                     account={account} 
+                    accountBalance={accountBalance}
+                    accountBalanceLow={accountBalanceLow}
                     initAccount={initAccount} 
                     userRejectedConnect={userRejectedConnect}
                     accountValidated={accountValidated} 

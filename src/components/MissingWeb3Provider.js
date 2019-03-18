@@ -7,6 +7,7 @@ import ConnectionModal from "./ConnectionModal";
 import TransactionConnectionModal from "./TransactionConnectionModal";
 import ConnectionPendingModal from "./ConnectionPendingModal";
 import UserRejectedValidationModal from "./UserRejectedValidationModal";
+import LowFundsModal from "./LowFundsModal";
 
 class MissingWeb3Provider extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class MissingWeb3Provider extends React.Component {
       transactionConnectionModalIsOpen: false,
       accountValidationPending: this.props.accountValidationPending,
       userRejectedValidation: this.props.userRejectedValidation,
+      lowFundsModalIsOpen: false,
     }
   }
 
@@ -87,6 +89,20 @@ class MissingWeb3Provider extends React.Component {
     e.preventDefault()
     this.setState((state, props) => ({
       userRejectedValidation: true
+    }))
+  }
+
+  closeLowFundsModal = (e) => {
+    e.preventDefault()
+    this.setState((state, props) => ({
+      lowFundsModalIsOpen: false
+    }))
+  }
+
+  openLowFundsModal = (e) => {
+    e.preventDefault()
+    this.setState((state, props) => ({
+      lowFundsModalIsOpen: true
     }))
   }
 
@@ -250,7 +266,17 @@ class MissingWeb3Provider extends React.Component {
             ?
               <Flex ml={4} alignItems={"center"}>
                 <Icon name='Check' color={"green"} mr={2} /> 
-                <Text color="#999">Connected wallet {this.props.account}</Text>
+                <Box>
+                  <Text color="#999">Connected wallet {this.props.account}</Text>                
+                  <Text color="#999">Account balance {this.props.accountBalance}</Text>
+                  {this.props.accountBalanceLow
+                    ?
+                      <Text color="red">Low balance!</Text>
+                    :
+                      null
+                  }
+                  
+                </Box>
               </Flex>
             :
               null
@@ -298,6 +324,7 @@ class MissingWeb3Provider extends React.Component {
           <Button size="small" onClick={this.openTransactionConnectionModal} mr={2} mb={2}>Transaction Connection</Button>
           <Button size="small" onClick={this.openConnectionPendingModal} mr={2} mb={2}>Connection Pending</Button>
           <Button size="small" onClick={this.openUserRejectedValidationModal} mr={2} mb={2}>User Rejected Validation</Button>
+          <Button size="small" onClick={(event) => { this.props.validateAccount(event); this.openLowFundsModal(event); }} mr={2} mb={2}>Low Funds</Button>
         </Box>
 
         {/* Modals */}
@@ -306,6 +333,7 @@ class MissingWeb3Provider extends React.Component {
         <TransactionConnectionModal closeTransactionConnectionModal={this.closeTransactionConnectionModal} validateAccount={this.props.validateAccount} isOpen={this.state.transactionConnectionModalIsOpen && !this.props.accountValidated} currentNetwork={this.props.currentNetwork} />
         <ConnectionPendingModal closeConnectionPendingModal={this.closeConnectionPendingModal} isOpen={ this.state.accountValidationPending } currentNetwork={this.props.currentNetwork} />
         <UserRejectedValidationModal closeUserRejectedValidationModal={this.closeUserRejectedValidationModal} isOpen={ this.state.userRejectedValidation } validateAccount={this.props.validateAccount} />
+        <LowFundsModal closeLowFundsModal={this.closeLowFundsModal} isOpen={ this.state.lowFundsModalIsOpen} currentNetwork={this.props.currentNetwork} account={ this.props.account } />
 
         <ToastMessage.Provider ref={node => (window.toastProvider = node)} />
         { !this.props.isCorrectNetwork && this.props.web3

@@ -5,6 +5,8 @@ import bowser from "bowser";
 const RimbleTransactionContext = React.createContext({
   contract: {},
   account: {},
+  accountBalance: {},
+  accountBalanceLow: {},
   web3: {},
   transactions: {},
   checkPreflight: () => {},
@@ -128,7 +130,49 @@ class RimbleTransaction extends React.Component {
       });
       this.setState({ userRejectedConnect: true })
     }
+    // After account is complete, get the balance
+    await this.getAccountBalance();
   };
+
+  getAccountBalance = async () => {
+    try {
+      await this.state.web3.eth.getBalance(this.state.account).then(accountBalance => {
+        accountBalance = this.state.web3.utils.fromWei(accountBalance, "ether");
+        accountBalance = parseFloat(accountBalance);
+        this.setState({ accountBalance })
+        console.log("account balance: ", accountBalance);
+
+        this.determineAccountLowBalance();
+      });
+    } catch (error) {
+      console.log("Failed to get account balance.");
+    }
+  };
+
+  determineAccountLowBalance = () => {
+    // If provided a minimum from config then use it, else default to 1
+    console.log("this.props.config", this.props.config);
+    
+    const accountBalanceMinimum = typeof (this.props.config.accountBalanceMinimum) !== "undefined"
+      ?
+        this.props.config.accountBalanceMinimum
+      : 
+        1000
+
+    console.log("accountBalanceMinimum", accountBalanceMinimum);
+    // Determine if the account balance is low
+    console.log("this.state.accountBalance", this.state.accountBalance);
+    console.log("compare", (this.state.accountBalance < accountBalanceMinimum));
+    const accountBalanceLow = this.state.accountBalance < accountBalanceMinimum
+      ?
+        true
+      :
+        false;
+
+    this.setState({
+      accountBalanceLow
+    });
+  }
 
   validateAccount = async () => {
     // Show blocking modal
@@ -345,6 +389,8 @@ class RimbleTransaction extends React.Component {
   state = {
     contract: {},
     account: null,
+    accountBalance: null,
+    accountBalanceLow: null,
     web3: null,
     transactions: {},
     checkPreflight: this.checkPreflight,
