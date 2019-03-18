@@ -20,22 +20,23 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 class App extends Component {
+  state = {
+    route: 'default'
+  }
+
   // Optional parameters to pass into RimbleWeb3
   config = {
     accountBalanceMinimum: 1
   }
+  showRoute = (route) => {
+    this.setState({
+      route
+    });
+  }
+
   render() {
     return (
       <ThemeProvider theme={theme} className="App">
-        <Header />
-        <Flex justifyContent="center" p={4}>
-          <Text width="400px">
-            This is a starter React dApp that uses the Rimble UI component
-            library to call methods on a smart contract deployed to the Ethereum
-            Rinkeby testnet.
-          </Text>
-        </Flex>
-
         <RimbleWeb3 config={this.config}>
           <RimbleWeb3.Consumer>
             {({ 
@@ -58,34 +59,61 @@ class App extends Component {
               isCorrectNetwork,
             }) => (
               <Box>
-                {/* Conditionally render child comonents dependent on web3 being loaded */}
-                {/* TODO: How can we combine these together to use a single prop? */}
-                { validBrowser && web3 && account && accountValidated && isCorrectNetwork ?  
-                  <PrimaryCard /> 
-                : <MissingWeb3Provider 
-                    validBrowser={validBrowser} 
-                    userAgent={userAgent} 
-                    web3={web3} 
-                    account={account} 
-                    accountBalance={accountBalance}
-                    accountBalanceLow={accountBalanceLow}
-                    initAccount={initAccount} 
-                    userRejectedConnect={userRejectedConnect}
-                    accountValidated={accountValidated} 
-                    accountValidationPending={accountValidationPending} 
-                    userRejectedValidation={userRejectedValidation} 
-                    validateAccount={validateAccount} 
-                    checkNetwork={checkNetwork}
-                    requiredNetwork={requiredNetwork}
-                    currentNetwork={currentNetwork}
-                    isCorrectNetwork={isCorrectNetwork}
-                  /> 
+                <Header
+                  account={account}
+                  accountBalance={accountBalance}
+                  accountBalanceLow={accountBalanceLow}
+                  initAccount={initAccount}
+                  userRejectedConnect={userRejectedConnect}
+                  accountValidated={accountValidated} 
+                  accountValidationPending={accountValidationPending} 
+                  userRejectedValidation={userRejectedValidation} 
+                  validateAccount={validateAccount} 
+                  checkNetwork={checkNetwork}
+                  requiredNetwork={requiredNetwork}
+                  currentNetwork={currentNetwork}
+                  isCorrectNetwork={isCorrectNetwork}
+                />
+                
+                <Flex justifyContent="center" p={4}>
+                  <Text width="400px">
+                    This is a starter React dApp that uses the Rimble UI component
+                    library to call methods on a smart contract deployed to the Ethereum
+                    Rinkeby testnet.
+                  </Text>
+                </Flex>
+
+                { this.state.route === 'default'
+                  ? <PrimaryCard />
+                  : null
+                }
+
+                { this.state.route === 'onboarding'
+                  ? <MissingWeb3Provider 
+                      validBrowser={validBrowser} 
+                      userAgent={userAgent} 
+                      web3={web3} 
+                      account={account} 
+                      accountBalance={accountBalance}
+                      accountBalanceLow={accountBalanceLow}
+                      initAccount={initAccount} 
+                      userRejectedConnect={userRejectedConnect}
+                      accountValidated={accountValidated} 
+                      accountValidationPending={accountValidationPending} 
+                      userRejectedValidation={userRejectedValidation} 
+                      validateAccount={validateAccount} 
+                      checkNetwork={checkNetwork}
+                      requiredNetwork={requiredNetwork}
+                      currentNetwork={currentNetwork}
+                      isCorrectNetwork={isCorrectNetwork}
+                    /> 
+                  : null
                 }
               </Box>
             )}
           </RimbleWeb3.Consumer>
         </RimbleWeb3>
-        <InstructionsCard />
+        <InstructionsCard showRoute={this.showRoute} route={this.state.route} />
         <GlobalStyle />
       </ThemeProvider>
     );

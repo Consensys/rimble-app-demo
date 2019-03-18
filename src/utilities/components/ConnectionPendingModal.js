@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Heading, Text, Icon, TextButton, Modal, Flex, Box, ToastMessage } from "rimble-ui";
-import NetworkOverview from "./NetworkOverview"
-import theme from "./../theme";
+import NetworkOverview from "../../components/NetworkOverview"
+import theme from "./../../theme";
 
 class ConnectionPendingModal extends React.Component {
   render() {

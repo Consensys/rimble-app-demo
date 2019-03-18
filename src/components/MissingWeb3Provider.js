@@ -3,10 +3,10 @@ import { Card, Heading, Text, Icon, Flex, ToastMessage, OutlineButton, Box, Butt
 import WrongNetworkBanner from "./WrongNetworkBanner";
 import NetworkOverview from "./NetworkOverview";
 import WrongNetworkModal from "./WrongNetworkModal";
-import ConnectionModal from "./ConnectionModal";
+import ConnectionModal from "../utilities/components/ConnectionModal";
 import TransactionConnectionModal from "./TransactionConnectionModal";
-import ConnectionPendingModal from "./ConnectionPendingModal";
-import UserRejectedValidationModal from "./UserRejectedValidationModal";
+import ConnectionPendingModal from "../utilities/components/ConnectionPendingModal";
+import UserRejectedValidationModal from "../utilities/components/UserRejectedValidationModal";
 import LowFundsModal from "./LowFundsModal";
 
 class MissingWeb3Provider extends React.Component {

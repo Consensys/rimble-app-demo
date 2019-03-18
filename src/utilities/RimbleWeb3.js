@@ -2,6 +2,8 @@ import React from "react";
 import Web3 from "web3"; // uses latest 1.x.x version
 import bowser from "bowser";
 
+import ConnectionUtil from "./ConnectionUtil"
+
 const RimbleTransactionContext = React.createContext({
   contract: {},
   account: {},
@@ -82,9 +84,11 @@ class RimbleTransaction extends React.Component {
       // Non-dapp browsers...
       else {
         console.log(
-          "Non-Ethereum browser detected. You should consider trying MetaMask!"
+          "Non-Ethereum browser detected. Using Infura fallback."
         );
 
+        const web3Provider = new Web3.providers.HttpProvider('https://rinkeby.infura.io:443');
+        this.setState({ web3Provider });
         web3 = false;
       }
 
@@ -409,7 +413,11 @@ class RimbleTransaction extends React.Component {
 
   render() {
     return (
-      <RimbleTransactionContext.Provider value={this.state} {...this.props} />
+      <div>
+        <RimbleTransactionContext.Provider value={this.state} {...this.props} />
+        <ConnectionUtil  />
+      </div>
+      
     );
   }
 }
