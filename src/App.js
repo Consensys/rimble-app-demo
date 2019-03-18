@@ -20,6 +20,10 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 class App extends Component {
+  // Optional parameters to pass into RimbleWeb3
+  config = {
+    accountBalanceMinimum: 1000
+  }
   render() {
     return (
       <ThemeProvider theme={theme} className="App">
@@ -32,12 +36,51 @@ class App extends Component {
           </Text>
         </Flex>
 
-        <RimbleWeb3>
+        <RimbleWeb3 config={this.config}>
           <RimbleWeb3.Consumer>
-            {({ web3 }) => (
+            {({ 
+              needsPreflight, 
+              validBrowser, 
+              userAgent, 
+              web3, 
+              account, 
+              accountBalance,
+              accountBalanceLow,
+              initAccount, 
+              userRejectedConnect,
+              accountValidated,
+              accountValidationPending,
+              userRejectedValidation,
+              validateAccount,
+              checkNetwork,
+              requiredNetwork,
+              currentNetwork,
+              isCorrectNetwork,
+            }) => (
               <Box>
                 {/* Conditionally render child comonents dependent on web3 being loaded */}
-                {!web3 ? <MissingWeb3Provider /> : <PrimaryCard />}
+                {/* TODO: How can we combine these together to use a single prop? */}
+                { validBrowser && web3 && account && accountValidated && isCorrectNetwork ?  
+                  <PrimaryCard /> 
+                : <MissingWeb3Provider 
+                    validBrowser={validBrowser} 
+                    userAgent={userAgent} 
+                    web3={web3} 
+                    account={account} 
+                    accountBalance={accountBalance}
+                    accountBalanceLow={accountBalanceLow}
+                    initAccount={initAccount} 
+                    userRejectedConnect={userRejectedConnect}
+                    accountValidated={accountValidated} 
+                    accountValidationPending={accountValidationPending} 
+                    userRejectedValidation={userRejectedValidation} 
+                    validateAccount={validateAccount} 
+                    checkNetwork={checkNetwork}
+                    requiredNetwork={requiredNetwork}
+                    currentNetwork={currentNetwork}
+                    isCorrectNetwork={isCorrectNetwork}
+                  /> 
+                }
               </Box>
             )}
           </RimbleWeb3.Consumer>
