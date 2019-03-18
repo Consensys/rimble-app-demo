@@ -151,23 +151,14 @@ class RimbleTransaction extends React.Component {
 
   determineAccountLowBalance = () => {
     // If provided a minimum from config then use it, else default to 1
-    console.log("this.props.config", this.props.config);
-    
-    const accountBalanceMinimum = typeof (this.props.config.accountBalanceMinimum) !== "undefined"
+    const accountBalanceMinimum = typeof(this.props.config) !== "undefined" && typeof (this.props.config.accountBalanceMinimum) !== "undefined"
       ?
         this.props.config.accountBalanceMinimum
       : 
-        1000
-
-    console.log("accountBalanceMinimum", accountBalanceMinimum);
+        1
     // Determine if the account balance is low
-    console.log("this.state.accountBalance", this.state.accountBalance);
-    console.log("compare", (this.state.accountBalance < accountBalanceMinimum));
     const accountBalanceLow = this.state.accountBalance < accountBalanceMinimum
-      ?
-        true
-      :
-        false;
+      ? true : false;
 
     this.setState({
       accountBalanceLow

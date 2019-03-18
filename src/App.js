@@ -22,7 +22,7 @@ const GlobalStyle = createGlobalStyle`
 class App extends Component {
   // Optional parameters to pass into RimbleWeb3
   config = {
-    accountBalanceMinimum: 1000
+    accountBalanceMinimum: 1
   }
   render() {
     return (

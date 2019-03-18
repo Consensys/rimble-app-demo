@@ -268,14 +268,7 @@ class MissingWeb3Provider extends React.Component {
                 <Icon name='Check' color={"green"} mr={2} /> 
                 <Box>
                   <Text color="#999">Connected wallet {this.props.account}</Text>                
-                  <Text color="#999">Account balance {this.props.accountBalance}</Text>
-                  {this.props.accountBalanceLow
-                    ?
-                      <Text color="red">Low balance!</Text>
-                    :
-                      null
-                  }
-                  
+                  <Text color={this.props.accountBalanceLow ? "red" : "#999"}>Account balance {this.props.accountBalance}</Text>
                 </Box>
               </Flex>
             :
