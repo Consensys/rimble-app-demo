@@ -14,6 +14,7 @@ const RimbleTransactionContext = React.createContext({
   userRejectedConnect: {},
   accountValidated: {},
   accountValidationPending: {},
+  userRejectedValidation: {},
   validateAccount: () => {},
   checkNetwork: () => {},
   requiredNetwork: {},
@@ -131,7 +132,10 @@ class RimbleTransaction extends React.Component {
 
   validateAccount = async () => {
     // Show blocking modal
-    this.setState({ accountValidationPending: true });
+    this.setState({ 
+      accountValidationPending: true,
+      userRejectedValidation: false,
+    });
 
     console.log("Account: ", this.state.account)
     if (!this.state.account) {
@@ -151,7 +155,7 @@ class RimbleTransaction extends React.Component {
           this.setState({ 
             accountValidated: false, 
             accountValidationPending: false,
-            userRejectedConnect: true,
+            userRejectedValidation: true,
           });
         } else {
           console.log("Account validation successful.", signature);
@@ -351,6 +355,7 @@ class RimbleTransaction extends React.Component {
     userRejectedConnect: null,
     accountValidated: null,
     accountValidationPending: null,
+    userRejectedValidation: null,
     validateAccount: this.validateAccount,
     checkNetwork: this.checkNetwork,
     requiredNetwork: {

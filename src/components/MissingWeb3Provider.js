@@ -6,6 +6,7 @@ import WrongNetworkModal from "./WrongNetworkModal";
 import ConnectionModal from "./ConnectionModal";
 import TransactionConnectionModal from "./TransactionConnectionModal";
 import ConnectionPendingModal from "./ConnectionPendingModal";
+import UserRejectedValidationModal from "./UserRejectedValidationModal";
 
 class MissingWeb3Provider extends React.Component {
   constructor(props) {
@@ -14,7 +15,8 @@ class MissingWeb3Provider extends React.Component {
       wrongNetworkModalIsOpen: false,
       connectionModalIsOpen: false,
       transactionConnectionModalIsOpen: false,
-      accountValidationPending: this.props.accountValidationPending
+      accountValidationPending: this.props.accountValidationPending,
+      userRejectedValidation: this.props.userRejectedValidation,
     }
   }
 
@@ -71,6 +73,20 @@ class MissingWeb3Provider extends React.Component {
     e.preventDefault()
     this.setState((state, props) => ({
       accountValidationPending: true
+    }))
+  }
+
+  closeUserRejectedValidationModal = (e) => {
+    e.preventDefault()
+    this.setState((state, props) => ({
+      userRejectedValidation: false
+    }))
+  }
+
+  openUserRejectedValidationModal = (e) => {
+    e.preventDefault()
+    this.setState((state, props) => ({
+      userRejectedValidation: true
     }))
   }
 
@@ -275,12 +291,13 @@ class MissingWeb3Provider extends React.Component {
           }
         </Box>
 
-        <Box>
+        <Box mt={4} borderTop={1} borderColor="#E8E8E8" pt={3}>
           <Heading.h4 textAlign={"center"}>Show Modal</Heading.h4>
-          <Button size="small" onClick={this.openWrongNetworkModal}>Blocking Wrong Network</Button>
-          <Button size="small" onClick={this.openConnectionModal}>Connection</Button>
-          <Button size="small" onClick={this.openTransactionConnectionModal}>Transaction Connection</Button>
-          <Button size="small" onClick={this.openConnectionPendingModal}>Connection Pending</Button>
+          <Button size="small" onClick={this.openWrongNetworkModal} mr={2} mb={2}>Blocking Wrong Network</Button>
+          <Button size="small" onClick={this.openConnectionModal} mr={2} mb={2}>Connection</Button>
+          <Button size="small" onClick={this.openTransactionConnectionModal} mr={2} mb={2}>Transaction Connection</Button>
+          <Button size="small" onClick={this.openConnectionPendingModal} mr={2} mb={2}>Connection Pending</Button>
+          <Button size="small" onClick={this.openUserRejectedValidationModal} mr={2} mb={2}>User Rejected Validation</Button>
         </Box>
 
         {/* Modals */}
@@ -288,7 +305,8 @@ class MissingWeb3Provider extends React.Component {
         <ConnectionModal closeConnectionModal={this.closeConnectionModal} validateAccount={this.props.validateAccount} isOpen={this.state.connectionModalIsOpen && !this.props.accountValidated} currentNetwork={this.props.currentNetwork} />
         <TransactionConnectionModal closeTransactionConnectionModal={this.closeTransactionConnectionModal} validateAccount={this.props.validateAccount} isOpen={this.state.transactionConnectionModalIsOpen && !this.props.accountValidated} currentNetwork={this.props.currentNetwork} />
         <ConnectionPendingModal closeConnectionPendingModal={this.closeConnectionPendingModal} isOpen={ this.state.accountValidationPending } currentNetwork={this.props.currentNetwork} />
-        
+        <UserRejectedValidationModal closeUserRejectedValidationModal={this.closeUserRejectedValidationModal} isOpen={ this.state.userRejectedValidation } validateAccount={this.props.validateAccount} />
+
         <ToastMessage.Provider ref={node => (window.toastProvider = node)} />
         { !this.props.isCorrectNetwork && this.props.web3
           ?
