@@ -1,11 +1,11 @@
 {
-  "main.js": "/rimble-app-demo/static/js/main.41be6c3e.chunk.js",
-  "main.js.map": "/rimble-app-demo/static/js/main.41be6c3e.chunk.js.map",
-  "static/js/1.5eb44a25.chunk.js": "/rimble-app-demo/static/js/1.5eb44a25.chunk.js",
-  "static/js/1.5eb44a25.chunk.js.map": "/rimble-app-demo/static/js/1.5eb44a25.chunk.js.map",
+  "main.js": "/rimble-app-demo/static/js/main.66f2ad72.chunk.js",
+  "main.js.map": "/rimble-app-demo/static/js/main.66f2ad72.chunk.js.map",
+  "static/js/1.f9886c63.chunk.js": "/rimble-app-demo/static/js/1.f9886c63.chunk.js",
+  "static/js/1.f9886c63.chunk.js.map": "/rimble-app-demo/static/js/1.f9886c63.chunk.js.map",
   "runtime~main.js": "/rimble-app-demo/static/js/runtime~main.040bab33.js",
   "runtime~main.js.map": "/rimble-app-demo/static/js/runtime~main.040bab33.js.map",
   "index.html": "/rimble-app-demo/index.html",
-  "precache-manifest.7dfba8c3e500b9f94b27e8f3a617f8b2.js": "/rimble-app-demo/precache-manifest.7dfba8c3e500b9f94b27e8f3a617f8b2.js",
+  "precache-manifest.40bfd078593680f2efc64f60c991360c.js": "/rimble-app-demo/precache-manifest.40bfd078593680f2efc64f60c991360c.js",
   "service-worker.js": "/rimble-app-demo/service-worker.js"
 }
