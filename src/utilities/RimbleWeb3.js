@@ -2,6 +2,8 @@ import React from "react";
 import Web3 from "web3"; // uses latest 1.x.x version
 import bowser from "bowser";
 
+import ConnectionUtil from "./ConnectionUtil"
+
 const RimbleTransactionContext = React.createContext({
   contract: {},
   account: {},
@@ -13,15 +15,33 @@ const RimbleTransactionContext = React.createContext({
   initWeb3: () => {},
   initContract: () => {},
   initAccount: () => {},
-  userRejectedConnect: {},
+  rejectAccountConnect: () => {},
   accountValidated: {},
   accountValidationPending: {},
-  userRejectedValidation: {},
+  rejectValidation: () => {},
   validateAccount: () => {},
+  connectAndValidateAccount: () => {}, 
   checkNetwork: () => {},
   requiredNetwork: {},
   currentNetwork: {},
   isCorrectNetwork: {},
+  modals: {
+    data: {
+      connectionModalIsOpen: {},
+      accountConnectionPending: {},
+      userRejectedConnect: {},
+      accountValidationPending: {},
+      userRejectedValidation: {},
+    },
+    methods: {
+      closeConnectionModal: () => {},
+      openConnectionModal: () => {},
+      closeConnectionPendingModal: () => {},
+      openConnectionPendingModal: () => {},
+      closeValidationPendingModal: () => {},
+      openValidationPendingModal: () => {},
+    }
+  }
 });
 
 class RimbleTransaction extends React.Component {
@@ -82,9 +102,11 @@ class RimbleTransaction extends React.Component {
       // Non-dapp browsers...
       else {
         console.log(
-          "Non-Ethereum browser detected. You should consider trying MetaMask!"
+          "Non-Ethereum browser detected. Using Infura fallback."
         );
 
+        const web3Provider = new Web3.providers.HttpProvider('https://rinkeby.infura.io:443');
+        this.setState({ web3Provider });
         web3 = false;
       }
 
@@ -112,12 +134,22 @@ class RimbleTransaction extends React.Component {
   };
 
   initAccount = async () => {
+    let modals = { ...this.state.modals };
+    modals.data.connectionModalIsOpen = false;
+    modals.data.accountConnectionPending = true;
+    this.setState({ modals });
+
     try {
       // Request account access if needed
       await window.ethereum.enable().then(wallets => {
         const account = wallets[0];
-        this.setState({ account });
+        modals.data.accountConnectionPending = false;
+        this.setState(({ account, modals }));
+        
         console.log("wallet address:", this.state.account);
+        
+        // After account is complete, get the balance
+        this.getAccountBalance();
         
         // Watch for account change
         this.pollAccountUpdates();
@@ -128,10 +160,17 @@ class RimbleTransaction extends React.Component {
       window.toastProvider.addMessage("User needs to CONNECT wallet", {
         variant: "failure"
       });
-      this.setState({ userRejectedConnect: true })
+
+      // Reject Connect
+      this.rejectAccountConnect(error);
     }
-    // After account is complete, get the balance
-    await this.getAccountBalance();
+  };
+
+  rejectAccountConnect = (error) => {
+    let modals = { ...this.state.modals };
+    modals.data.accountConnectionPending = false;
+    modals.data.userRejectedConnect = true;
+    this.setState({ modals });
   };
 
   getAccountBalance = async () => {
@@ -151,23 +190,14 @@ class RimbleTransaction extends React.Component {
 
   determineAccountLowBalance = () => {
     // If provided a minimum from config then use it, else default to 1
-    console.log("this.props.config", this.props.config);
-    
-    const accountBalanceMinimum = typeof (this.props.config.accountBalanceMinimum) !== "undefined"
+    const accountBalanceMinimum = typeof(this.props.config) !== "undefined" && typeof (this.props.config.accountBalanceMinimum) !== "undefined"
       ?
         this.props.config.accountBalanceMinimum
       : 
-        1000
-
-    console.log("accountBalanceMinimum", accountBalanceMinimum);
+        1
     // Determine if the account balance is low
-    console.log("this.state.accountBalance", this.state.accountBalance);
-    console.log("compare", (this.state.accountBalance < accountBalanceMinimum));
     const accountBalanceLow = this.state.accountBalance < accountBalanceMinimum
-      ?
-        true
-      :
-        false;
+      ? true : false;
 
     this.setState({
       accountBalanceLow
@@ -175,41 +205,67 @@ class RimbleTransaction extends React.Component {
   }
 
   validateAccount = async () => {
-    // Show blocking modal
-    this.setState({ 
-      accountValidationPending: true,
-      userRejectedValidation: false,
-    });
-
-    console.log("Account: ", this.state.account)
+    console.log("validateAccount");
+    // Get account wallet if none exist
     if (!this.state.account) {
       await this.initAccount();
-    }
 
+      if (!this.state.account) {
+        return;
+      }
+    }
+    console.log("setting state to update UI");
+    
+    // Show blocking modal
+    let modals = { ...this.state.modals };
+    modals.data.accountConnectionPending = false;
+    modals.data.accountValidationPending = true;
+    modals.data.userRejectedValidation = false;
+    this.setState({ modals });
+
+    console.log("Requesting web3 personal sign");
     return window.web3.personal.sign(
       window.web3.fromUtf8(`I am signing my one-time nonce: 012345`),
       this.state.account,
-      (err, signature) => {
-        if (err) {
+      (error, signature) => {
+        if (error) {
           // User rejected account validation.
-          console.log("Wallet account not validated. Error:", err);
+          console.log("Wallet account not validated. Error:", error);
           window.toastProvider.addMessage("Wallet account was not validated", {
             variant: "failure"
           });
-          this.setState({ 
-            accountValidated: false, 
-            accountValidationPending: false,
-            userRejectedValidation: true,
-          });
+          
+          // Reject the validation
+          this.rejectValidation(error);
         } else {
           console.log("Account validation successful.", signature);
+          modals.data.accountValidationPending = false;
           this.setState({ 
-            accountValidated: true, 
-            accountValidationPending: false 
+            modals: modals,
+            accountValidated: true,
           });
         }
       }
     )
+  }
+
+  rejectValidation = (error) => {
+    let modals = { ...this.state.modals };
+    modals.data.userRejectedValidation = true;
+    modals.data.accountValidated = false;
+    modals.data.accountValidationPending = false;
+    this.setState({ modals });
+  }
+
+  connectAndValidateAccount = async () => {
+    // Check for account
+    if (!this.state.account) {
+      // Show modal to connect account
+      this.openConnectionModal();
+    }
+
+    // await this.initAccount();
+    // await this.validateAccount();
   }
 
   getNetworkId = async () => {
@@ -252,6 +308,9 @@ class RimbleTransaction extends React.Component {
     let account = this.state.account;
     let requiresUpdate = false;
     let accountInterval = setInterval(() => {
+      if (this.state.modals.data.accountValidationPending || this.state.modals.data.accountConnectionPending) {
+        return;
+      }
       window.ethereum.enable().then(wallets => {
         const updatedAccount = wallets[0];
         
@@ -261,8 +320,11 @@ class RimbleTransaction extends React.Component {
 
         if (requiresUpdate) {
           clearInterval(accountInterval);
-          this.setState({
-            userRejectedConnect: null,
+          let modals = { ...this.state.modals };
+          modals.data.userRejectedConnect = null;
+          
+          this.setState({ 
+            modals: modals,
             account: '',
             accountValidated: null,
           }, () => {
@@ -386,6 +448,70 @@ class RimbleTransaction extends React.Component {
     this.setState({ transactions });
   };
 
+
+  // CONNECTION MODAL METHODS
+  closeConnectionModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+    
+    let modals = { ...this.state.modals };
+    modals.data.connectionModalIsOpen = false;
+    console.log("this.state", this.state);
+    this.setState((state, props) => ({ modals }))
+  }
+
+  openConnectionModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+    
+    let modals = { ...this.state.modals };
+    modals.data.connectionModalIsOpen = true;
+    this.setState((state, props) => ({ modals }));
+  }
+
+  closeConnectionPendingModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+    
+    let modals = { ...this.state.modals };
+    modals.data.connectionModalIsOpen = false;
+    this.setState((state, props) => ({ modals }));
+  }
+
+  openConnectionPendingModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+    
+    let modals = { ...this.state.modals };
+    modals.data.accountConnectionPending = true;
+    this.setState((state, props) => ({ modals }));
+  }
+
+  closeValidationPendingModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+    
+    let modals = { ...this.state.modals };
+    modals.data.accountConnectionPending = false;
+    this.setState((state, props) => ({ modals }));
+  }
+
+  openValidationPendingModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+
+    let modals = { ...this.state.modals };
+    modals.data.accountConnectionPending = true;
+    this.setState((state, props) => ({ modals }));
+  }
+
+
   state = {
     contract: {},
     account: null,
@@ -398,11 +524,12 @@ class RimbleTransaction extends React.Component {
     initContract: this.initContract,
     initAccount: this.initAccount,
     contractMethodSendWrapper: this.contractMethodSendWrapper,
-    userRejectedConnect: null,
+    rejectAccountConnect: this.rejectAccountConnect,
     accountValidated: null,
     accountValidationPending: null,
-    userRejectedValidation: null,
+    rejectValidation: this.rejectValidation,
     validateAccount: this.validateAccount,
+    connectAndValidateAccount: this.connectAndValidateAccount,
     checkNetwork: this.checkNetwork,
     requiredNetwork: {
       name: "Rinkby",
@@ -410,6 +537,23 @@ class RimbleTransaction extends React.Component {
     },
     currentNetwork: {},
     isCorrectNetwork: null,
+    modals: {
+      data: {
+        connectionModalIsOpen: null,
+        accountConnectionPending: null,
+        userRejectedConnection: null,
+        accountValidationPending: null,
+        userRejectedValidation: null,
+      },
+      methods: {
+        closeConnectionModal: this.closeConnectionModal,
+        openConnectionModal: this.openConnectionModal,
+        closeConnectionPendingModal: this.closeConnectionPendingModal,
+        openConnectionPendingModal: this.openConnectionPendingModal,
+        closeValidationPendingModal: this.closeValidationPendingModal,
+        openValidationPendingModal: this.openValidationPendingModal,
+      }
+    }
   };
 
   componentDidMount() {
@@ -418,7 +562,17 @@ class RimbleTransaction extends React.Component {
 
   render() {
     return (
-      <RimbleTransactionContext.Provider value={this.state} {...this.props} />
+      <div>
+        <RimbleTransactionContext.Provider value={this.state} {...this.props} />
+        <ConnectionUtil 
+          validateAccount={this.state.validateAccount} 
+          accountValidationPending={this.state.accountValidationPending} 
+          accountValidated={this.state.accountValidated}
+          currentNetwork={this.state.currentNetwork} 
+          modals={ this.state.modals }
+        />
+      </div>
+      
     );
   }
 }

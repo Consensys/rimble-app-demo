@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Heading, Text } from "rimble-ui";
+import { Box, Heading, Text, Link, Flex, OutlineButton } from "rimble-ui";
 
 class InstructionsCard extends React.Component {
   render() {
@@ -17,6 +17,21 @@ class InstructionsCard extends React.Component {
             <Text p={1}>You'll need a little bit of ETH for gas fees</Text>
           </li>
         </ol>
+        <Flex borderTop={1} borderColor={"#ccc"} py={4} alignItems={"center"} justifyContent={"space-between"}>
+          <Link
+            href="https://github.com/ConsenSys/rimble-app-demo"
+            target="_blank"
+          >
+            View Code GitHub
+          </Link>
+
+          { this.props.route === "default"
+            ? 
+              <OutlineButton size="small" onClick={() => this.props.showRoute('onboarding')}>Onboarding Debugger</OutlineButton>
+            :
+              <OutlineButton size="small" onClick={() => this.props.showRoute('default')}>Default View</OutlineButton>
+          }
+        </Flex>
       </Box>
     );
   }

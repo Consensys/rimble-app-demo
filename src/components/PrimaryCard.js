@@ -22,20 +22,13 @@ class PrimaryCard extends React.Component {
         }) => (
           <div>
             <Card width={"400px"} mx={"auto"} px={4}>
-              {!account ? (
-                <ConnectButton 
-                  initAccount={initAccount} 
-                  account={account} 
-                />
-              ) : (
-                <SmartContractControls
-                  contract={contract}
-                  account={account}
-                  transactions={transactions}
-                  initContract={initContract}
-                  contractMethodSendWrapper={contractMethodSendWrapper}
-                />
-              )}
+              <SmartContractControls
+                contract={contract}
+                account={account}
+                transactions={transactions}
+                initContract={initContract}
+                contractMethodSendWrapper={contractMethodSendWrapper}
+              />
             </Card>
 
             <TransactionsCard transactions={transactions} />

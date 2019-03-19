@@ -30,7 +30,7 @@ class UserRejectedValidationModal extends React.Component {
             
             <Heading.h2 my={3}>You can't continue without signing the message</Heading.h2>
 
-            <Text my={4}>To use Bounties Explorer, you need to sign the message to finish conne ting securely. You can still browse as a guest.</Text>
+            <Text my={4}>To use Bounties Explorer, you need to sign the message to finish connecting securely. You can still browse as a guest.</Text>
             
             <Flex justifyContent={"flex-end"} mt={4}>
               <OutlineButton onClick={this.props.closeUserRejectedValidationModal} mr={4}>Browse as guest</OutlineButton>
