@@ -186,7 +186,7 @@ class MissingWeb3Provider extends React.Component {
                 size="small" 
                 onClick={this.props.validateAccount}
                 disabled={!this.props.web3}
-              >Connect & Validate</Button>
+              >Connect and verify</Button>
               <Text>- or -</Text>
               <Button size="small" disabled>Initiate On-Chain Action</Button>
             </Flex>
@@ -245,7 +245,7 @@ class MissingWeb3Provider extends React.Component {
               :
                 <Icon name='Close' color={"red"} mr={2} />
             }
-            <Text>Wallet Connected and Validated</Text>
+            <Text>Wallet connected and verified</Text>
           </Flex>
 
           { !this.props.account && this.props.web3 
@@ -297,7 +297,7 @@ class MissingWeb3Provider extends React.Component {
               <Flex ml={4} my={1} alignItems={"center"} justifyContent={"space-between"}>
                 <Flex alignItems={"center"}>
                   <Icon name='Info' mr={2} color="#999" />
-                  <Text color="#999">Account not validated</Text>
+                  <Text color="#999">Account not verified</Text>
                 </Flex>
                 
                 <OutlineButton size="small" onClick={this.props.validateAccount}>Validate</OutlineButton>
@@ -310,7 +310,7 @@ class MissingWeb3Provider extends React.Component {
             ? 
               <Flex ml={4}>
               <Icon name='Error' mr={2} color="red" />
-                <Text color="red">Account not validated</Text>
+                <Text color="red">Account not verified</Text>
               </Flex>
             : 
               null
