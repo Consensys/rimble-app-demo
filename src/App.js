@@ -53,10 +53,12 @@ class App extends Component {
               accountValidationPending,
               userRejectedValidation,
               validateAccount,
+              connectAndValidateAccount,
               checkNetwork,
               requiredNetwork,
               currentNetwork,
               isCorrectNetwork,
+              modals,
             }) => (
               <Box>
                 <Header
@@ -69,10 +71,12 @@ class App extends Component {
                   accountValidationPending={accountValidationPending} 
                   userRejectedValidation={userRejectedValidation} 
                   validateAccount={validateAccount} 
+                  connectAndValidateAccount={connectAndValidateAccount}
                   checkNetwork={checkNetwork}
                   requiredNetwork={requiredNetwork}
                   currentNetwork={currentNetwork}
                   isCorrectNetwork={isCorrectNetwork}
+                  modals={modals}
                 />
                 
                 <Flex justifyContent="center" p={4}>

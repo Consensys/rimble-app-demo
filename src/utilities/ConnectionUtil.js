@@ -6,45 +6,30 @@ import UserRejectedValidationModal from "./components/UserRejectedValidationModa
 
 class ConnectionUtil extends React.Component {
   state = {
-    connectionModalIsOpen: false,
-    accountValidationPending: this.props.accountValidationPending,
-    userRejectedValidation: this.props.userRejectedValidation,
-  }
-  
-  closeConnectionModal = (e) => {
-    e.preventDefault()
-    this.setState((state, props) => ({
-      connectionModalIsOpen: false
-    }))
+    
   }
 
-  openConnectionModal = (e) => {
-    e.preventDefault()
-    this.setState((state, props) => ({
-      connectionModalIsOpen: true
-    }))
+  componentWillReceiveProps() {
+    console.log("this.props.modals", this.props.modals)
+    this.setState({
+      closeConnectionModal: this.props.modals.methods.closeConnectionModal,
+      closeConnectionPendingModal: this.props.modals.methods.closeConnectionPendingModal,
+    });
   }
-
-  closeConnectionPendingModal = (e) => {
-    e.preventDefault()
-    this.setState((state, props) => ({
-      accountValidationPending: false
-    }))
-  }
-
-  openConnectionPendingModal = (e) => {
-    e.preventDefault()
-    this.setState((state, props) => ({
-      accountValidationPending: true
-    }))
-  }
-
-
   render() {
     return (
       <div>
-        <ConnectionModal closeConnectionModal={this.closeConnectionModal} validateAccount={this.props.validateAccount} isOpen={this.state.connectionModalIsOpen && !this.props.accountValidated} currentNetwork={this.props.currentNetwork} />
-        <ConnectionPendingModal closeConnectionPendingModal={this.closeConnectionPendingModal} isOpen={ this.state.accountValidationPending } currentNetwork={this.props.currentNetwork} />
+        <ConnectionModal 
+          closeConnectionModal={this.state.closeConnectionModal} 
+          validateAccount={this.props.validateAccount} 
+          isOpen={this.props.modals.data.connectionModalIsOpen && !this.props.accountValidated} 
+          currentNetwork={this.props.currentNetwork}
+        />
+        <ConnectionPendingModal 
+          closeConnectionPendingModal={this.state.closeConnectionPendingModal} 
+          isOpen={ this.props.accountValidationPending } 
+          currentNetwork={this.props.currentNetwork} 
+        />
         <UserRejectedValidationModal></UserRejectedValidationModal>
       </div>
     );

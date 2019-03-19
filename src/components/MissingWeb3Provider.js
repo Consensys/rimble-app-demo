@@ -4,8 +4,10 @@ import WrongNetworkBanner from "./WrongNetworkBanner";
 import NetworkOverview from "./NetworkOverview";
 import WrongNetworkModal from "./WrongNetworkModal";
 import ConnectionModal from "../utilities/components/ConnectionModal";
-import TransactionConnectionModal from "./TransactionConnectionModal";
 import ConnectionPendingModal from "../utilities/components/ConnectionPendingModal";
+import UserRejectedConnectionModal from "../utilities/components/UserRejectedConnectionModal";
+import TransactionConnectionModal from "./TransactionConnectionModal";
+import ValidationPendingModal from "../utilities/components/ValidationPendingModal";
 import UserRejectedValidationModal from "../utilities/components/UserRejectedValidationModal";
 import LowFundsModal from "./LowFundsModal";
 
@@ -15,6 +17,7 @@ class MissingWeb3Provider extends React.Component {
     this.state = {
       wrongNetworkModalIsOpen: false,
       connectionModalIsOpen: false,
+      userRejectedConnect: false,
       transactionConnectionModalIsOpen: false,
       accountValidationPending: this.props.accountValidationPending,
       userRejectedValidation: this.props.userRejectedValidation,
@@ -26,88 +29,127 @@ class MissingWeb3Provider extends React.Component {
     e.preventDefault()
     this.setState((state, props) => ({
       wrongNetworkModalIsOpen: false
-    }))
+    }));
   }
 
   openWrongNetworkModal = (e) => {
     e.preventDefault()
     this.setState((state, props) => ({
       wrongNetworkModalIsOpen: true
-    }))
+    }));
   }
 
   closeConnectionModal = (e) => {
     e.preventDefault()
     this.setState((state, props) => ({
       connectionModalIsOpen: false
-    }))
+    }));
   }
 
   openConnectionModal = (e) => {
     e.preventDefault()
     this.setState((state, props) => ({
       connectionModalIsOpen: true
-    }))
+    }));
+  }
+  
+  closeConnectionPendingModal = (e) => {
+    e.preventDefault()
+    this.setState((state, props) => ({
+      accountConnectionPending: false,
+      userRejectedConnect: true,
+    }));
+  }
+
+  openConnectionPendingModal = (e) => {
+    e.preventDefault()
+    this.setState((state, props) => ({
+      accountConnectionPending: true
+    }));
+  }
+
+  closeUserRejectedConnectionModal = (e) => {
+    e.preventDefault()
+    this.setState((state, props) => ({
+      userRejectedConnect: false,
+    }));
+    // Need to call function in RimbleWeb3 to change state there and it will propagate down to this component.
+    // Maybe moving these close/open functions to RimbleWeb3 fixes?
+  }
+
+  openUserRejectedConnectionModal = (e) => {
+    e.preventDefault()
+    this.setState((state, props) => ({
+      userRejectedConnect: true
+    }));
+    // Need to call function in RimbleWeb3 to change state there and it will propagate down to this component.
+    // Maybe moving these close/open functions to RimbleWeb3 fixes?
   }
 
   closeTransactionConnectionModal = (e) => {
     e.preventDefault()
     this.setState((state, props) => ({
       transactionConnectionModalIsOpen: false
-    }))
+    }));
   }
 
   openTransactionConnectionModal = (e) => {
     e.preventDefault()
     this.setState((state, props) => ({
       transactionConnectionModalIsOpen: true
-    }))
+    }));
   }
 
-  closeConnectionPendingModal = (e) => {
+  closeAccountValidationPendingModal = (e) => {
     e.preventDefault()
     this.setState((state, props) => ({
-      accountValidationPending: false
-    }))
+      accountValidationPending: false,
+      userRejectedValidation: true,
+    }));
   }
 
-  openConnectionPendingModal = (e) => {
+  openAccountValidationPendingModal = (e) => {
     e.preventDefault()
     this.setState((state, props) => ({
       accountValidationPending: true
-    }))
+    }));
   }
 
   closeUserRejectedValidationModal = (e) => {
     e.preventDefault()
     this.setState((state, props) => ({
       userRejectedValidation: false
-    }))
+    }));
   }
 
   openUserRejectedValidationModal = (e) => {
     e.preventDefault()
     this.setState((state, props) => ({
       userRejectedValidation: true
-    }))
+    }));
   }
 
   closeLowFundsModal = (e) => {
     e.preventDefault()
     this.setState((state, props) => ({
       lowFundsModalIsOpen: false
-    }))
+    }));
   }
 
   openLowFundsModal = (e) => {
     e.preventDefault()
     this.setState((state, props) => ({
       lowFundsModalIsOpen: true
-    }))
+    }));
   }
 
   componentWillReceiveProps(props) {
-    this.setState({ accountValidationPending: props.accountValidationPending });
+    this.setState({ 
+      accountConnectionPending: props.accountConnectionPending,
+      userRejectedConnect: props.userRejectedConnect,
+      accountValidationPending: props.accountValidationPending,
+      userRejectedValidation: props.userRejectedValidation,
+    });
   }
 
 
@@ -303,7 +345,17 @@ class MissingWeb3Provider extends React.Component {
             ? 
               <Flex ml={4}>
               <Icon name='Error' mr={2} color="red" />
-                <Text color="red">Account not validated</Text>
+                <Text color="red">Account not verified</Text>
+              </Flex>
+            : 
+              null
+          }
+
+          { this.props.userRejectedValidation === false
+            ? 
+              <Flex ml={4}>
+              <Icon name='Error' mr={2} color="red" />
+                <Text color="red">User rejected verification</Text>
               </Flex>
             : 
               null
@@ -313,19 +365,31 @@ class MissingWeb3Provider extends React.Component {
         <Box mt={4} borderTop={1} borderColor="#E8E8E8" pt={3}>
           <Heading.h4 textAlign={"center"}>Show Modal</Heading.h4>
           <Button size="small" onClick={this.openWrongNetworkModal} mr={2} mb={2}>Blocking Wrong Network</Button>
+          
           <Button size="small" onClick={this.openConnectionModal} mr={2} mb={2}>Connection</Button>
-          <Button size="small" onClick={this.openTransactionConnectionModal} mr={2} mb={2}>Transaction Connection</Button>
           <Button size="small" onClick={this.openConnectionPendingModal} mr={2} mb={2}>Connection Pending</Button>
+          <Button size="small" onClick={this.openUserRejectedConnectionModal} mr={2} mb={2}>Connection Rejected</Button>
+
+          <Button size="small" onClick={this.openTransactionConnectionModal} mr={2} mb={2}>Transaction Connection</Button>
+          
+          <Button size="small" onClick={this.openAccountValidationPendingModal} mr={2} mb={2}>Validation Pending</Button>
           <Button size="small" onClick={this.openUserRejectedValidationModal} mr={2} mb={2}>User Rejected Validation</Button>
           <Button size="small" onClick={(event) => { this.props.validateAccount(event); this.openLowFundsModal(event); }} mr={2} mb={2}>Low Funds</Button>
         </Box>
 
         {/* Modals */}
         <WrongNetworkModal closeWrongNetworkModal={this.closeWrongNetworkModal} isOpen={this.state.wrongNetworkModalIsOpen} requiredNetwork={this.props.requiredNetwork} currentNetwork={this.props.currentNetwork} />
+        
         <ConnectionModal closeConnectionModal={this.closeConnectionModal} validateAccount={this.props.validateAccount} isOpen={this.state.connectionModalIsOpen && !this.props.accountValidated} currentNetwork={this.props.currentNetwork} />
+        <ConnectionPendingModal closeConnectionPendingModal={this.closeConnectionPendingModal} isOpen={ this.state.accountConnectionPending } currentNetwork={this.props.currentNetwork} />
+        <UserRejectedConnectionModal closeUserRejectedConnectionModal={this.closeUserRejectedConnectionModal} isOpen={this.state.userRejectedConnect} connectAccount={this.props.initAccount} openConnectionPendingModal={this.openConnectionPendingModal} />
+        
+
         <TransactionConnectionModal closeTransactionConnectionModal={this.closeTransactionConnectionModal} validateAccount={this.props.validateAccount} isOpen={this.state.transactionConnectionModalIsOpen && !this.props.accountValidated} currentNetwork={this.props.currentNetwork} />
-        <ConnectionPendingModal closeConnectionPendingModal={this.closeConnectionPendingModal} isOpen={ this.state.accountValidationPending } currentNetwork={this.props.currentNetwork} />
+        
+        <ValidationPendingModal closeAccountValidationPendingModal={this.closeAccountValidationPendingModal} isOpen={this.state.accountValidationPending} currentNetwork={this.props.currentNetwork} />
         <UserRejectedValidationModal closeUserRejectedValidationModal={this.closeUserRejectedValidationModal} isOpen={ this.state.userRejectedValidation } validateAccount={this.props.validateAccount} />
+
         <LowFundsModal closeLowFundsModal={this.closeLowFundsModal} isOpen={ this.state.lowFundsModalIsOpen} currentNetwork={this.props.currentNetwork} account={ this.props.account } />
 
         <ToastMessage.Provider ref={node => (window.toastProvider = node)} />

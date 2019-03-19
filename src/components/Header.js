@@ -9,7 +9,7 @@ class Header extends React.Component {
         <Flex justifyContent="flex-end" bg={"white"}>
           <Button
             m={3}
-            onClick={this.props.validateAccount}
+            onClick={this.props.connectAndValidateAccount}
             size="small"
             backgroundColor={"white"}
           >

@@ -20,10 +20,22 @@ const RimbleTransactionContext = React.createContext({
   accountValidationPending: {},
   userRejectedValidation: {},
   validateAccount: () => {},
+  connectAndValidateAccount: () => {}, 
   checkNetwork: () => {},
   requiredNetwork: {},
   currentNetwork: {},
   isCorrectNetwork: {},
+  modals: {
+    data: {
+      connectionModalIsOpen: {},
+    },
+    methods: {
+      closeConnectionModal: () => {},
+      openConnectionModal: () => {},
+      closeConnectionPendingModal: () => {},
+      openConnectionPendingModal: () => {},
+    }
+  }
 });
 
 class RimbleTransaction extends React.Component {
@@ -170,10 +182,15 @@ class RimbleTransaction extends React.Component {
   }
 
   validateAccount = async () => {
+    // Hide the connection modal
+    // let modals = { ...this.state.modals };
+    // modals.data.connectionModalIsOpen = false;
+
     // Show blocking modal
     this.setState({ 
       accountValidationPending: true,
       userRejectedValidation: false,
+      // modals: modals,
     });
 
     console.log("Account: ", this.state.account)
@@ -205,6 +222,17 @@ class RimbleTransaction extends React.Component {
         }
       }
     )
+  }
+
+  connectAndValidateAccount = async () => {
+    // Check for account
+    if (!this.state.account) {
+      // Show modal to connect account
+      this.openConnectionModal();
+    }
+
+    // await this.initAccount();
+    // await this.validateAccount();
   }
 
   getNetworkId = async () => {
@@ -381,6 +409,45 @@ class RimbleTransaction extends React.Component {
     this.setState({ transactions });
   };
 
+
+  // CONNECTION MODAL METHODS
+  closeConnectionModal = (e) => {
+    e.preventDefault();
+    let modals = { 
+      data: { ...this.state.modals.data }, 
+      methods: { ...this.state.modals.methods }
+    };
+    modals.data.connectionModalIsOpen = false;
+    console.log("this.state", this.state);
+    this.setState((state, props) => ({ modals }))
+  }
+
+  openConnectionModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+    
+    let modals = { ...this.state.modals };
+    console.log("modals", modals)
+    modals.data.connectionModalIsOpen = true;
+    this.setState((state, props) => ({ modals }));
+  }
+
+  closeConnectionPendingModal = (e) => {
+    e.preventDefault()
+    this.setState((state, props) => ({
+      accountValidationPending: false
+    }))
+  }
+
+  openConnectionPendingModal = (e) => {
+    e.preventDefault()
+    this.setState((state, props) => ({
+      accountValidationPending: true
+    }))
+  }
+
+
   state = {
     contract: {},
     account: null,
@@ -398,6 +465,7 @@ class RimbleTransaction extends React.Component {
     accountValidationPending: null,
     userRejectedValidation: null,
     validateAccount: this.validateAccount,
+    connectAndValidateAccount: this.connectAndValidateAccount,
     checkNetwork: this.checkNetwork,
     requiredNetwork: {
       name: "Rinkby",
@@ -405,6 +473,17 @@ class RimbleTransaction extends React.Component {
     },
     currentNetwork: {},
     isCorrectNetwork: null,
+    modals: {
+      data: {
+        connectionModalIsOpen: null,
+      },
+      methods: {
+        closeConnectionModal: this.closeConnectionModal,
+        openConnectionModal: this.openConnectionModal,
+        closeConnectionPendingModal: this.closeConnectionPendingModal,
+        openConnectionPendingModal: this.openConnectionPendingModal,
+      }
+    }
   };
 
   componentDidMount() {
@@ -415,7 +494,13 @@ class RimbleTransaction extends React.Component {
     return (
       <div>
         <RimbleTransactionContext.Provider value={this.state} {...this.props} />
-        <ConnectionUtil  />
+        <ConnectionUtil 
+          validateAccount={this.state.validateAccount} 
+          accountValidationPending={this.state.accountValidationPending} 
+          accountValidated={this.state.accountValidated}
+          currentNetwork={this.state.currentNetwork} 
+          modals={ this.state.modals }
+        />
       </div>
       
     );
