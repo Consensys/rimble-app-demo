@@ -55,10 +55,11 @@ class MissingWeb3Provider extends React.Component {
   
   closeConnectionPendingModal = (e) => {
     e.preventDefault()
-    this.setState((state, props) => ({
-      accountConnectionPending: false,
-      userRejectedConnect: true,
-    }));
+    // this.setState((state, props) => ({
+    //   accountConnectionPending: false,
+    //   userRejectedConnect: true,
+    // }));
+    this.props.rejectAccountConnect();
   }
 
   openConnectionPendingModal = (e) => {
@@ -290,7 +291,7 @@ class MissingWeb3Provider extends React.Component {
             <Text>Wallet Connected and Validated</Text>
           </Flex>
 
-          { !this.props.account && this.props.web3 
+          { !this.props.account && this.props.web3 && !this.props.userRejectedConnect
             ? 
               <Flex ml={4} alignItems={"center"} justifyContent={"space-between"}>
                 <Flex alignItems={"center"}>
@@ -319,9 +320,13 @@ class MissingWeb3Provider extends React.Component {
 
           { this.props.userRejectedConnect 
             ? 
-              <Flex ml={4}>
-                <Icon name='Error' mr={2} color="red" />
-                <Text color="red">User rejected Connect request</Text>
+              <Flex ml={4} justifyContent={"space-between"}>
+                <Flex alignItems={"center"}>
+                  <Icon name="Error" mr={2} color="red" />
+                  <Text color="red">User rejected Connect request</Text>
+                </Flex>
+                
+                <OutlineButton size="small" onClick={this.props.initAccount}>Connect</OutlineButton>
               </Flex>
             : 
               null

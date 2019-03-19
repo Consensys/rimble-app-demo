@@ -15,9 +15,11 @@ const RimbleTransactionContext = React.createContext({
   initWeb3: () => {},
   initContract: () => {},
   initAccount: () => {},
+  rejectAccountConnect: () => {},
   userRejectedConnect: {},
   accountValidated: {},
   accountValidationPending: {},
+  rejectValidation: () => {},
   userRejectedValidation: {},
   validateAccount: () => {},
   connectAndValidateAccount: () => {}, 
@@ -144,10 +146,18 @@ class RimbleTransaction extends React.Component {
       window.toastProvider.addMessage("User needs to CONNECT wallet", {
         variant: "failure"
       });
-      this.setState({ userRejectedConnect: true })
+
+      // Reject Connect
+      this.rejectAccountConnect(error);
     }
     // After account is complete, get the balance
     await this.getAccountBalance();
+  };
+
+  rejectAccountConnect = (error) => {
+    this.setState({ 
+      userRejectedConnect: true, 
+    });
   };
 
   getAccountBalance = async () => {
@@ -201,18 +211,16 @@ class RimbleTransaction extends React.Component {
     return window.web3.personal.sign(
       window.web3.fromUtf8(`I am signing my one-time nonce: 012345`),
       this.state.account,
-      (err, signature) => {
-        if (err) {
+      (error, signature) => {
+        if (error) {
           // User rejected account validation.
-          console.log("Wallet account not validated. Error:", err);
+          console.log("Wallet account not validated. Error:", error);
           window.toastProvider.addMessage("Wallet account was not validated", {
             variant: "failure"
           });
-          this.setState({ 
-            accountValidated: false, 
-            accountValidationPending: false,
-            userRejectedValidation: true,
-          });
+          
+          // Reject the validation
+          this.rejectValidation(error);
         } else {
           console.log("Account validation successful.", signature);
           this.setState({ 
@@ -222,6 +230,14 @@ class RimbleTransaction extends React.Component {
         }
       }
     )
+  }
+
+  rejectValidation = (error) => {
+    this.setState({
+      userRejectedValidation: true,
+      accountValidated: false, 
+      accountValidationPending: false,
+    })
   }
 
   connectAndValidateAccount = async () => {
@@ -460,9 +476,11 @@ class RimbleTransaction extends React.Component {
     initContract: this.initContract,
     initAccount: this.initAccount,
     contractMethodSendWrapper: this.contractMethodSendWrapper,
+    rejectAccountConnect: this.rejectAccountConnect,
     userRejectedConnect: null,
     accountValidated: null,
     accountValidationPending: null,
+    rejectValidation: this.rejectValidation,
     userRejectedValidation: null,
     validateAccount: this.validateAccount,
     connectAndValidateAccount: this.connectAndValidateAccount,

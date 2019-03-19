@@ -48,9 +48,11 @@ class App extends Component {
               accountBalance,
               accountBalanceLow,
               initAccount, 
+              rejectAccountConnect,
               userRejectedConnect,
               accountValidated,
               accountValidationPending,
+              rejectValidation,
               userRejectedValidation,
               validateAccount,
               connectAndValidateAccount,
@@ -66,9 +68,11 @@ class App extends Component {
                   accountBalance={accountBalance}
                   accountBalanceLow={accountBalanceLow}
                   initAccount={initAccount}
+                  rejectAccountConnect={rejectAccountConnect}
                   userRejectedConnect={userRejectedConnect}
                   accountValidated={accountValidated} 
                   accountValidationPending={accountValidationPending} 
+                  rejectValidation={rejectValidation}
                   userRejectedValidation={userRejectedValidation} 
                   validateAccount={validateAccount} 
                   connectAndValidateAccount={connectAndValidateAccount}
@@ -101,9 +105,11 @@ class App extends Component {
                       accountBalance={accountBalance}
                       accountBalanceLow={accountBalanceLow}
                       initAccount={initAccount} 
+                      rejectAccountConnect={rejectAccountConnect}
                       userRejectedConnect={userRejectedConnect}
                       accountValidated={accountValidated} 
                       accountValidationPending={accountValidationPending} 
+                      rejectValidation={rejectValidation}
                       userRejectedValidation={userRejectedValidation} 
                       validateAccount={validateAccount} 
                       checkNetwork={checkNetwork}
