@@ -69,8 +69,6 @@ class MissingWeb3Provider extends React.Component {
     let modals = { ...this.props.modals };
     modals.data.userRejectedConnect = false;
     this.setState({ modals });
-    // Need to call function in RimbleWeb3 to change state there and it will propagate down to this component.
-    // Maybe moving these close/open functions to RimbleWeb3 fixes?
   }
 
   openUserRejectedConnectionModal = (e) => {
@@ -78,8 +76,6 @@ class MissingWeb3Provider extends React.Component {
     let modals = { ...this.props.modals };
     modals.data.userRejectedConnect = true;
     this.setState({ modals });
-    // Need to call function in RimbleWeb3 to change state there and it will propagate down to this component.
-    // Maybe moving these close/open functions to RimbleWeb3 fixes?
   }
 
   closeTransactionConnectionModal = (e) => {

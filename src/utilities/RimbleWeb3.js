@@ -239,9 +239,11 @@ class RimbleTransaction extends React.Component {
           this.rejectValidation(error);
         } else {
           console.log("Account validation successful.", signature);
-          modals.data.accountValidated = true;
           modals.data.accountValidationPending = false;
-          this.setState({ modals });
+          this.setState({ 
+            modals: modals,
+            accountValidated: true,
+          });
         }
       }
     )
