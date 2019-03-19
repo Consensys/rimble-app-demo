@@ -10,7 +10,6 @@ class ConnectionUtil extends React.Component {
   }
 
   componentWillReceiveProps() {
-    console.log("this.props.modals", this.props.modals)
     this.setState({
       closeConnectionModal: this.props.modals.methods.closeConnectionModal,
       closeConnectionPendingModal: this.props.modals.methods.closeConnectionPendingModal,

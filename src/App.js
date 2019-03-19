@@ -112,10 +112,12 @@ class App extends Component {
                       rejectValidation={rejectValidation}
                       userRejectedValidation={userRejectedValidation} 
                       validateAccount={validateAccount} 
+                      connectAndValidateAccount={connectAndValidateAccount}
                       checkNetwork={checkNetwork}
                       requiredNetwork={requiredNetwork}
                       currentNetwork={currentNetwork}
                       isCorrectNetwork={isCorrectNetwork}
+                      modals={modals}
                     /> 
                   : null
                 }
