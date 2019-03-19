@@ -2,7 +2,8 @@ import React from "react";
 import Web3 from "web3"; // uses latest 1.x.x version
 import bowser from "bowser";
 
-import ConnectionUtil from "./ConnectionUtil"
+import ConnectionUtil from "./ConnectionUtil";
+import NetworkUtil from "./NetworkUtil";
 
 const RimbleTransactionContext = React.createContext({
   contract: {},
@@ -25,6 +26,12 @@ const RimbleTransactionContext = React.createContext({
   requiredNetwork: {},
   currentNetwork: {},
   isCorrectNetwork: {},
+  network: {
+    required: {},
+    current: {},
+    isCorrectNetwork: null,
+    checkNetwork: () => {},
+  },
   modals: {
     data: {
       connectionModalIsOpen: {},
@@ -271,9 +278,11 @@ class RimbleTransaction extends React.Component {
   getNetworkId = async () => {
     try {
       return this.state.web3.eth.net.getId((error, networkId) => {
-        let currentNetwork = { ...this.state.currentNetwork };
-        currentNetwork.id = networkId;
-        this.setState({ currentNetwork });
+        let current = { ...this.state.network.current };
+        current.id = networkId;
+        let network = { ...this.state.network };
+        network.current = current;
+        this.setState({ network });
       });
     } catch (error) {
       console.log("Could not get network ID: ", error);
@@ -283,9 +292,11 @@ class RimbleTransaction extends React.Component {
   getNetworkName = async () => {
     try {
       return this.state.web3.eth.net.getNetworkType((error, networkName) => {
-        let currentNetwork = { ...this.state.currentNetwork };
-        currentNetwork.name = networkName;
-        this.setState({ currentNetwork });
+        let current = { ...this.state.network.current };
+        current.name = networkName;
+        let network = { ...this.state.network };
+        network.current = current;
+        this.setState({ network });
       });
     } catch (error) {
       console.log("Could not get network Name: ", error);
@@ -293,15 +304,15 @@ class RimbleTransaction extends React.Component {
   }
 
   checkNetwork = async () => {
-    let isCorrectNetwork = null;
     await this.getNetworkId();
     await this.getNetworkName();
 
-    isCorrectNetwork = this.state.currentNetwork.id === this.state.requiredNetwork.id
+    let network = { ...this.state.network }
+    network.isCorrectNetwork = this.state.network.current.id === this.state.network.required.id
       ? true
       : false;
-  
-    this.setState({ isCorrectNetwork });
+    
+    this.setState({ network });
   }
 
   pollAccountUpdates = () => {
@@ -537,6 +548,12 @@ class RimbleTransaction extends React.Component {
     },
     currentNetwork: {},
     isCorrectNetwork: null,
+    network: {
+      required: {},
+      current: {},
+      isCorrectNetwork: null,
+      checkNetwork: this.checkNetwork,
+    },
     modals: {
       data: {
         connectionModalIsOpen: null,
@@ -570,6 +587,10 @@ class RimbleTransaction extends React.Component {
           accountValidated={this.state.accountValidated}
           currentNetwork={this.state.currentNetwork} 
           modals={ this.state.modals }
+        />
+        <NetworkUtil
+          network={this.state.network}
+          web3={this.state.web3}
         />
       </div>
       

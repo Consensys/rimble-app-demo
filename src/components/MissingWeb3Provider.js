@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Heading, Text, Icon, Flex, ToastMessage, OutlineButton, Box, Button, Link } from "rimble-ui";
-import WrongNetworkBanner from "./WrongNetworkBanner";
+import WrongNetworkBanner from "../utilities/components/WrongNetworkBanner";
 import NetworkOverview from "./NetworkOverview";
 import WrongNetworkModal from "./WrongNetworkModal";
 import ConnectionModal from "../utilities/components/ConnectionModal";
@@ -430,14 +430,6 @@ class MissingWeb3Provider extends React.Component {
         />
 
         <ToastMessage.Provider ref={node => (window.toastProvider = node)} />
-        { !this.props.isCorrectNetwork && this.props.web3
-          ?
-            <WrongNetworkBanner 
-              requiredNetwork={this.props.requiredNetwork} 
-              currentNetwork={this.props.currentNetwork} />
-          :
-            null
-        }
       </Card>
     )
   }

@@ -62,7 +62,7 @@ class App extends Component {
               isCorrectNetwork,
               modals,
             }) => (
-              <Box>
+              <Box style={{paddingBottom: !isCorrectNetwork ? "8em" : "0" }}>
                 <Header
                   account={account}
                   accountBalance={accountBalance}
@@ -121,11 +121,11 @@ class App extends Component {
                     /> 
                   : null
                 }
+                <InstructionsCard showRoute={this.showRoute} route={this.state.route} />
               </Box>
             )}
           </RimbleWeb3.Consumer>
         </RimbleWeb3>
-        <InstructionsCard showRoute={this.showRoute} route={this.state.route} />
         <GlobalStyle />
       </ThemeProvider>
     );
