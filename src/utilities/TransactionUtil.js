@@ -1,5 +1,7 @@
 import React from "react";
 
+import NoWeb3BrowserModal from "./components/NoWeb3BrowserModal";
+import NoWalletModal from "./components/NoWalletModal";
 import ConnectionModal from "./components/ConnectionModal";
 import ConnectionPendingModal from "./components/ConnectionPendingModal";
 import UserRejectedConnectionModal from "./components/UserRejectedConnectionModal";
@@ -7,10 +9,22 @@ import UserRejectedConnectionModal from "./components/UserRejectedConnectionModa
 import ValidationPendingModal from "./components/ValidationPendingModal";
 import UserRejectedValidationModal from "./components/UserRejectedValidationModal";
 
-class ConnectionUtil extends React.Component {
+class TransactionUtil extends React.Component {
   render() {
     return (
       <div>
+        <NoWeb3BrowserModal
+          closeModal={this.props.modals.methods.closeNoWeb3BrowserModal}
+          isOpen={this.props.modals.data.noWeb3BrowserModalIsOpen}
+          transaction={this.props.transaction}
+        />
+
+        <NoWalletModal
+          closeModal={this.props.modals.methods.closeNoWalletModal}
+          isOpen={this.props.modals.data.noWalletModalIsOpen}
+          transaction={this.props.transaction}
+        />
+
         <ConnectionModal 
           closeConnectionModal={this.props.modals.methods.closeConnectionModal} 
           validateAccount={this.props.validateAccount} 
@@ -45,4 +59,4 @@ class ConnectionUtil extends React.Component {
   }
 }
 
-export default ConnectionUtil;
+export default TransactionUtil;

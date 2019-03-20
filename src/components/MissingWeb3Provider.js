@@ -375,6 +375,9 @@ class MissingWeb3Provider extends React.Component {
           <Button size="small" onClick={this.openAccountValidationPendingModal} mr={2} mb={2}>Validation Pending</Button>
           <Button size="small" onClick={this.openUserRejectedValidationModal} mr={2} mb={2}>User Rejected Validation</Button>
           <Button size="small" onClick={(event) => { this.props.validateAccount(event); this.openLowFundsModal(event); }} mr={2} mb={2}>Low Funds</Button>
+          
+          <Button size="small" onClick={this.props.modals.methods.openNoWeb3BrowserModal} mr={2} mb={2}>Not Web3 Browser</Button>
+          <Button size="small" onClick={this.props.modals.methods.openNoWalletModal} mr={2} mb={2}>No Wallet</Button>
         </Box>
 
         {/* Modals */}

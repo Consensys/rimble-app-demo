@@ -4,7 +4,6 @@ import { Card } from "rimble-ui";
 import RimbleWeb3 from "../utilities/RimbleWeb3";
 import TransactionToastUtil from "../utilities/TransactionToastUtil";
 
-import ConnectButton from "./ConnectButton";
 import SmartContractControls from "./SmartContractControls";
 import TransactionsCard from "./TransactionsCard";
 
