@@ -631,6 +631,7 @@ class RimbleTransaction extends React.Component {
       <div>
         <RimbleTransactionContext.Provider value={this.state} {...this.props} />
         <ConnectionUtil 
+          initAccount={this.state.initAccount}
           validateAccount={this.state.validateAccount} 
           accountConnectionPending={this.state.accountConnectionPending}
           accountValidationPending={this.state.accountValidationPending} 

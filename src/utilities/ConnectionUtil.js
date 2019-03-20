@@ -35,7 +35,7 @@ class ConnectionUtil extends React.Component {
           closeUserRejectedConnectionModal={this.props.modals.methods.closeUserRejectedConnectionModal} 
           isOpen={this.props.modals.data.userRejectedConnect} 
           connectAccount={this.props.initAccount} 
-          openConnectionPendingModal={this.openConnectionPendingModal} 
+          openConnectionPendingModal={this.props.modals.methods.openConnectionPendingModal} 
         />
         
         <ValidationPendingModal 
