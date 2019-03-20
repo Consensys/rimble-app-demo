@@ -162,9 +162,6 @@ class RimbleTransaction extends React.Component {
     } catch (error) {
       // User denied account access...
       console.log("User cancelled connect request. Error:", error);
-      window.toastProvider.addMessage("User needs to CONNECT wallet", {
-        variant: "failure"
-      });
 
       // Reject Connect
       this.rejectAccountConnect(error);
@@ -236,14 +233,16 @@ class RimbleTransaction extends React.Component {
         if (error) {
           // User rejected account validation.
           console.log("Wallet account not validated. Error:", error);
-          window.toastProvider.addMessage("Wallet account was not validated", {
-            variant: "failure"
-          });
           
           // Reject the validation
           this.rejectValidation(error);
         } else {
-          console.log("Account validation successful.", signature);
+          const successMessage = "Wallet " + this.shortenHash(this.state.account) + " connected";
+          console.log(successMessage, signature);
+          window.toastProvider.addMessage(successMessage, {
+            variant: "success"
+          });
+
           modals.data.accountValidationPending = false;
           this.setState({ 
             modals: modals,
@@ -500,6 +499,16 @@ class RimbleTransaction extends React.Component {
     transactions[`tx${updatedTransaction.created}`] = transaction;
     this.setState({ transactions });
   };
+
+
+  // UTILITY
+  shortenHash = (hash) => {
+    let shortHash = hash;
+    const txStart = shortHash.substr(0, 7);
+    const txEnd = shortHash.substr(shortHash.length - 4);
+    shortHash = txStart + "..." + txEnd;
+    return shortHash;
+  }
 
 
   // CONNECTION MODAL METHODS
