@@ -26,8 +26,10 @@ class App extends Component {
 
   // Optional parameters to pass into RimbleWeb3
   config = {
-    accountBalanceMinimum: 1
+    accountBalanceMinimum: 1,
+    requiredNetwork: 4,
   }
+
   showRoute = (route) => {
     this.setState({
       route
@@ -56,13 +58,10 @@ class App extends Component {
               userRejectedValidation,
               validateAccount,
               connectAndValidateAccount,
-              checkNetwork,
-              requiredNetwork,
-              currentNetwork,
-              isCorrectNetwork,
               modals,
+              network,
             }) => (
-              <Box>
+              <Box style={{paddingBottom: !network.isCorrectNetwork ? "8em" : "0" }}>
                 <Header
                   account={account}
                   accountBalance={accountBalance}
@@ -76,11 +75,8 @@ class App extends Component {
                   userRejectedValidation={userRejectedValidation} 
                   validateAccount={validateAccount} 
                   connectAndValidateAccount={connectAndValidateAccount}
-                  checkNetwork={checkNetwork}
-                  requiredNetwork={requiredNetwork}
-                  currentNetwork={currentNetwork}
-                  isCorrectNetwork={isCorrectNetwork}
                   modals={modals}
+                  network={network}
                 />
                 
                 <Flex justifyContent="center" p={4}>
@@ -113,19 +109,16 @@ class App extends Component {
                       userRejectedValidation={userRejectedValidation} 
                       validateAccount={validateAccount} 
                       connectAndValidateAccount={connectAndValidateAccount}
-                      checkNetwork={checkNetwork}
-                      requiredNetwork={requiredNetwork}
-                      currentNetwork={currentNetwork}
-                      isCorrectNetwork={isCorrectNetwork}
                       modals={modals}
+                      network={network}
                     /> 
                   : null
                 }
+                <InstructionsCard showRoute={this.showRoute} route={this.state.route} />
               </Box>
             )}
           </RimbleWeb3.Consumer>
         </RimbleWeb3>
-        <InstructionsCard showRoute={this.showRoute} route={this.state.route} />
         <GlobalStyle />
       </ThemeProvider>
     );

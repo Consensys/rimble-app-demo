@@ -25,7 +25,7 @@ class WrongNetworkModal extends React.Component {
             
             <Heading.h2 my={3}>Wrong Network</Heading.h2>
 
-            <Text my={4}>Looks like your account is connected to {this.props.currentNetwork.name} network. Head to MetaMask and switch to the {this.props.requiredNetwork.name} network.</Text>
+            <Text my={4}>Looks like your account is connected to the <Text.span style={{ textTransform: "capitalize" }}>{this.props.network.current.name}</Text.span> network. Head to MetaMask and switch to the {this.props.network.required.name} network.</Text>
             
             <ToastMessage
               message={'Waiting for the right network...'}

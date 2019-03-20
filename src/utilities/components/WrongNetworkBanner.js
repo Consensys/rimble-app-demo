@@ -20,7 +20,7 @@ class WrongNetworkBanner extends React.Component {
           </Box>
           <Flex flexDirection={"column"}>
             <Text fontWeight={"bold"}>Looks like you're on the wrong network</Text>
-            <Text>You should be on the {this.props.requiredNetwork.name} Ethereum network. You are currently connected to {this.props.currentNetwork.name} - switch in your MetaMask extension.</Text>
+            <Text>You should be on the {this.props.network.required.name} Ethereum network. You are currently connected to the <Text.span style={{textTransform: "capitalize"}}>{this.props.network.current.name}</Text.span> Network - switch in your MetaMask extension.</Text>
           </Flex>
         </Flex>
       </Box>

@@ -2,7 +2,8 @@ import React from "react";
 import Web3 from "web3"; // uses latest 1.x.x version
 import bowser from "bowser";
 
-import ConnectionUtil from "./ConnectionUtil"
+import ConnectionUtil from "./ConnectionUtil";
+import NetworkUtil from "./NetworkUtil";
 
 const RimbleTransactionContext = React.createContext({
   contract: {},
@@ -21,10 +22,12 @@ const RimbleTransactionContext = React.createContext({
   rejectValidation: () => {},
   validateAccount: () => {},
   connectAndValidateAccount: () => {}, 
-  checkNetwork: () => {},
-  requiredNetwork: {},
-  currentNetwork: {},
-  isCorrectNetwork: {},
+  network: {
+    required: {},
+    current: {},
+    isCorrectNetwork: null,
+    checkNetwork: () => {},
+  },
   modals: {
     data: {
       connectionModalIsOpen: {},
@@ -38,8 +41,10 @@ const RimbleTransactionContext = React.createContext({
       openConnectionModal: () => {},
       closeConnectionPendingModal: () => {},
       openConnectionPendingModal: () => {},
+      closeUserRejectedConnectionModal: () => {},
       closeValidationPendingModal: () => {},
       openValidationPendingModal: () => {},
+      closeUserRejectedValidationModal: () => {},
     }
   }
 });
@@ -259,7 +264,7 @@ class RimbleTransaction extends React.Component {
 
   connectAndValidateAccount = async () => {
     // Check for account
-    if (!this.state.account) {
+    if (!this.state.account || !this.state.accountValidated) {
       // Show modal to connect account
       this.openConnectionModal();
     }
@@ -268,12 +273,49 @@ class RimbleTransaction extends React.Component {
     // await this.validateAccount();
   }
 
+  getRequiredNetwork = () => {
+    const networkId = typeof(this.props.config) !== "undefined" && typeof (this.props.config.requiredNetwork) !== "undefined"
+      ?
+        this.props.config.requiredNetwork
+      : 
+        1
+    let networkName = "";
+    switch (networkId) {
+      case 1:
+        networkName = "Main";
+        break;
+      case 3:
+        networkName = "Ropsten";
+        break;
+      case 4:
+        networkName = "Rinkeby";
+        break;
+      case 42:
+        networkName = "Kovan";
+        break;
+      default:
+        networkName = "unknown";
+    }
+
+    let requiredNetwork = {
+      name: networkName,
+      id: networkId
+    }
+
+    let network = { ...this.state.network };
+    network.required = requiredNetwork;
+
+    this.setState({ network })
+  }
+
   getNetworkId = async () => {
     try {
       return this.state.web3.eth.net.getId((error, networkId) => {
-        let currentNetwork = { ...this.state.currentNetwork };
-        currentNetwork.id = networkId;
-        this.setState({ currentNetwork });
+        let current = { ...this.state.network.current };
+        current.id = networkId;
+        let network = { ...this.state.network };
+        network.current = current;
+        this.setState({ network });
       });
     } catch (error) {
       console.log("Could not get network ID: ", error);
@@ -283,9 +325,11 @@ class RimbleTransaction extends React.Component {
   getNetworkName = async () => {
     try {
       return this.state.web3.eth.net.getNetworkType((error, networkName) => {
-        let currentNetwork = { ...this.state.currentNetwork };
-        currentNetwork.name = networkName;
-        this.setState({ currentNetwork });
+        let current = { ...this.state.network.current };
+        current.name = networkName;
+        let network = { ...this.state.network };
+        network.current = current;
+        this.setState({ network });
       });
     } catch (error) {
       console.log("Could not get network Name: ", error);
@@ -293,15 +337,16 @@ class RimbleTransaction extends React.Component {
   }
 
   checkNetwork = async () => {
-    let isCorrectNetwork = null;
+    this.getRequiredNetwork();
     await this.getNetworkId();
     await this.getNetworkName();
 
-    isCorrectNetwork = this.state.currentNetwork.id === this.state.requiredNetwork.id
+    let network = { ...this.state.network }
+    network.isCorrectNetwork = this.state.network.current.id === this.state.network.required.id
       ? true
       : false;
-  
-    this.setState({ isCorrectNetwork });
+    
+    this.setState({ network });
   }
 
   pollAccountUpdates = () => {
@@ -468,7 +513,7 @@ class RimbleTransaction extends React.Component {
     
     let modals = { ...this.state.modals };
     modals.data.connectionModalIsOpen = true;
-    this.setState((state, props) => ({ modals }));
+    this.setState({ modals: modals });
   }
 
   closeConnectionPendingModal = (e) => {
@@ -488,6 +533,16 @@ class RimbleTransaction extends React.Component {
     
     let modals = { ...this.state.modals };
     modals.data.accountConnectionPending = true;
+    this.setState((state, props) => ({ modals }));
+  }
+
+  closeUserRejectedConnectionModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+    
+    let modals = { ...this.state.modals };
+    modals.data.userRejectedConnect = false;
     this.setState((state, props) => ({ modals }));
   }
 
@@ -511,6 +566,16 @@ class RimbleTransaction extends React.Component {
     this.setState((state, props) => ({ modals }));
   }
 
+  closeUserRejectedValidationModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+
+    let modals = { ...this.state.modals };
+    modals.data.userRejectedValidation = false;
+    this.setState((state, props) => ({ modals }));
+  }
+
 
   state = {
     contract: {},
@@ -530,13 +595,12 @@ class RimbleTransaction extends React.Component {
     rejectValidation: this.rejectValidation,
     validateAccount: this.validateAccount,
     connectAndValidateAccount: this.connectAndValidateAccount,
-    checkNetwork: this.checkNetwork,
-    requiredNetwork: {
-      name: "Rinkby",
-      id: 4,
+    network: {
+      required: {},
+      current: {},
+      isCorrectNetwork: null,
+      checkNetwork: this.checkNetwork,
     },
-    currentNetwork: {},
-    isCorrectNetwork: null,
     modals: {
       data: {
         connectionModalIsOpen: null,
@@ -550,8 +614,10 @@ class RimbleTransaction extends React.Component {
         openConnectionModal: this.openConnectionModal,
         closeConnectionPendingModal: this.closeConnectionPendingModal,
         openConnectionPendingModal: this.openConnectionPendingModal,
+        closeUserRejectedConnectionModal: this.closeUserRejectedConnectionModal,
         closeValidationPendingModal: this.closeValidationPendingModal,
         openValidationPendingModal: this.openValidationPendingModal,
+        closeUserRejectedValidationModal: this.closeUserRejectedValidationModal,
       }
     }
   };
@@ -565,11 +631,17 @@ class RimbleTransaction extends React.Component {
       <div>
         <RimbleTransactionContext.Provider value={this.state} {...this.props} />
         <ConnectionUtil 
+          initAccount={this.state.initAccount}
           validateAccount={this.state.validateAccount} 
+          accountConnectionPending={this.state.accountConnectionPending}
           accountValidationPending={this.state.accountValidationPending} 
           accountValidated={this.state.accountValidated}
-          currentNetwork={this.state.currentNetwork} 
+          network={this.state.network} 
           modals={ this.state.modals }
+        />
+        <NetworkUtil
+          network={this.state.network}
+          web3={this.state.web3}
         />
       </div>
       
