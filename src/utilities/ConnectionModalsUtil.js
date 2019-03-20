@@ -12,6 +12,8 @@ import UserRejectedConnectionModal from "./components/UserRejectedConnectionModa
 import ValidationPendingModal from "./components/ValidationPendingModal";
 import UserRejectedValidationModal from "./components/UserRejectedValidationModal";
 
+import LowFundsModal from "./components/LowFundsModal";
+
 class ConnectionModalUtil extends React.Component {
   render() {
     return (
@@ -70,6 +72,13 @@ class ConnectionModalUtil extends React.Component {
           closeUserRejectedValidationModal={this.props.modals.methods.closeUserRejectedValidationModal} 
           isOpen={ this.props.modals.data.userRejectedValidation } 
           validateAccount={this.props.validateAccount} 
+        />
+
+        <LowFundsModal 
+          closeModal={this.props.modals.methods.closeLowFundsModal} 
+          isOpen={ this.props.modals.data.lowFundsModalIsOpen} 
+          currentNetwork={this.props.network.current} 
+          account={ this.props.account } 
         />
 
       </div>

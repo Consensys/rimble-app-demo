@@ -40,14 +40,11 @@ const RimbleTransactionContext = React.createContext({
       userRejectedValidation: {},
       wrongNetworkModalIsOpen: {},
       transactionConnectionModalIsOpen: {},
+      lowFundsModalIsOpen: {},
     },
     methods: {
       openNoWeb3BrowserModal: () => {},
       closeNoWeb3BrowserModal: () => {},
-      openNoWalletModal: () => {},
-      closeNoWalletModal: () => {},
-      closeConnectionModal: () => {},
-      openConnectionModal: () => {},
       closeConnectionPendingModal: () => {},
       openConnectionPendingModal: () => {},
       closeUserRejectedConnectionModal: () => {},
@@ -58,6 +55,8 @@ const RimbleTransactionContext = React.createContext({
       openWrongNetworkModal: () => {},
       closeTransactionConnectionModal: () => {},
       openTransactionConnectionModal: () => {},
+      closeLowFundsModal: () => {},
+      openLowFundsModal: () => {},
     }
   },
   transaction: {
@@ -442,6 +441,12 @@ class RimbleTransaction extends React.Component {
       this.openTransactionConnectionModal();
       return;
     }
+
+    // Are there a minimum amount of funds?
+    if (this.state.accountBalanceLow) {
+      this.openLowFundsModal();
+      return;
+    }
     
     // Is the contract loaded?
 
@@ -755,6 +760,26 @@ class RimbleTransaction extends React.Component {
     modals.data.transactionConnectionModalIsOpen = true;
     this.setState({ modals });
   }
+
+  closeLowFundsModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+
+    let modals = { ...this.state.modals };
+    modals.data.lowFundsModalIsOpen = false;
+    this.setState({ modals });
+  }
+  
+  openLowFundsModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+
+    let modals = { ...this.state.modals };
+    modals.data.lowFundsModalIsOpen = true;
+    this.setState({ modals });
+  }
   
 
 
@@ -793,6 +818,7 @@ class RimbleTransaction extends React.Component {
         userRejectedValidation: null,
         wrongNetworkModalIsOpen: null,
         transactionConnectionModalIsOpen: null,
+        lowFundsModalIsOpen: null,
       },
       methods: {
         openNoWeb3BrowserModal: this.openNoWeb3BrowserModal,
@@ -811,6 +837,8 @@ class RimbleTransaction extends React.Component {
         openWrongNetworkModal: this.openWrongNetworkModal,
         closeTransactionConnectionModal: this.closeTransactionConnectionModal,
         openTransactionConnectionModal: this.openTransactionConnectionModal,
+        closeLowFundsModal: this.closeLowFundsModal,
+        openLowFundsModal: this.openLowFundsModal,
       }
     },
     transaction: {
