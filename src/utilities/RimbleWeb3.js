@@ -38,6 +38,7 @@ const RimbleTransactionContext = React.createContext({
       userRejectedConnect: {},
       accountValidationPending: {},
       userRejectedValidation: {},
+      wrongNetworkModalIsOpen: {},
     },
     methods: {
       openNoWeb3BrowserModal: () => {},
@@ -52,6 +53,8 @@ const RimbleTransactionContext = React.createContext({
       closeValidationPendingModal: () => {},
       openValidationPendingModal: () => {},
       closeUserRejectedValidationModal: () => {},
+      closeWrongNetworkModal: () => {},
+      openWrongNetworkModal: () => {},
     }
   },
   transaction: {
@@ -424,11 +427,17 @@ class RimbleTransaction extends React.Component {
   }
 
   contractMethodSendWrapper = contractMethod => {
+    // Is it web3 capable?
     if (!this.web3ActionPreflight()) {
       return;
     }
 
     // Is it on the correct network?
+    if (!this.state.network.isCorrectNetwork) {
+      // wrong network modal
+      this.state.modals.methods.openWrongNetworkModal();
+      return;
+    }
 
     // Is a wallet connected and verified?
     
@@ -680,6 +689,46 @@ class RimbleTransaction extends React.Component {
     this.setState({ modals });
   }
 
+  closeNoWalletModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+
+    let modals = { ...this.state.modals };
+    modals.data.noWalletModalIsOpen = false;
+    this.setState({ modals });
+  }
+  
+  openNoWalletModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+
+    let modals = { ...this.state.modals };
+    modals.data.noWalletModalIsOpen = true;
+    this.setState({ modals });
+  }
+
+  closeWrongNetworkModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+
+    let modals = { ...this.state.modals };
+    modals.data.wrongNetworkModalIsOpen = false;
+    this.setState({ modals });
+  }
+  
+  openWrongNetworkModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+
+    let modals = { ...this.state.modals };
+    modals.data.wrongNetworkModalIsOpen = true;
+    this.setState({ modals });
+  }
+
 
   state = {
     contract: {},
@@ -714,6 +763,7 @@ class RimbleTransaction extends React.Component {
         userRejectedConnection: null,
         accountValidationPending: null,
         userRejectedValidation: null,
+        wrongNetworkModalIsOpen: null,
       },
       methods: {
         openNoWeb3BrowserModal: this.openNoWeb3BrowserModal,
@@ -728,6 +778,8 @@ class RimbleTransaction extends React.Component {
         closeValidationPendingModal: this.closeValidationPendingModal,
         openValidationPendingModal: this.openValidationPendingModal,
         closeUserRejectedValidationModal: this.closeUserRejectedValidationModal,
+        closeWrongNetworkModal: this.closeWrongNetworkModal,
+        openWrongNetworkModal: this.openWrongNetworkModal,
       }
     },
     transaction: {

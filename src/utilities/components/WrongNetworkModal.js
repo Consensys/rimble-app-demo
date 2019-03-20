@@ -15,7 +15,7 @@ class WrongNetworkModal extends React.Component {
             right={0}
             mt={3}
             mr={3}
-            onClick={this.props.closeWrongNetworkModal}
+            onClick={this.props.closeModal}
           />
 
           <Flex flexDirection={"column"} justifyContent={"space-between"}>
