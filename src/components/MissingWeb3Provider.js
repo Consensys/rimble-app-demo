@@ -1,8 +1,7 @@
 import React from "react";
 import { Card, Heading, Text, Icon, Flex, ToastMessage, OutlineButton, Box, Button, Link } from "rimble-ui";
-import WrongNetworkBanner from "../utilities/components/WrongNetworkBanner";
-import NetworkOverview from "./NetworkOverview";
-import WrongNetworkModal from "./WrongNetworkModal";
+import NetworkOverview from "../utilities/components/NetworkOverview";
+import WrongNetworkModal from "../utilities/components/WrongNetworkModal";
 import ConnectionModal from "../utilities/components/ConnectionModal";
 import ConnectionPendingModal from "../utilities/components/ConnectionPendingModal";
 import UserRejectedConnectionModal from "../utilities/components/UserRejectedConnectionModal";
@@ -231,7 +230,7 @@ class MissingWeb3Provider extends React.Component {
 
         <Box>
           <Flex alignItems={"center"}>
-            { this.props.isCorrectNetwork ? 
+            { this.props.network.isCorrectNetwork ? 
               <Icon name='Check' color={"green"} mr={2} /> 
             :
               <Icon name='Close' color={"red"} mr={2} />
@@ -239,7 +238,7 @@ class MissingWeb3Provider extends React.Component {
             <Text>Correct Network</Text>
           </Flex>
 
-          { this.props.web3 && !this.props.isCorrectNetwork
+          { this.props.web3 && !this.props.network.isCorrectNetwork
             ? 
               <Flex ml={4} alignItems={"center"} justifyContent={"space-between"}>
                 <Flex alignItems={"center"}>
@@ -247,11 +246,11 @@ class MissingWeb3Provider extends React.Component {
                   <Box>
                     <Flex alignItems={"center"}>
                       <Text mr={2} color="#999" style={{ textTransform: "capitalize" }}>Current network:</Text>
-                      <NetworkOverview network={this.props.currentNetwork}/>
+                      <NetworkOverview network={this.props.network.current}/>
                     </Flex>
                     <Flex alignItems={"center"}>
                       <Text mr={2} color="#999" style={{ textTransform: "capitalize" }}>Required network:</Text>
-                      <NetworkOverview network={this.props.requiredNetwork}/>
+                      <NetworkOverview network={this.props.network.required}/>
                     </Flex>
                   </Box>
                 </Flex>
@@ -382,8 +381,7 @@ class MissingWeb3Provider extends React.Component {
         <WrongNetworkModal 
           closeWrongNetworkModal={this.closeWrongNetworkModal} 
           isOpen={this.state.wrongNetworkModalIsOpen} 
-          requiredNetwork={this.props.requiredNetwork} 
-          currentNetwork={this.props.currentNetwork} 
+          network={this.props.network}
         />        
         <ConnectionModal 
           closeConnectionModal={this.closeConnectionModal} 

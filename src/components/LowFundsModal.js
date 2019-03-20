@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Heading, Text, Icon, TextButton, Modal, Flex, Box, OutlineButton, Button, PublicAddress, QR } from "rimble-ui";
-import NetworkOverview from "./NetworkOverview"
+import NetworkOverview from "../utilities/components/NetworkOverview"
 import theme from "./../theme";
 
 class LowFundsModal extends React.Component {

@@ -1,12 +1,16 @@
 import React from "react";
 import { Box, Flex, Button, Heading } from "rimble-ui";
-
+import NetworkOverview from "../utilities/components/NetworkOverview";
 
 class Header extends React.Component {
   render() {
     return (
       <Box>
-        <Flex justifyContent="flex-end" bg={"white"}>
+        <Flex alignItems={"center"} justifyContent="flex-end" bg={"white"}>
+          <Box mr={4}>
+            <NetworkOverview network={this.props.network.current} />
+          </Box>
+          
           <Button
             m={3}
             onClick={this.props.connectAndValidateAccount}

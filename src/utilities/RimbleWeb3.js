@@ -22,10 +22,6 @@ const RimbleTransactionContext = React.createContext({
   rejectValidation: () => {},
   validateAccount: () => {},
   connectAndValidateAccount: () => {}, 
-  checkNetwork: () => {},
-  requiredNetwork: {},
-  currentNetwork: {},
-  isCorrectNetwork: {},
   network: {
     required: {},
     current: {},
@@ -275,6 +271,41 @@ class RimbleTransaction extends React.Component {
     // await this.validateAccount();
   }
 
+  getRequiredNetwork = () => {
+    const networkId = typeof(this.props.config) !== "undefined" && typeof (this.props.config.requiredNetwork) !== "undefined"
+      ?
+        this.props.config.requiredNetwork
+      : 
+        1
+    let networkName = "";
+    switch (networkId) {
+      case 1:
+        networkName = "Main";
+        break;
+      case 3:
+        networkName = "Ropsten";
+        break;
+      case 4:
+        networkName = "Rinkeby";
+        break;
+      case 42:
+        networkName = "Kovan";
+        break;
+      default:
+        networkName = "unknown";
+    }
+
+    let requiredNetwork = {
+      name: networkName,
+      id: networkId
+    }
+
+    let network = { ...this.state.network };
+    network.required = requiredNetwork;
+
+    this.setState({ network })
+  }
+
   getNetworkId = async () => {
     try {
       return this.state.web3.eth.net.getId((error, networkId) => {
@@ -304,6 +335,7 @@ class RimbleTransaction extends React.Component {
   }
 
   checkNetwork = async () => {
+    this.getRequiredNetwork();
     await this.getNetworkId();
     await this.getNetworkName();
 
@@ -541,13 +573,6 @@ class RimbleTransaction extends React.Component {
     rejectValidation: this.rejectValidation,
     validateAccount: this.validateAccount,
     connectAndValidateAccount: this.connectAndValidateAccount,
-    checkNetwork: this.checkNetwork,
-    requiredNetwork: {
-      name: "Rinkby",
-      id: 4,
-    },
-    currentNetwork: {},
-    isCorrectNetwork: null,
     network: {
       required: {},
       current: {},

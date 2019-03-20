@@ -11,11 +11,11 @@ class NetworkUtil extends React.Component {
   render() {
     return (
       <div>
-        { !this.props.network.isCorrectNetwork && this.props.web3
+        { this.props.network.isCorrectNetwork === false && this.props.web3
           ?
             <WrongNetworkBanner 
-              requiredNetwork={this.props.network.required} 
-              currentNetwork={this.props.network.current} />
+              network={this.props.network}
+            />
           :
             null
         }

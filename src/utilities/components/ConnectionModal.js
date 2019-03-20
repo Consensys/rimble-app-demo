@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Heading, Text, Icon, TextButton, Modal, Flex, Image, Box, MetaMaskButton } from "rimble-ui";
-import NetworkOverview from "../../components/NetworkOverview"
+import NetworkOverview from "./NetworkOverview"
 import theme from "../../theme";
 
 class ConnectionModal extends React.Component {
