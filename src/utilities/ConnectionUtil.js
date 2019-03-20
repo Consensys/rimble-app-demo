@@ -39,7 +39,7 @@ class ConnectionUtil extends React.Component {
         />
         
         <ValidationPendingModal 
-          closeAccountValidationPendingModal={this.props.modals.methods.closeAccountValidationPendingModal} 
+          closeValidationPendingModal={this.props.modals.methods.closeValidationPendingModal} 
           isOpen={this.props.modals.data.accountValidationPending} 
           currentNetwork={this.props.network.current} 
         />

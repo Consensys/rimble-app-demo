@@ -17,7 +17,7 @@ class ValidationPendingModal extends React.Component {
             right={0}
             mt={3}
             mr={3}
-            onClick={this.props.closeAccountValidationPendingModal}
+            onClick={this.props.closeValidationPendingModal}
           />
 
           <Flex justifyContent={"center"} alignContent={"stretch"}>

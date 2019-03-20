@@ -511,7 +511,7 @@ class RimbleTransaction extends React.Component {
     let modals = { ...this.state.modals };
     modals.data.connectionModalIsOpen = false;
     console.log("this.state", this.state);
-    this.setState((state, props) => ({ modals }))
+    this.setState({ modals });
   }
 
   openConnectionModal = (e) => {
@@ -531,7 +531,7 @@ class RimbleTransaction extends React.Component {
     
     let modals = { ...this.state.modals };
     modals.data.accountConnectionPending = false;
-    this.setState((state, props) => ({ modals }));
+    this.setState({ modals });
   }
 
   openConnectionPendingModal = (e) => {
@@ -541,7 +541,7 @@ class RimbleTransaction extends React.Component {
     
     let modals = { ...this.state.modals };
     modals.data.accountConnectionPending = true;
-    this.setState((state, props) => ({ modals }));
+    this.setState({ modals });
   }
 
   closeUserRejectedConnectionModal = (e) => {
@@ -551,7 +551,7 @@ class RimbleTransaction extends React.Component {
     
     let modals = { ...this.state.modals };
     modals.data.userRejectedConnect = false;
-    this.setState((state, props) => ({ modals }));
+    this.setState({ modals });
   }
 
   closeValidationPendingModal = (e) => {
@@ -560,8 +560,8 @@ class RimbleTransaction extends React.Component {
     }
     
     let modals = { ...this.state.modals };
-    modals.data.accountConnectionPending = false;
-    this.setState((state, props) => ({ modals }));
+    modals.data.accountValidationPending = false;
+    this.setState({ modals });
   }
 
   openValidationPendingModal = (e) => {
@@ -571,7 +571,7 @@ class RimbleTransaction extends React.Component {
 
     let modals = { ...this.state.modals };
     modals.data.accountConnectionPending = true;
-    this.setState((state, props) => ({ modals }));
+    this.setState({ modals });
   }
 
   closeUserRejectedValidationModal = (e) => {
@@ -581,7 +581,8 @@ class RimbleTransaction extends React.Component {
 
     let modals = { ...this.state.modals };
     modals.data.userRejectedValidation = false;
-    this.setState((state, props) => ({ modals }));
+    modals.data.connectionModalIsOpen = false;
+    this.setState({ modals });
   }
 
 
