@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Heading, Text, Icon, TextButton, Modal, Flex, Box, OutlineButton, Button, PublicAddress, QR } from "rimble-ui";
-import NetworkOverview from "../utilities/components/NetworkOverview"
-import theme from "./../theme";
+import NetworkOverview from "./NetworkOverview"
+import theme from "../../theme";
 
 class LowFundsModal extends React.Component {
   state = {
@@ -42,7 +42,7 @@ class LowFundsModal extends React.Component {
         </Box>
         <Flex justifyContent={"flex-end"}>
           <Box>
-            <Button onClick={this.props.closeLowFundsModal}>Continue to Bounties Explorer</Button>
+            <Button onClick={this.props.closeModal}>Continue to Bounties Explorer</Button>
           </Box>
         </Flex>
       </Flex>
@@ -62,7 +62,7 @@ class LowFundsModal extends React.Component {
             right={0}
             mt={3}
             mr={3}
-            onClick={this.props.closeLowFundsModal}
+            onClick={this.props.closeModal}
           />
 
           <Flex justifyContent={"center"} alignContent={"stretch"}>
@@ -99,7 +99,6 @@ class LowFundsModal extends React.Component {
                 <Box>
                   <QR value={this.props.account} />
                   <Text>{this.props.account}</Text>
-
                 </Box>
             }
             

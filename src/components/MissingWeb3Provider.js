@@ -8,7 +8,7 @@ import UserRejectedConnectionModal from "../utilities/components/UserRejectedCon
 import TransactionConnectionModal from "../utilities/components/TransactionConnectionModal";
 import ValidationPendingModal from "../utilities/components/ValidationPendingModal";
 import UserRejectedValidationModal from "../utilities/components/UserRejectedValidationModal";
-import LowFundsModal from "./LowFundsModal";
+import LowFundsModal from "../utilities/components/LowFundsModal";
 
 class MissingWeb3Provider extends React.Component {
   constructor(props) {
@@ -360,7 +360,7 @@ class MissingWeb3Provider extends React.Component {
           
           <Button size="small" onClick={this.openAccountValidationPendingModal} mr={2} mb={2}>Validation Pending</Button>
           <Button size="small" onClick={this.openUserRejectedValidationModal} mr={2} mb={2}>User Rejected Validation</Button>
-          <Button size="small" onClick={(event) => { this.props.validateAccount(event); this.openLowFundsModal(event); }} mr={2} mb={2}>Low Funds</Button>
+          <Button size="small" onClick={(event) => { this.props.modals.methods.openLowFundsModal(event); }} mr={2} mb={2}>Low Funds</Button>
           
           <Button size="small" onClick={this.props.modals.methods.openNoWeb3BrowserModal} mr={2} mb={2}>Not Web3 Browser</Button>
           <Button size="small" onClick={this.props.modals.methods.openNoWalletModal} mr={2} mb={2}>No Wallet</Button>
@@ -410,8 +410,8 @@ class MissingWeb3Provider extends React.Component {
         />
 
         <LowFundsModal 
-          closeLowFundsModal={this.closeLowFundsModal} 
-          isOpen={ this.state.lowFundsModalIsOpen} 
+          closeModal={this.props.modals.methods.closeLowFundsModal} 
+          isOpen={ this.props.modals.data.lowFundsModalIsOpen} 
           currentNetwork={this.props.network.current} 
           account={ this.props.account } 
         />
