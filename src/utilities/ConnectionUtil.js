@@ -18,6 +18,8 @@ class ConnectionUtil extends React.Component {
     });
   }
   render() {
+    console.log("this.props.account: ", this.props.account);
+    
     return (
       <div>
         <ConnectionModal 
@@ -42,6 +44,7 @@ class ConnectionUtil extends React.Component {
           closeValidationPendingModal={this.props.modals.methods.closeValidationPendingModal} 
           isOpen={this.props.modals.data.accountValidationPending} 
           currentNetwork={this.props.network.current} 
+          account={this.props.account}
         />
         <UserRejectedValidationModal 
           closeUserRejectedValidationModal={this.props.modals.methods.closeUserRejectedValidationModal} 
