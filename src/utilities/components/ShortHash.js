@@ -13,7 +13,7 @@ class ShortHash extends React.Component {
     const shortHash = this.shortenHash(this.props.hash);
 
     return (
-      <Text>{shortHash}</Text>
+      <Text.span>{shortHash}</Text.span>
     )
   }
 }

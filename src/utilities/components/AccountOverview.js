@@ -16,9 +16,9 @@ class AccountOverview extends React.Component {
   render() {
     const roundedBalance = this.trimEth(this.props.accountBalance)
     return (
-      <Flex alignItems={"center"} flexDirection={"column"} m={2}>
-        <ShortHash hash={this.props.account} />
-        <Text color={this.props.accountBalanceLow ? "red" : "#999"}>{roundedBalance} ETH</Text>
+      <Flex alignItems={"flex-start"} flexDirection={"column"} my={2} mx={4}>
+        <Text fontSize={2}>Connected to <ShortHash hash={this.props.account} /></Text>
+        <Text fontSize={1} color={this.props.accountBalanceLow ? "red" : "#999"}>Balance: {roundedBalance} ETH</Text>
       </Flex>
     )
   }
