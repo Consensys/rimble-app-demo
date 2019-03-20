@@ -22,20 +22,6 @@ class MissingWeb3Provider extends React.Component {
     }
   }
 
-  closeWrongNetworkModal = (e) => {
-    e.preventDefault()
-    this.setState((state, props) => ({
-      wrongNetworkModalIsOpen: false
-    }));
-  }
-
-  openWrongNetworkModal = (e) => {
-    e.preventDefault()
-    this.setState((state, props) => ({
-      wrongNetworkModalIsOpen: true
-    }));
-  }
-
   closeConnectionModal = (e) => {
     e.preventDefault()
     this.setState((state, props) => ({
@@ -364,7 +350,7 @@ class MissingWeb3Provider extends React.Component {
 
         <Box mt={4} borderTop={1} borderColor="#E8E8E8" pt={3}>
           <Heading.h4 textAlign={"center"}>Show Modal</Heading.h4>
-          <Button size="small" onClick={this.openWrongNetworkModal} mr={2} mb={2}>Blocking Wrong Network</Button>
+          <Button size="small" onClick={this.props.modals.methods.openWrongNetworkModal} mr={2} mb={2}>Blocking Wrong Network</Button>
           
           <Button size="small" onClick={this.openConnectionModal} mr={2} mb={2}>Connection</Button>
           <Button size="small" onClick={this.openConnectionPendingModal} mr={2} mb={2}>Connection Pending</Button>
@@ -382,10 +368,10 @@ class MissingWeb3Provider extends React.Component {
 
         {/* Modals */}
         <WrongNetworkModal 
-          closeWrongNetworkModal={this.closeWrongNetworkModal} 
-          isOpen={this.state.wrongNetworkModalIsOpen} 
+          closeModal={this.props.modals.methods.closeWrongNetworkModal} 
+          isOpen={this.props.modals.data.wrongNetworkModalIsOpen} 
           network={this.props.network}
-        />        
+        />
         <ConnectionModal 
           closeConnectionModal={this.closeConnectionModal} 
           validateAccount={this.props.validateAccount} 

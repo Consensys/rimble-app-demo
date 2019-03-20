@@ -2,6 +2,8 @@ import React from "react";
 
 import NoWeb3BrowserModal from "./components/NoWeb3BrowserModal";
 import NoWalletModal from "./components/NoWalletModal";
+import WrongNetworkModal from "./components/WrongNetworkModal";
+
 import ConnectionModal from "./components/ConnectionModal";
 import ConnectionPendingModal from "./components/ConnectionPendingModal";
 import UserRejectedConnectionModal from "./components/UserRejectedConnectionModal";
@@ -23,6 +25,12 @@ class TransactionUtil extends React.Component {
           closeModal={this.props.modals.methods.closeNoWalletModal}
           isOpen={this.props.modals.data.noWalletModalIsOpen}
           transaction={this.props.transaction}
+        />
+
+        <WrongNetworkModal 
+          closeModal={this.props.modals.methods.closeWrongNetworkModal} 
+          isOpen={this.props.modals.data.wrongNetworkModalIsOpen} 
+          network={this.props.network}
         />
 
         <ConnectionModal 
