@@ -49,6 +49,10 @@ class ValidationPendingModal extends React.Component {
 
               <Text mb={4}>To connect securely and prove you have access to this account, sign the message in your MetaMask extension. A signature request should automatically appear. If not, open it using the MetaMask icon in your browser.</Text>
               
+              <Box bg={"#f3f2fd"} borderRadius={2} p={3} mb={4}>
+                <Text>Address: {this.props.account}</Text>
+              </Box>
+
               <ToastMessage
                 message={'Waiting for connection confirmation...'}
                 secondaryMessage={'This won\'t cost your any Ether'}
