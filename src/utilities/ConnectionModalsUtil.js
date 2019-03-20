@@ -1,22 +1,53 @@
 import React from "react";
 
+import NoWeb3BrowserModal from "./components/NoWeb3BrowserModal";
+import NoWalletModal from "./components/NoWalletModal";
+import WrongNetworkModal from "./components/WrongNetworkModal";
+
 import ConnectionModal from "./components/ConnectionModal";
+import TransactionConnectionModal from "./components/TransactionConnectionModal";
 import ConnectionPendingModal from "./components/ConnectionPendingModal";
 import UserRejectedConnectionModal from "./components/UserRejectedConnectionModal";
 
 import ValidationPendingModal from "./components/ValidationPendingModal";
 import UserRejectedValidationModal from "./components/UserRejectedValidationModal";
 
-class ConnectionUtil extends React.Component {
+class ConnectionModalUtil extends React.Component {
   render() {
     return (
       <div>
+        <NoWeb3BrowserModal
+          closeModal={this.props.modals.methods.closeNoWeb3BrowserModal}
+          isOpen={this.props.modals.data.noWeb3BrowserModalIsOpen}
+          transaction={this.props.transaction}
+        />
+
+        <NoWalletModal
+          closeModal={this.props.modals.methods.closeNoWalletModal}
+          isOpen={this.props.modals.data.noWalletModalIsOpen}
+          transaction={this.props.transaction}
+        />
+
+        <WrongNetworkModal 
+          closeModal={this.props.modals.methods.closeWrongNetworkModal} 
+          isOpen={this.props.modals.data.wrongNetworkModalIsOpen} 
+          network={this.props.network}
+        />
+        
         <ConnectionModal 
           closeConnectionModal={this.props.modals.methods.closeConnectionModal} 
           validateAccount={this.props.validateAccount} 
           isOpen={this.props.modals.data.connectionModalIsOpen && !this.props.accountValidated} 
           currentNetwork={this.props.network.current}
         />
+
+        <TransactionConnectionModal 
+          closeModal={this.props.modals.methods.closeTransactionConnectionModal} 
+          validateAccount={this.props.validateAccount} 
+          isOpen={this.props.modals.data.transactionConnectionModalIsOpen} 
+          currentNetwork={this.props.network.current} 
+        />
+        
         <ConnectionPendingModal 
           closeConnectionPendingModal={this.props.modals.methods.closeConnectionPendingModal} 
           isOpen={ this.props.modals.data.accountConnectionPending } 
@@ -40,9 +71,10 @@ class ConnectionUtil extends React.Component {
           isOpen={ this.props.modals.data.userRejectedValidation } 
           validateAccount={this.props.validateAccount} 
         />
+
       </div>
     );
   }
 }
 
-export default ConnectionUtil;
+export default ConnectionModalUtil;

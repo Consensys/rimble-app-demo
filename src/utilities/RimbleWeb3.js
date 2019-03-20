@@ -2,7 +2,7 @@ import React from "react";
 import Web3 from "web3"; // uses latest 1.x.x version
 import bowser from "bowser";
 
-import ConnectionUtil from "./ConnectionUtil";
+import ConnectionModalUtil from "./ConnectionModalsUtil";
 import NetworkUtil from "./NetworkUtil";
 import TransactionUtil from "./TransactionUtil";
 
@@ -39,6 +39,7 @@ const RimbleTransactionContext = React.createContext({
       accountValidationPending: {},
       userRejectedValidation: {},
       wrongNetworkModalIsOpen: {},
+      transactionConnectionModalIsOpen: {},
     },
     methods: {
       openNoWeb3BrowserModal: () => {},
@@ -55,6 +56,8 @@ const RimbleTransactionContext = React.createContext({
       closeUserRejectedValidationModal: () => {},
       closeWrongNetworkModal: () => {},
       openWrongNetworkModal: () => {},
+      closeTransactionConnectionModal: () => {},
+      openTransactionConnectionModal: () => {},
     }
   },
   transaction: {
@@ -262,11 +265,7 @@ class RimbleTransaction extends React.Component {
     console.log("setting state to update UI");
     
     // Show blocking modal
-    let modals = { ...this.state.modals };
-    modals.data.accountConnectionPending = false;
-    modals.data.accountValidationPending = true;
-    modals.data.userRejectedValidation = false;
-    this.setState({ modals });
+    this.openValidationPendingModal();
 
     console.log("Requesting web3 personal sign");
     return window.web3.personal.sign(
@@ -286,9 +285,8 @@ class RimbleTransaction extends React.Component {
             variant: "success"
           });
 
-          modals.data.accountValidationPending = false;
+          this.closeValidationPendingModal();
           this.setState({ 
-            modals: modals,
             accountValidated: true,
           });
         }
@@ -440,6 +438,10 @@ class RimbleTransaction extends React.Component {
     }
 
     // Is a wallet connected and verified?
+    if (!this.state.account || !this.state.accountValidated) {
+      this.openTransactionConnectionModal();
+      return;
+    }
     
     // Is the contract loaded?
 
@@ -625,6 +627,8 @@ class RimbleTransaction extends React.Component {
     
     let modals = { ...this.state.modals };
     modals.data.accountValidationPending = false;
+    modals.data.connectionModalIsOpen = false;
+    modals.data.transactionConnectionModalIsOpen = false;
     this.setState({ modals });
   }
 
@@ -634,7 +638,9 @@ class RimbleTransaction extends React.Component {
     }
 
     let modals = { ...this.state.modals };
-    modals.data.accountConnectionPending = true;
+    modals.data.accountConnectionPending = false;
+    modals.data.accountValidationPending = true;
+    modals.data.userRejectedValidation = false;
     this.setState({ modals });
   }
 
@@ -646,6 +652,7 @@ class RimbleTransaction extends React.Component {
     let modals = { ...this.state.modals };
     modals.data.userRejectedValidation = false;
     modals.data.connectionModalIsOpen = false;
+    modals.data.transactionConnectionModalIsOpen = false;
     this.setState({ modals });
   }
 
@@ -729,6 +736,27 @@ class RimbleTransaction extends React.Component {
     this.setState({ modals });
   }
 
+  closeTransactionConnectionModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+
+    let modals = { ...this.state.modals };
+    modals.data.transactionConnectionModalIsOpen = false;
+    this.setState({ modals });
+  }
+  
+  openTransactionConnectionModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+
+    let modals = { ...this.state.modals };
+    modals.data.transactionConnectionModalIsOpen = true;
+    this.setState({ modals });
+  }
+  
+
 
   state = {
     contract: {},
@@ -764,6 +792,7 @@ class RimbleTransaction extends React.Component {
         accountValidationPending: null,
         userRejectedValidation: null,
         wrongNetworkModalIsOpen: null,
+        transactionConnectionModalIsOpen: null,
       },
       methods: {
         openNoWeb3BrowserModal: this.openNoWeb3BrowserModal,
@@ -780,6 +809,8 @@ class RimbleTransaction extends React.Component {
         closeUserRejectedValidationModal: this.closeUserRejectedValidationModal,
         closeWrongNetworkModal: this.closeWrongNetworkModal,
         openWrongNetworkModal: this.openWrongNetworkModal,
+        closeTransactionConnectionModal: this.closeTransactionConnectionModal,
+        openTransactionConnectionModal: this.openTransactionConnectionModal,
       }
     },
     transaction: {
@@ -802,7 +833,7 @@ class RimbleTransaction extends React.Component {
     return (
       <div>
         <RimbleTransactionContext.Provider value={this.state} {...this.props} />
-        <ConnectionUtil 
+        <ConnectionModalUtil 
           initAccount={this.state.initAccount} 
           account={this.state.account} 
           validateAccount={this.state.validateAccount} 
@@ -817,14 +848,6 @@ class RimbleTransaction extends React.Component {
           web3={this.state.web3}
         />
         <TransactionUtil
-          initAccount={this.state.initAccount} 
-          account={this.state.account} 
-          validateAccount={this.state.validateAccount} 
-          accountConnectionPending={this.state.accountConnectionPending} 
-          accountValidationPending={this.state.accountValidationPending} 
-          accountValidated={this.state.accountValidated} 
-          network={this.state.network} 
-          modals={ this.state.modals } 
           transaction={ this.state.transaction }
         />
       </div>

@@ -5,7 +5,7 @@ import WrongNetworkModal from "../utilities/components/WrongNetworkModal";
 import ConnectionModal from "../utilities/components/ConnectionModal";
 import ConnectionPendingModal from "../utilities/components/ConnectionPendingModal";
 import UserRejectedConnectionModal from "../utilities/components/UserRejectedConnectionModal";
-import TransactionConnectionModal from "./TransactionConnectionModal";
+import TransactionConnectionModal from "../utilities/components/TransactionConnectionModal";
 import ValidationPendingModal from "../utilities/components/ValidationPendingModal";
 import UserRejectedValidationModal from "../utilities/components/UserRejectedValidationModal";
 import LowFundsModal from "./LowFundsModal";
@@ -356,7 +356,7 @@ class MissingWeb3Provider extends React.Component {
           <Button size="small" onClick={this.openConnectionPendingModal} mr={2} mb={2}>Connection Pending</Button>
           <Button size="small" onClick={this.openUserRejectedConnectionModal} mr={2} mb={2}>Connection Rejected</Button>
 
-          <Button size="small" onClick={this.openTransactionConnectionModal} mr={2} mb={2}>Transaction Connection</Button>
+          <Button size="small" onClick={this.props.modals.methods.openTransactionConnectionModal} mr={2} mb={2}>Transaction Connection</Button>
           
           <Button size="small" onClick={this.openAccountValidationPendingModal} mr={2} mb={2}>Validation Pending</Button>
           <Button size="small" onClick={this.openUserRejectedValidationModal} mr={2} mb={2}>User Rejected Validation</Button>
@@ -392,9 +392,9 @@ class MissingWeb3Provider extends React.Component {
         
 
         <TransactionConnectionModal 
-          closeTransactionConnectionModal={this.closeTransactionConnectionModal} 
+          closeModal={this.props.modals.methods.closeTransactionConnectionModal} 
           validateAccount={this.props.validateAccount} 
-          isOpen={this.state.transactionConnectionModalIsOpen && !this.props.accountValidated} 
+          isOpen={this.props.modals.data.transactionConnectionModalIsOpen} 
           currentNetwork={this.props.network.current} 
         />
         
