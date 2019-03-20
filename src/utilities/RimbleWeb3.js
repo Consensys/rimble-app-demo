@@ -4,6 +4,7 @@ import bowser from "bowser";
 
 import ConnectionUtil from "./ConnectionUtil";
 import NetworkUtil from "./NetworkUtil";
+import TransactionUtil from "./TransactionUtil";
 
 const RimbleTransactionContext = React.createContext({
   contract: {},
@@ -30,6 +31,8 @@ const RimbleTransactionContext = React.createContext({
   },
   modals: {
     data: {
+      noWeb3BrowserModalIsOpen: {},
+      noWalletModalIsOpen: {},
       connectionModalIsOpen: {},
       accountConnectionPending: {},
       userRejectedConnect: {},
@@ -37,6 +40,10 @@ const RimbleTransactionContext = React.createContext({
       userRejectedValidation: {},
     },
     methods: {
+      openNoWeb3BrowserModal: () => {},
+      closeNoWeb3BrowserModal: () => {},
+      openNoWalletModal: () => {},
+      closeNoWalletModal: () => {},
       closeConnectionModal: () => {},
       openConnectionModal: () => {},
       closeConnectionPendingModal: () => {},
@@ -45,6 +52,17 @@ const RimbleTransactionContext = React.createContext({
       closeValidationPendingModal: () => {},
       openValidationPendingModal: () => {},
       closeUserRejectedValidationModal: () => {},
+    }
+  },
+  transaction: {
+    data: {
+      transactions: {}
+    },
+    meta: {
+      
+    },
+    methods: {
+      
     }
   }
 });
@@ -64,6 +82,28 @@ class RimbleTransaction extends React.Component {
     //   return "Prevent reload"
     // }
     
+  }
+
+  web3ActionPreflight = () => {
+    // Is this browser compatible?
+    if (!this.state.validBrowser) {  
+      console.log("Invalid browser, cancelling transaction.");
+      let modals = { ...this.state.modals };
+      modals.data.noWeb3BrowserModalIsOpen = true;
+      this.setState({ modals });
+      return false;
+    }
+
+    // Is there a web3 provider?
+    if (!this.state.web3) {  
+      console.log("No browser wallet, cancelling transaction.");
+      let modals = { ...this.state.modals };
+      modals.data.noWalletModalIsOpen = true;
+      this.setState({ modals });
+      return false;
+    }
+
+    return true;
   }
 
   // Validates user's browser is web3 capable
@@ -262,6 +302,10 @@ class RimbleTransaction extends React.Component {
   }
 
   connectAndValidateAccount = async () => {
+    if (!this.web3ActionPreflight()) {
+      return;
+    }
+
     // Check for account
     if (!this.state.account || !this.state.accountValidated) {
       // Show modal to connect account
@@ -380,9 +424,11 @@ class RimbleTransaction extends React.Component {
   }
 
   contractMethodSendWrapper = contractMethod => {
-    // Is this browser compatible?
+    if (!this.web3ActionPreflight()) {
+      return;
+    }
 
-    // Is there a web3 provider?
+    // Is it on the correct network?
 
     // Is a wallet connected and verified?
     
@@ -594,6 +640,46 @@ class RimbleTransaction extends React.Component {
     this.setState({ modals });
   }
 
+  closeNoWeb3BrowserModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+
+    let modals = { ...this.state.modals };
+    modals.data.noWeb3BrowserModalIsOpen = false;
+    this.setState({ modals });
+  }
+
+  openNoWeb3BrowserModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+
+    let modals = { ...this.state.modals };
+    modals.data.noWeb3BrowserModalIsOpen = true;
+    this.setState({ modals });
+  }
+
+  closeNoWalletModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+
+    let modals = { ...this.state.modals };
+    modals.data.noWalletModalIsOpen = false;
+    this.setState({ modals });
+  }
+  
+  openNoWalletModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+
+    let modals = { ...this.state.modals };
+    modals.data.noWalletModalIsOpen = true;
+    this.setState({ modals });
+  }
+
 
   state = {
     contract: {},
@@ -621,6 +707,8 @@ class RimbleTransaction extends React.Component {
     },
     modals: {
       data: {
+        noWeb3BrowserModalIsOpen: this.noWeb3BrowserModalIsOpen,
+        noWalletModalIsOpen: this.noWalletModalIsOpen,
         connectionModalIsOpen: null,
         accountConnectionPending: null,
         userRejectedConnection: null,
@@ -628,6 +716,10 @@ class RimbleTransaction extends React.Component {
         userRejectedValidation: null,
       },
       methods: {
+        openNoWeb3BrowserModal: this.openNoWeb3BrowserModal,
+        closeNoWeb3BrowserModal: this.closeNoWeb3BrowserModal,
+        openNoWalletModal: this.openNoWalletModal,
+        closeNoWalletModal: this.closeNoWalletModal,
         closeConnectionModal: this.closeConnectionModal,
         openConnectionModal: this.openConnectionModal,
         closeConnectionPendingModal: this.closeConnectionPendingModal,
@@ -636,6 +728,16 @@ class RimbleTransaction extends React.Component {
         closeValidationPendingModal: this.closeValidationPendingModal,
         openValidationPendingModal: this.openValidationPendingModal,
         closeUserRejectedValidationModal: this.closeUserRejectedValidationModal,
+      }
+    },
+    transaction: {
+      data: {
+        transactions: null
+      },
+      meta: {
+        
+      },
+      methods: {
       }
     }
   };
@@ -649,18 +751,29 @@ class RimbleTransaction extends React.Component {
       <div>
         <RimbleTransactionContext.Provider value={this.state} {...this.props} />
         <ConnectionUtil 
-          initAccount={this.state.initAccount}
-          account={this.state.account}
+          initAccount={this.state.initAccount} 
+          account={this.state.account} 
           validateAccount={this.state.validateAccount} 
-          accountConnectionPending={this.state.accountConnectionPending}
+          accountConnectionPending={this.state.accountConnectionPending} 
           accountValidationPending={this.state.accountValidationPending} 
-          accountValidated={this.state.accountValidated}
+          accountValidated={this.state.accountValidated} 
           network={this.state.network} 
-          modals={ this.state.modals }
+          modals={ this.state.modals } 
         />
         <NetworkUtil
           network={this.state.network}
           web3={this.state.web3}
+        />
+        <TransactionUtil
+          initAccount={this.state.initAccount} 
+          account={this.state.account} 
+          validateAccount={this.state.validateAccount} 
+          accountConnectionPending={this.state.accountConnectionPending} 
+          accountValidationPending={this.state.accountValidationPending} 
+          accountValidated={this.state.accountValidated} 
+          network={this.state.network} 
+          modals={ this.state.modals } 
+          transaction={ this.state.transaction }
         />
       </div>
       

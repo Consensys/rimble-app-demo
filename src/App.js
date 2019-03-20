@@ -60,6 +60,7 @@ class App extends Component {
               connectAndValidateAccount,
               modals,
               network,
+              transaction,
             }) => (
               <Box style={{paddingBottom: !network.isCorrectNetwork ? "8em" : "0" }}>
                 <Header
@@ -111,6 +112,7 @@ class App extends Component {
                       connectAndValidateAccount={connectAndValidateAccount}
                       modals={modals}
                       network={network}
+                      transaction={transaction}
                     /> 
                   : null
                 }
