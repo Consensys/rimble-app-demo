@@ -41,8 +41,10 @@ const RimbleTransactionContext = React.createContext({
       openConnectionModal: () => {},
       closeConnectionPendingModal: () => {},
       openConnectionPendingModal: () => {},
+      closeUserRejectedConnectionModal: () => {},
       closeValidationPendingModal: () => {},
       openValidationPendingModal: () => {},
+      closeUserRejectedValidationModal: () => {},
     }
   }
 });
@@ -262,7 +264,7 @@ class RimbleTransaction extends React.Component {
 
   connectAndValidateAccount = async () => {
     // Check for account
-    if (!this.state.account) {
+    if (!this.state.account || !this.state.accountValidated) {
       // Show modal to connect account
       this.openConnectionModal();
     }
@@ -511,7 +513,7 @@ class RimbleTransaction extends React.Component {
     
     let modals = { ...this.state.modals };
     modals.data.connectionModalIsOpen = true;
-    this.setState((state, props) => ({ modals }));
+    this.setState({ modals: modals });
   }
 
   closeConnectionPendingModal = (e) => {
@@ -534,6 +536,16 @@ class RimbleTransaction extends React.Component {
     this.setState((state, props) => ({ modals }));
   }
 
+  closeUserRejectedConnectionModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+    
+    let modals = { ...this.state.modals };
+    modals.data.userRejectedConnect = false;
+    this.setState((state, props) => ({ modals }));
+  }
+
   closeValidationPendingModal = (e) => {
     if (typeof e !== "undefined") {
       e.preventDefault();
@@ -551,6 +563,16 @@ class RimbleTransaction extends React.Component {
 
     let modals = { ...this.state.modals };
     modals.data.accountConnectionPending = true;
+    this.setState((state, props) => ({ modals }));
+  }
+
+  closeUserRejectedValidationModal = (e) => {
+    if (typeof e !== "undefined") {
+      e.preventDefault();
+    }
+
+    let modals = { ...this.state.modals };
+    modals.data.userRejectedValidation = false;
     this.setState((state, props) => ({ modals }));
   }
 
@@ -592,8 +614,10 @@ class RimbleTransaction extends React.Component {
         openConnectionModal: this.openConnectionModal,
         closeConnectionPendingModal: this.closeConnectionPendingModal,
         openConnectionPendingModal: this.openConnectionPendingModal,
+        closeUserRejectedConnectionModal: this.closeUserRejectedConnectionModal,
         closeValidationPendingModal: this.closeValidationPendingModal,
         openValidationPendingModal: this.openValidationPendingModal,
+        closeUserRejectedValidationModal: this.closeUserRejectedValidationModal,
       }
     }
   };
@@ -608,9 +632,10 @@ class RimbleTransaction extends React.Component {
         <RimbleTransactionContext.Provider value={this.state} {...this.props} />
         <ConnectionUtil 
           validateAccount={this.state.validateAccount} 
+          accountConnectionPending={this.state.accountConnectionPending}
           accountValidationPending={this.state.accountValidationPending} 
           accountValidated={this.state.accountValidated}
-          currentNetwork={this.state.currentNetwork} 
+          network={this.state.network} 
           modals={ this.state.modals }
         />
         <NetworkUtil

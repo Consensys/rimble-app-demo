@@ -264,7 +264,7 @@ class MissingWeb3Provider extends React.Component {
             this.props.web3 && this.props.isCorrectNetwork
             ?
               <Flex ml={4} alignItems={"center"} >
-                <NetworkOverview network={this.props.currentNetwork}/>
+                <NetworkOverview network={this.props.network.current}/>
               </Flex>
             :
               null
@@ -387,12 +387,12 @@ class MissingWeb3Provider extends React.Component {
           closeConnectionModal={this.closeConnectionModal} 
           validateAccount={this.props.validateAccount} 
           isOpen={this.state.connectionModalIsOpen && !this.props.accountValidated} 
-          currentNetwork={this.props.currentNetwork} 
+          currentNetwork={this.props.network.current} 
         />
         <ConnectionPendingModal 
           closeConnectionPendingModal={this.state.closeConnectionPendingModal} 
           isOpen={ this.state.accountConnectionPending } 
-          currentNetwork={this.props.currentNetwork} 
+          currentNetwork={this.props.network.current} 
         />
         <UserRejectedConnectionModal 
           closeUserRejectedConnectionModal={this.closeUserRejectedConnectionModal} 
@@ -406,13 +406,13 @@ class MissingWeb3Provider extends React.Component {
           closeTransactionConnectionModal={this.closeTransactionConnectionModal} 
           validateAccount={this.props.validateAccount} 
           isOpen={this.state.transactionConnectionModalIsOpen && !this.props.accountValidated} 
-          currentNetwork={this.props.currentNetwork} 
+          currentNetwork={this.props.network.current} 
         />
         
         <ValidationPendingModal 
           closeAccountValidationPendingModal={this.closeAccountValidationPendingModal} 
           isOpen={this.state.accountValidationPending} 
-          currentNetwork={this.props.currentNetwork} 
+          currentNetwork={this.props.network.current} 
         />
         <UserRejectedValidationModal 
           closeUserRejectedValidationModal={this.closeUserRejectedValidationModal} 
@@ -423,7 +423,7 @@ class MissingWeb3Provider extends React.Component {
         <LowFundsModal 
           closeLowFundsModal={this.closeLowFundsModal} 
           isOpen={ this.state.lowFundsModalIsOpen} 
-          currentNetwork={this.props.currentNetwork} 
+          currentNetwork={this.props.network.current} 
           account={ this.props.account } 
         />
 
