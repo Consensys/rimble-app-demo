@@ -381,6 +381,14 @@ class RimbleTransaction extends React.Component {
   }
 
   contractMethodSendWrapper = contractMethod => {
+    // Is this browser compatible?
+
+    // Is there a web3 provider?
+
+    // Is a wallet connected and verified?
+    
+    // Is the contract loaded?
+
     // Create new tx and add to collection
     // Maybe this needs to get moved out of the wrapper?
     let transaction = this.createTransaction();
@@ -522,7 +530,7 @@ class RimbleTransaction extends React.Component {
     }
     
     let modals = { ...this.state.modals };
-    modals.data.connectionModalIsOpen = false;
+    modals.data.accountConnectionPending = false;
     this.setState((state, props) => ({ modals }));
   }
 
