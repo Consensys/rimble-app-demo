@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Heading, Text, Icon, TextButton, Modal, Flex, Box, MetaMaskButton } from "rimble-ui";
-import NetworkOverview from "../utilities/components/NetworkOverview"
-import theme from "./../theme";
+import NetworkOverview from "./NetworkOverview"
+import theme from "../../theme";
 
 class TransactionConnectionModal extends React.Component {
   render() {
@@ -17,7 +17,7 @@ class TransactionConnectionModal extends React.Component {
             right={0}
             mt={3}
             mr={3}
-            onClick={this.props.closeTransactionConnectionModal}
+            onClick={this.props.closeModal}
           />
 
           <Flex justifyContent={"center"} alignContent={"stretch"}>

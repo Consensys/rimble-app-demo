@@ -27,7 +27,7 @@ const TransactionToastMessages = {
     },
     error: {
       message: "Value change failed",
-      secondaryMessage: "Make sure you have enough Ether (ETH) and try again",
+      secondaryMessage: "Could not complete transaction.",
       actionHref: "",
       actionText: "",
       variant: "failure"
