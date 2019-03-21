@@ -63,9 +63,8 @@ class SmartContractControls extends React.Component {
 
   // gets the number stored in smart contract storage
   getNumber = ({ ...props }) => {
-    const { contract } = this.props;
     try {
-      contract.methods
+      this.props.contract.methods
         .getCounter()
         .call()
         .then(value => {
@@ -115,10 +114,10 @@ class SmartContractControls extends React.Component {
 
   componentDidMount() {
     // Init the contract after the web3 provider has been determined
-    //this.props.initContract(contractAddress, contractAbi).then(() => {
+    this.props.initContract(contractAddress, contractAbi).then(() => {
       // Can finally interact with contract
-      //this.getNumber();
-    //});
+      this.getNumber();
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
