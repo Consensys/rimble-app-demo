@@ -12,6 +12,7 @@ const RimbleTransactionContext = React.createContext({
   accountBalance: {},
   accountBalanceLow: {},
   web3: {},
+  web3Fallback: {},
   transactions: {},
   checkPreflight: () => {},
   initWeb3: () => {},
@@ -73,17 +74,25 @@ const RimbleTransactionContext = React.createContext({
 class RimbleTransaction extends React.Component {
   static Consumer = RimbleTransactionContext.Consumer;
 
-  // Performs
-  checkPreflight = () => {
-    this.checkModernBrowser();
-    this.initWeb3();
+  web3Preflight = () => {
+    // Is this browser compatible?
+    if (!this.state.validBrowser) {
+      console.log("Invalid browser, cancelling transaction.");
+      let modals = { ...this.state.modals };
+      modals.data.noWeb3BrowserModalIsOpen = true;
+      this.setState({ modals });
+    }
 
-    // Prevent MetaMask from reloading page on network change
-    // TODO: Throwing too many system dialogs, possible to resolve?
-    // window.onbeforeunload = function() {
-    //   console.log("Suppresing page reload");
-    //   return "Prevent reload"
-    // }
+    // Is there a web3 provider?
+    if (!this.state.web3) {
+      console.log("No browser wallet, cancelling transaction.");
+      let modals = { ...this.state.modals };
+      modals.data.noWalletModalIsOpen = true;
+      this.setState({ modals });
+      return false;
+    }
+
+    return true;
   };
 
   web3ActionPreflight = () => {
@@ -96,8 +105,9 @@ class RimbleTransaction extends React.Component {
       return false;
     }
 
-    // Is there a web3 provider?
-    if (!this.state.web3) {
+    // Is there a wallet?
+    console.log("this.state.web3Fallback", this.state.web3Fallback);
+    if (this.state.web3Fallback) {
       console.log("No browser wallet, cancelling transaction.");
       let modals = { ...this.state.modals };
       modals.data.noWalletModalIsOpen = true;
@@ -135,47 +145,57 @@ class RimbleTransaction extends React.Component {
   // Initialize a web3 provider
   // TODO: Make async work
   initWeb3 = async () => {
-    return new Promise(
-      (resolve, reject) => {
-        let web3 = {};
+    this.checkModernBrowser();
 
-        // Check for modern web3 provider
-        if (window.ethereum) {
-          console.log("Using modern web3 provider.");
-          web3 = new Web3(window.ethereum);
-        }
-        // Legacy dapp browsers, public wallet address always exposed
-        else if (window.web3) {
-          console.log("Legacy web3 provider. Try updating.");
-          web3 = new Web3(window.web3.currentProvider);
-        }
-        // Non-dapp browsers...
-        else {
-          console.log("Non-Ethereum browser detected. Using Infura fallback.");
+    let web3 = {};
 
-          const web3Provider = new Web3.providers.HttpProvider(
-            "https://rinkeby.infura.io:443"
-          );
-          this.setState({ web3Provider });
-          web3 = false;
-        }
+    // Check for modern web3 provider
+    if (window.ethereum) {
+      console.log("Using modern web3 provider.");
+      web3 = new Web3(window.ethereum);
+    }
+    // Legacy dapp browsers, public wallet address always exposed
+    else if (window.web3) {
+      console.log("Legacy web3 provider. Try updating.");
+      web3 = new Web3(window.web3.currentProvider);
+    }
+    // Non-dapp browsers...
+    else {
+      console.log("Non-Ethereum browser detected. Using Infura fallback.");
 
-        this.setState({ web3 }, () => {
-          // After setting the web3 provider, check network
-          this.checkNetwork();
-        });
-      },
-      error => {
-        console.log("Error initializing web3");
-      }
-    );
+      const web3Provider = new Web3.providers.HttpProvider(
+        "https://rinkeby.infura.io/v3/c43d74f41ea4482d8eecfa96d47a8151"
+      );
+      web3 = new Web3(web3Provider);
+
+      // Set fallback property, used to show modal
+      this.setState({ web3Fallback: true });
+    }
+
+    this.setState({ web3 }, () => {
+      // After setting the web3 provider, check network
+      this.checkNetwork();
+    });
+
+    console.log("Finished initWeb3");
   };
 
   initContract = async (address, abi) => {
-    console.log("creating contract");
+    console.log("Init contract");
+
+    if (!this.state.web3) {
+      console.log("Awaiting web3");
+      await this.initWeb3();
+    }
+
+    this.createContract(address, abi);
+  };
+
+  createContract = async (address, abi) => {
+    console.log("creating contract", address, abi);
     // Create contract on initialized web3 provider with given abi and address
     try {
-      const contract = await new this.state.web3.eth.Contract(abi, address);
+      const contract = new this.state.web3.eth.Contract(abi, address);
       this.setState({ contract });
     } catch (error) {
       console.log("Could not create contract.");
@@ -826,6 +846,7 @@ class RimbleTransaction extends React.Component {
     accountBalance: null,
     accountBalanceLow: null,
     web3: null,
+    web3Fallback: null,
     transactions: {},
     checkPreflight: this.checkPreflight,
     initWeb3: this.initWeb3,
@@ -890,7 +911,8 @@ class RimbleTransaction extends React.Component {
   };
 
   componentDidMount() {
-    this.checkPreflight();
+    // Performs a check on browser and will load a web3 provider
+    // this.initWeb3();
   }
 
   render() {
