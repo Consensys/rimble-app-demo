@@ -23,7 +23,7 @@ class LowFundsModal extends React.Component {
 
   toggleQRVisible = () => {
     this.setState({
-      showQR: !this.showQR
+      showQR: !this.state.showQR
     });
   };
 
@@ -127,8 +127,14 @@ class LowFundsModal extends React.Component {
               this.RightColumn()
             ) : (
               <Box>
-                <QR value={this.props.account} />
+                <Flex justifyContent={"center"}>
+                  <QR value={this.props.account} />
+                </Flex>
+
                 <Text>{this.props.account}</Text>
+                <OutlineButton onClick={this.toggleQRVisible}>
+                  Close QR
+                </OutlineButton>
               </Box>
             )}
           </Flex>
