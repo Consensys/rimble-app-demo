@@ -6,7 +6,7 @@ import RimbleWeb3 from "./utilities/RimbleWeb3";
 import Header from "./components/Header";
 import PrimaryCard from "./components/PrimaryCard";
 import InstructionsCard from "./components/InstructionsCard";
-import MissingWeb3Provider from "./components/MissingWeb3Provider";
+import Web3Debugger from "./components/Web3Debugger";
 
 import theme from "./theme";
 import { createGlobalStyle } from "styled-components";
@@ -21,35 +21,35 @@ const GlobalStyle = createGlobalStyle`
 
 class App extends Component {
   state = {
-    route: 'default'
-  }
+    route: "default"
+  };
 
   // Optional parameters to pass into RimbleWeb3
   config = {
     accountBalanceMinimum: 100,
-    requiredNetwork: 4,
-  }
+    requiredNetwork: 4
+  };
 
-  showRoute = (route) => {
+  showRoute = route => {
     this.setState({
       route
     });
-  }
+  };
 
   render() {
     return (
       <ThemeProvider theme={theme} className="App">
         <RimbleWeb3 config={this.config}>
           <RimbleWeb3.Consumer>
-            {({ 
-              needsPreflight, 
-              validBrowser, 
-              userAgent, 
-              web3, 
-              account, 
+            {({
+              needsPreflight,
+              validBrowser,
+              userAgent,
+              web3,
+              account,
               accountBalance,
               accountBalanceLow,
-              initAccount, 
+              initAccount,
               rejectAccountConnect,
               userRejectedConnect,
               accountValidated,
@@ -60,9 +60,13 @@ class App extends Component {
               connectAndValidateAccount,
               modals,
               network,
-              transaction,
+              transaction
             }) => (
-              <Box style={{paddingBottom: !network.isCorrectNetwork ? "8em" : "0" }}>
+              <Box
+                style={{
+                  paddingBottom: !network.isCorrectNetwork ? "8em" : "0"
+                }}
+              >
                 <Header
                   account={account}
                   accountBalance={accountBalance}
@@ -70,53 +74,52 @@ class App extends Component {
                   initAccount={initAccount}
                   rejectAccountConnect={rejectAccountConnect}
                   userRejectedConnect={userRejectedConnect}
-                  accountValidated={accountValidated} 
-                  accountValidationPending={accountValidationPending} 
+                  accountValidated={accountValidated}
+                  accountValidationPending={accountValidationPending}
                   rejectValidation={rejectValidation}
-                  userRejectedValidation={userRejectedValidation} 
-                  validateAccount={validateAccount} 
+                  userRejectedValidation={userRejectedValidation}
+                  validateAccount={validateAccount}
                   connectAndValidateAccount={connectAndValidateAccount}
                   modals={modals}
                   network={network}
                 />
-                
+
                 <Flex justifyContent="center" p={4}>
                   <Text width="400px">
-                    This is a starter React dApp that uses the Rimble UI component
-                    library to call methods on a smart contract deployed to the Ethereum
-                    Rinkeby testnet.
+                    This is a starter React dApp that uses the Rimble UI
+                    component library to call methods on a smart contract
+                    deployed to the Ethereum Rinkeby testnet.
                   </Text>
                 </Flex>
 
-                { this.state.route === 'default'
-                  ? <PrimaryCard />
-                  : null
-                }
+                {this.state.route === "default" ? <PrimaryCard /> : null}
 
-                { this.state.route === 'onboarding'
-                  ? <MissingWeb3Provider 
-                      validBrowser={validBrowser} 
-                      userAgent={userAgent} 
-                      web3={web3} 
-                      account={account} 
-                      accountBalance={accountBalance}
-                      accountBalanceLow={accountBalanceLow}
-                      initAccount={initAccount} 
-                      rejectAccountConnect={rejectAccountConnect}
-                      userRejectedConnect={userRejectedConnect}
-                      accountValidated={accountValidated} 
-                      accountValidationPending={accountValidationPending} 
-                      rejectValidation={rejectValidation}
-                      userRejectedValidation={userRejectedValidation} 
-                      validateAccount={validateAccount} 
-                      connectAndValidateAccount={connectAndValidateAccount}
-                      modals={modals}
-                      network={network}
-                      transaction={transaction}
-                    /> 
-                  : null
-                }
-                <InstructionsCard showRoute={this.showRoute} route={this.state.route} />
+                {this.state.route === "onboarding" ? (
+                  <Web3Debugger
+                    validBrowser={validBrowser}
+                    userAgent={userAgent}
+                    web3={web3}
+                    account={account}
+                    accountBalance={accountBalance}
+                    accountBalanceLow={accountBalanceLow}
+                    initAccount={initAccount}
+                    rejectAccountConnect={rejectAccountConnect}
+                    userRejectedConnect={userRejectedConnect}
+                    accountValidated={accountValidated}
+                    accountValidationPending={accountValidationPending}
+                    rejectValidation={rejectValidation}
+                    userRejectedValidation={userRejectedValidation}
+                    validateAccount={validateAccount}
+                    connectAndValidateAccount={connectAndValidateAccount}
+                    modals={modals}
+                    network={network}
+                    transaction={transaction}
+                  />
+                ) : null}
+                <InstructionsCard
+                  showRoute={this.showRoute}
+                  route={this.state.route}
+                />
               </Box>
             )}
           </RimbleWeb3.Consumer>

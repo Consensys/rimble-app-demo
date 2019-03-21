@@ -1,12 +1,25 @@
 import React from "react";
-import { Card, Heading, Text, Icon, TextButton, Modal, Flex, Box, OutlineButton, Button, PublicAddress, QR } from "rimble-ui";
-import NetworkOverview from "./NetworkOverview"
+import {
+  Card,
+  Heading,
+  Text,
+  Icon,
+  TextButton,
+  Modal,
+  Flex,
+  Box,
+  OutlineButton,
+  Button,
+  PublicAddress,
+  QR
+} from "rimble-ui";
+import NetworkOverview from "./NetworkOverview";
 import theme from "../../theme";
 
 class LowFundsModal extends React.Component {
   state = {
-    showQR: false,
-  }
+    showQR: false
+  };
 
   toggleQRVisible = () => {
     this.setState({
@@ -18,20 +31,28 @@ class LowFundsModal extends React.Component {
     return (
       <Flex flexDirection={"column"} p={3}>
         <Flex justifyContent={"center"} my={4}>
-          <Icon name="Warning" color="gold" size="40"/>
+          <Icon name="Warning" color="gold" size="40" />
         </Flex>
-        
+
         <Heading.h2>Low Funds</Heading.h2>
-  
-        <Text mb={4}>To use Bounties Explorer's block chain features, you'll need to own Ether. Deposit Ether into your account via your MetaMask extension or send Funds from another account.</Text>
-  
+
+        <Text mb={4}>
+          To use Bounties Explorer's block chain features, you'll need to own
+          Ether. Deposit Ether into your account via your MetaMask extension or
+          send Funds from another account.
+        </Text>
+
         <PublicAddress address={this.props.account} />
-  
+
         <Box my={3}>
-          <Text.span bold fontWeight={3} mr={3}>Got another account on a mobile wallet?</Text.span> 
-          <Text.span>Send funds by scanning your QR code with your wallet app.</Text.span>
+          <Text.span bold fontWeight={3} mr={3}>
+            Got another account on a mobile wallet?
+          </Text.span>
+          <Text.span>
+            Send funds by scanning your QR code with your wallet app.
+          </Text.span>
         </Box>
-  
+
         <Box mb={4}>
           <OutlineButton onClick={this.toggleQRVisible}>
             <Flex alignItems={"center"}>
@@ -42,22 +63,24 @@ class LowFundsModal extends React.Component {
         </Box>
         <Flex justifyContent={"flex-end"}>
           <Box>
-            <Button onClick={this.props.closeModal}>Continue to Bounties Explorer</Button>
+            <Button onClick={this.props.closeModal}>
+              Continue to Bounties Explorer
+            </Button>
           </Box>
         </Flex>
       </Flex>
     );
-  }
+  };
 
   render() {
     return (
       <Modal isOpen={this.props.isOpen}>
-        <Card p={5} maxWidth={'960px'}>
+        <Card p={5} maxWidth={"960px"}>
           <TextButton
             icononly
-            icon={'Close'}
-            color={'moon-gray'}
-            position={'absolute'}
+            icon={"Close"}
+            color={"moon-gray"}
+            position={"absolute"}
             top={0}
             right={0}
             mt={3}
@@ -69,12 +92,16 @@ class LowFundsModal extends React.Component {
             <Box width={"400px"} flex={"1 1 auto"}>
               <Flex flexDirection={"column"} alignContent={"center"}>
                 <Box>
-                  <Text color={theme.colors.primary} caps>Current Network</Text>
+                  <Text color={theme.colors.primary} caps>
+                    Current Network
+                  </Text>
                   <NetworkOverview network={this.props.currentNetwork} />
                 </Box>
-                
+
                 <Box my={4}>
-                  <Text color={theme.colors.primary} caps>New to Ether?</Text>
+                  <Text color={theme.colors.primary} caps>
+                    New to Ether?
+                  </Text>
                 </Box>
 
                 <Text fontWeight={3}>What you'll need Ether for:</Text>
@@ -85,28 +112,29 @@ class LowFundsModal extends React.Component {
                 </ul>
 
                 <Text fontWeight={3}>What are network fees?</Text>
-                <Text>Network fees pay for a person or group to add a record of your action to the blockchain and let the network know. It doesn't go to us.</Text>
+                <Text>
+                  Network fees pay for a person or group to add a record of your
+                  action to the blockchain and let the network know. It doesn't
+                  go to us.
+                </Text>
               </Flex>
             </Box>
 
             <Flex borderRight={1} borderColor={"#999"} mx={3}>
-              <Text></Text>
+              <Text />
             </Flex>
-            { !this.state.showQR 
-              ?
-                this.RightColumn()
-              :
-                <Box>
-                  <QR value={this.props.account} />
-                  <Text>{this.props.account}</Text>
-                </Box>
-            }
-            
-            
+            {!this.state.showQR ? (
+              this.RightColumn()
+            ) : (
+              <Box>
+                <QR value={this.props.account} />
+                <Text>{this.props.account}</Text>
+              </Box>
+            )}
           </Flex>
         </Card>
       </Modal>
-    )
+    );
   }
 }
 

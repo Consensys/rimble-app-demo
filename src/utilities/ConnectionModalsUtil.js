@@ -30,57 +30,62 @@ class ConnectionModalUtil extends React.Component {
           transaction={this.props.transaction}
         />
 
-        <WrongNetworkModal 
-          closeModal={this.props.modals.methods.closeWrongNetworkModal} 
-          isOpen={this.props.modals.data.wrongNetworkModalIsOpen} 
+        <WrongNetworkModal
+          closeModal={this.props.modals.methods.closeWrongNetworkModal}
+          isOpen={this.props.modals.data.wrongNetworkModalIsOpen}
           network={this.props.network}
         />
-        
-        <ConnectionModal 
-          closeConnectionModal={this.props.modals.methods.closeConnectionModal} 
-          validateAccount={this.props.validateAccount} 
-          isOpen={this.props.modals.data.connectionModalIsOpen && !this.props.accountValidated} 
+
+        <ConnectionModal
+          closeModal={this.props.modals.methods.closeConnectionModal}
+          validateAccount={this.props.validateAccount}
+          isOpen={
+            this.props.modals.data.connectionModalIsOpen &&
+            !this.props.accountValidated
+          }
           currentNetwork={this.props.network.current}
         />
 
-        <TransactionConnectionModal 
-          closeModal={this.props.modals.methods.closeTransactionConnectionModal} 
-          validateAccount={this.props.validateAccount} 
-          isOpen={this.props.modals.data.transactionConnectionModalIsOpen} 
-          currentNetwork={this.props.network.current} 
+        <TransactionConnectionModal
+          closeModal={this.props.modals.methods.closeTransactionConnectionModal}
+          validateAccount={this.props.validateAccount}
+          isOpen={this.props.modals.data.transactionConnectionModalIsOpen}
+          currentNetwork={this.props.network.current}
         />
-        
-        <ConnectionPendingModal 
-          closeConnectionPendingModal={this.props.modals.methods.closeConnectionPendingModal} 
-          isOpen={ this.props.modals.data.accountConnectionPending } 
-          currentNetwork={this.props.network.current} 
+
+        <ConnectionPendingModal
+          closeModal={this.props.modals.methods.closeConnectionPendingModal}
+          isOpen={this.props.modals.data.accountConnectionPending}
+          currentNetwork={this.props.network.current}
         />
-        <UserRejectedConnectionModal 
-          closeUserRejectedConnectionModal={this.props.modals.methods.closeUserRejectedConnectionModal} 
-          isOpen={this.props.modals.data.userRejectedConnect} 
-          connectAccount={this.props.initAccount} 
-          openConnectionPendingModal={this.props.modals.methods.openConnectionPendingModal} 
+        <UserRejectedConnectionModal
+          closeModal={
+            this.props.modals.methods.closeUserRejectedConnectionModal
+          }
+          isOpen={this.props.modals.data.userRejectedConnect}
+          initAccount={this.props.initAccount}
         />
-        
-        <ValidationPendingModal 
-          closeValidationPendingModal={this.props.modals.methods.closeValidationPendingModal} 
-          isOpen={this.props.modals.data.accountValidationPending} 
-          currentNetwork={this.props.network.current} 
+
+        <ValidationPendingModal
+          closeModal={this.props.modals.methods.closeValidationPendingModal}
+          isOpen={this.props.modals.data.accountValidationPending}
+          currentNetwork={this.props.network.current}
           account={this.props.account}
         />
-        <UserRejectedValidationModal 
-          closeUserRejectedValidationModal={this.props.modals.methods.closeUserRejectedValidationModal} 
-          isOpen={ this.props.modals.data.userRejectedValidation } 
-          validateAccount={this.props.validateAccount} 
+        <UserRejectedValidationModal
+          closeModal={
+            this.props.modals.methods.closeUserRejectedValidationModal
+          }
+          isOpen={this.props.modals.data.userRejectedValidation}
+          validateAccount={this.props.validateAccount}
         />
 
-        <LowFundsModal 
-          closeModal={this.props.modals.methods.closeLowFundsModal} 
-          isOpen={ this.props.modals.data.lowFundsModalIsOpen} 
-          currentNetwork={this.props.network.current} 
-          account={ this.props.account } 
+        <LowFundsModal
+          closeModal={this.props.modals.methods.closeLowFundsModal}
+          isOpen={this.props.modals.data.lowFundsModalIsOpen}
+          currentNetwork={this.props.network.current}
+          account={this.props.account}
         />
-
       </div>
     );
   }

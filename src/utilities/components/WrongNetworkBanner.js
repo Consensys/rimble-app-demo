@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 import { Box, Flex, Text, Icon } from "rimble-ui";
 
 class WrongNetworkBanner extends React.Component {
   render() {
     const bannerStyle = {
-      position: 'fixed',
+      position: "fixed",
       bottom: 0,
       left: 0,
       right: 0,
-      width: '100%',
-      backgroundColor: 'white'
+      width: "100%",
+      backgroundColor: "white"
     };
 
     return (
@@ -19,12 +19,21 @@ class WrongNetworkBanner extends React.Component {
             <Icon name="Warning" color="gold" size="30" />
           </Box>
           <Flex flexDirection={"column"}>
-            <Text fontWeight={"bold"}>Looks like you're on the wrong network</Text>
-            <Text>You should be on the {this.props.network.required.name} Ethereum network. You are currently connected to the <Text.span style={{textTransform: "capitalize"}}>{this.props.network.current.name}</Text.span> Network - switch in your MetaMask extension.</Text>
+            <Text fontWeight={"bold"}>
+              Looks like you're on the wrong network
+            </Text>
+            <Text>
+              You should be on the {this.props.network.required.name} Ethereum
+              network. You are currently connected to the{" "}
+              <Text.span style={{ textTransform: "capitalize" }}>
+                {this.props.network.current.name}
+              </Text.span>{" "}
+              Network - switch in your MetaMask extension.
+            </Text>
           </Flex>
         </Flex>
       </Box>
-    )
+    );
   }
 }
 
