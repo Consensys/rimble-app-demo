@@ -1,6 +1,6 @@
 {
   "name": "rimble-app-demo",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
   "dependencies": {
     "bowser": "^2.1.2",
@@ -10,9 +10,9 @@
     "gh-pages": "^2.0.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-scripts": "2.1.3",
+    "react-scripts": "2.1.8",
     "react-timeago": "^4.3.0",
-    "rimble-ui": "^0.5.0",
+    "rimble-ui": "^0.6.0",
     "styled-components": "^4.1.3",
     "web3": "^1.0.0-beta.46"
   },

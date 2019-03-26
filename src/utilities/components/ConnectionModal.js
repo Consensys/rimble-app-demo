@@ -90,13 +90,15 @@ class ConnectionModal extends React.Component {
               </MetaMaskButton>
 
               <Flex mt={3} mx={4} alignItems="center">
-                <Image
-                  src="/images/phone.png"
-                  alt="mobile phone"
-                  width={"60"}
-                  height={"92"}
-                  mr={3}
-                />
+                <Box mr={3}>
+                  <Image
+                    src="images/phone.png"
+                    alt="mobile phone"
+                    width={"60px"}
+                    height={"92px"}
+                  />
+                </Box>
+
                 <Flex flexDirection={"column"}>
                   <Text fontWeight={3} mb={2}>
                     Connect with a mobile app
