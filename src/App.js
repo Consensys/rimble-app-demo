@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { ThemeProvider, Box, Text, Flex } from "rimble-ui";
 
 import RimbleWeb3 from "./utilities/RimbleWeb3";
+import { ConnectionBanner } from "rimble-web3-components";
 
 import Header from "./components/Header";
 import PrimaryCard from "./components/PrimaryCard";
@@ -120,6 +121,7 @@ class App extends Component {
                   showRoute={this.showRoute}
                   route={this.state.route}
                 />
+                <ConnectionBanner currentNetwork={3} requiredNetwork={4} />
               </Box>
             )}
           </RimbleWeb3.Consumer>
