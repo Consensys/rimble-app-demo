@@ -61,7 +61,8 @@ class App extends Component {
               connectAndValidateAccount,
               modals,
               network,
-              transaction
+              transaction,
+              web3Fallback
             }) => (
               <Box
                 style={{
@@ -121,7 +122,11 @@ class App extends Component {
                   showRoute={this.showRoute}
                   route={this.state.route}
                 />
-                <ConnectionBanner currentNetwork={3} requiredNetwork={4} />
+                <ConnectionBanner
+                  currentNetwork={network.current.id}
+                  requiredNetwork={this.config.requiredNetwork}
+                  onWeb3Fallback={web3Fallback}
+                />
               </Box>
             )}
           </RimbleWeb3.Consumer>
