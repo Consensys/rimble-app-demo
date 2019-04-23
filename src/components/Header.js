@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Flex, Button, Heading } from "rimble-ui";
-import NetworkOverview from "../utilities/components/NetworkOverview";
+import NetworkIndicator from "@rimble/network-indicator"
 import AccountOverview from "../utilities/components/AccountOverview";
 
 class Header extends React.Component {
@@ -9,7 +9,7 @@ class Header extends React.Component {
       <Box>
         <Flex alignItems={"center"} justifyContent="flex-end" bg={"white"}>
           <Box mr={4}>
-            <NetworkOverview network={this.props.network.current} />
+            <NetworkIndicator currentNetwork={this.props.network.current.id} requiredNetwork={this.props.network.required.id} />
           </Box>
 
           {this.props.account && this.props.accountValidated ? (
