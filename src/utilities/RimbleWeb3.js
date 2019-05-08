@@ -3,7 +3,6 @@ import Web3 from "web3"; // uses latest 1.x.x version
 import bowser from "bowser";
 
 import ConnectionModalUtil from "./ConnectionModalsUtil";
-import NetworkUtil from "./NetworkUtil";
 import TransactionUtil from "./TransactionUtil";
 
 const RimbleTransactionContext = React.createContext({
@@ -929,7 +928,6 @@ class RimbleTransaction extends React.Component {
           network={this.state.network}
           modals={this.state.modals}
         />
-        <NetworkUtil network={this.state.network} web3={this.state.web3} />
         <TransactionUtil transaction={this.state.transaction} />
       </div>
     );
