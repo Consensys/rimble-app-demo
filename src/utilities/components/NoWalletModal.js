@@ -6,9 +6,8 @@ import {
   Flex,
   Icon,
   Modal,
-  TextButton,
-  Link,
-  OutlineButton
+  Button,
+  Link
 } from "rimble-ui";
 
 class NoWalletModal extends React.Component {
@@ -16,7 +15,7 @@ class NoWalletModal extends React.Component {
     return (
       <Modal isOpen={this.props.isOpen}>
         <Card p={5} maxWidth={"600px"}>
-          <TextButton
+          <Button.Text
             icononly
             icon={"Close"}
             color={"moon-gray"}
@@ -44,7 +43,9 @@ class NoWalletModal extends React.Component {
               href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
               target="_blank"
             >
-              <OutlineButton size="small">Get MetaMask Extension</OutlineButton>
+              <Button.Outline size="small">
+                Get MetaMask Extension
+              </Button.Outline>
             </Link>
           </Flex>
         </Card>

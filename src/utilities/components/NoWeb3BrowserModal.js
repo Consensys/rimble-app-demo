@@ -6,9 +6,8 @@ import {
   Flex,
   Icon,
   Modal,
-  TextButton,
-  Link,
-  OutlineButton
+  Button,
+  Link
 } from "rimble-ui";
 
 class NoWeb3BrowserModal extends React.Component {
@@ -16,7 +15,7 @@ class NoWeb3BrowserModal extends React.Component {
     return (
       <Modal isOpen={this.props.isOpen}>
         <Card p={5} maxWidth={"600px"}>
-          <TextButton
+          <Button.Text
             icononly
             icon={"Close"}
             color={"moon-gray"}
@@ -41,7 +40,7 @@ class NoWeb3BrowserModal extends React.Component {
             </Text>
 
             <Link href="https://www.google.com/chrome/browser/" target="_blank">
-              <OutlineButton size="small">Download Chrome</OutlineButton>
+              <Button.Outline size="small">Download Chrome</Button.Outline>
             </Link>
           </Flex>
         </Card>

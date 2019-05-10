@@ -4,11 +4,11 @@ import {
   Heading,
   Text,
   Icon,
-  TextButton,
   Modal,
   Flex,
   Box,
-  ToastMessage
+  ToastMessage,
+  Button
 } from "rimble-ui";
 import NetworkOverview from "./NetworkOverview";
 import theme from "../../theme";
@@ -18,7 +18,7 @@ class ValidationPendingModal extends React.Component {
     return (
       <Modal isOpen={this.props.isOpen}>
         <Card p={5} maxWidth={"960px"}>
-          <TextButton
+          <Button.Text
             icononly
             icon={"Close"}
             color={"moon-gray"}

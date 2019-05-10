@@ -1,13 +1,13 @@
 {
   "name": "rimble-app-demo",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "dependencies": {
     "@rimble/connection-banner": "^1.0.0",
     "@rimble/network-indicator": "^1.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
-    "rimble-ui": "^0.7.1",
+    "rimble-ui": "^0.8.0",
     "styled-components": "^4.2.0",
     "web3": "^1.0.0-beta.46"
   },

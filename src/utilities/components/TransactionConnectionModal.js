@@ -4,7 +4,7 @@ import {
   Heading,
   Text,
   Icon,
-  TextButton,
+  Button,
   Modal,
   Flex,
   Box,
@@ -18,7 +18,7 @@ class TransactionConnectionModal extends React.Component {
     return (
       <Modal isOpen={this.props.isOpen}>
         <Card p={5} maxWidth={"960px"}>
-          <TextButton
+          <Button.Text
             icononly
             icon={"Close"}
             color={"moon-gray"}

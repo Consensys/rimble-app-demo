@@ -7,7 +7,7 @@ import {
   ToastMessage,
   Icon,
   Modal,
-  TextButton
+  Button
 } from "rimble-ui";
 
 class WrongNetworkModal extends React.Component {
@@ -15,7 +15,7 @@ class WrongNetworkModal extends React.Component {
     return (
       <Modal isOpen={this.props.isOpen}>
         <Card p={5} maxWidth={"600px"}>
-          <TextButton
+          <Button.Text
             icononly
             icon={"Close"}
             color={"moon-gray"}

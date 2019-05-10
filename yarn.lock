@@ -852,7 +852,7 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.1", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.2":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.3.1", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.2", "@babel/runtime@^7.4.4":
   version "7.4.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.4.4.tgz#dc2e34982eb236803aa27a07fea6857af1b9171d"
   integrity sha512-w0+uT71b6Yi7i5SE0co4NioIpSYS6lLiXvCzWzGSKvpK5vdQtCbICHMj+gbAKAOtxiV6HsVh/MBdaF9EQ6faSg==
@@ -7931,12 +7931,12 @@ pnp-webpack-plugin@1.2.1:
   dependencies:
     ts-pnp "^1.0.0"
 
-polished@^2.3.3:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/polished/-/polished-2.3.3.tgz#bdbaba962ba8271b0e11aa287f2befd4c87be99a"
-  integrity sha512-59V4fDbdxtH4I1m9TWxFsoGJbC8nnOpUYo5uFmvMfKp9Qh+6suo4VMUle1TGIIUZIGxfkW+Rs485zPk0wcwR2Q==
+polished@^3.2.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/polished/-/polished-3.3.0.tgz#59158368b29466e19f16f5ed38007397fb66f51d"
+  integrity sha512-R04iFBAViTVQ5vMZqhwCZPcG3Av4WyUP2kxTfsr+yNoO60CXai9u7YMlExZZh56/DRoCamXKbusaTbTsBX0vtw==
   dependencies:
-    "@babel/runtime" "^7.2.0"
+    "@babel/runtime" "^7.4.4"
 
 popper.js@^1.14.3:
   version "1.15.0"
@@ -9433,15 +9433,15 @@ rgba-regex@^1.0.0:
   resolved "https://registry.yarnpkg.com/rgba-regex/-/rgba-regex-1.0.0.tgz#43374e2e2ca0968b0ef1523460b7d730ff22eeb3"
   integrity sha1-QzdOLiyglosO8VI0YLfXMP8i7rM=
 
-rimble-ui@^0.7.1:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/rimble-ui/-/rimble-ui-0.7.1.tgz#5d602a4b8cb46b15afb3e9d666295701641036e6"
-  integrity sha512-vgQzvN/jIK2IRtnagJhUyFIdJDu979kho0JWi6JLgzIdx10FCd9sROF891nZheFhiz3BteX4kjBlKtENbKJgHA==
+rimble-ui@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/rimble-ui/-/rimble-ui-0.8.0.tgz#1ee103317568f0f99ec4c962556a27c36ba40560"
+  integrity sha512-B+ZU/4PK15lX15Hj+KRJhMboaSAlvprUKlDz0kyc6kttYwrUYxuMxNjNfPuDHpev4QOydjk0P8fXS0KckKpCbw==
   dependencies:
     "@d8660091/react-popper" "^1.0.4"
     "@svgr/rollup" "^4.2.0"
     ethereum-blockies "^0.1.1"
-    polished "^2.3.3"
+    polished "^3.2.0"
     qrcode.react "^0.9.3"
     rmdi "^1.0.1"
     styled-system "^4.1.0"

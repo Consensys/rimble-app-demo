@@ -6,7 +6,6 @@ import {
   Icon,
   Flex,
   ToastMessage,
-  OutlineButton,
   Box,
   Button,
   Link
@@ -131,7 +130,7 @@ class Web3Debugger extends React.Component {
                 href="https://www.google.com/chrome/browser/"
                 target="_blank"
               >
-                <OutlineButton size="small">Download Chrome</OutlineButton>
+                <Button.Outline size="small">Download Chrome</Button.Outline>
               </Link>
             </Flex>
           ) : null}
@@ -158,9 +157,9 @@ class Web3Debugger extends React.Component {
                 href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
                 target="_blank"
               >
-                <OutlineButton size="small">
+                <Button.Outline size="small">
                   Get MetaMask Extension
-                </OutlineButton>
+                </Button.Outline>
               </Link>
             </Flex>
           ) : null}
@@ -229,9 +228,9 @@ class Web3Debugger extends React.Component {
                 </Box>
               </Flex>
 
-              <OutlineButton size="small" onClick={this.props.checkNetwork}>
+              <Button.Outline size="small" onClick={this.props.checkNetwork}>
                 Check Network
-              </OutlineButton>
+              </Button.Outline>
             </Flex>
           ) : null}
           {this.props.web3 && this.props.isCorrectNetwork ? (
@@ -260,9 +259,9 @@ class Web3Debugger extends React.Component {
                 <Text color="#999">Not connected to this dApp.</Text>
               </Flex>
 
-              <OutlineButton size="small" onClick={this.props.initAccount}>
+              <Button.Outline size="small" onClick={this.props.initAccount}>
                 Connect
-              </OutlineButton>
+              </Button.Outline>
             </Flex>
           ) : null}
           {this.props.account && this.props.web3 ? (
@@ -284,9 +283,9 @@ class Web3Debugger extends React.Component {
                 <Text color="red">User rejected Connect request</Text>
               </Flex>
 
-              <OutlineButton size="small" onClick={this.props.initAccount}>
+              <Button.Outline size="small" onClick={this.props.initAccount}>
                 Connect
-              </OutlineButton>
+              </Button.Outline>
             </Flex>
           ) : null}
 
@@ -304,9 +303,9 @@ class Web3Debugger extends React.Component {
                 <Text color="#999">Account not verified</Text>
               </Flex>
 
-              <OutlineButton size="small" onClick={this.props.validateAccount}>
+              <Button.Outline size="small" onClick={this.props.validateAccount}>
                 Validate
-              </OutlineButton>
+              </Button.Outline>
             </Flex>
           ) : null}
 
@@ -322,9 +321,9 @@ class Web3Debugger extends React.Component {
                 <Text color="red">Account not verified</Text>
               </Flex>
 
-              <OutlineButton size="small" onClick={this.props.validateAccount}>
+              <Button.Outline size="small" onClick={this.props.validateAccount}>
                 Validate
-              </OutlineButton>
+              </Button.Outline>
             </Flex>
           ) : null}
 

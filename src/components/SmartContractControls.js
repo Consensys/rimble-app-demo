@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Box, Text, Button, OutlineButton } from "rimble-ui";
+import { Flex, Box, Text, Button } from "rimble-ui";
 
 // Address of the deployed smart contract (from etherscan)
 const contractAddress = "0x0f69f0ac4b92bf0d101b5747eed3fa6b653a36f8";
@@ -141,13 +141,13 @@ class SmartContractControls extends React.Component {
             Smart contract value
           </Text>
 
-          <OutlineButton
+          <Button.Outline
             size={"small"}
             onClick={this.resetCounter}
             disabled={!this.props.account}
           >
             Reset
-          </OutlineButton>
+          </Button.Outline>
         </Flex>
 
         <Box py={4}>
