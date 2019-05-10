@@ -4,11 +4,9 @@ import {
   Heading,
   Text,
   Icon,
-  TextButton,
   Modal,
   Flex,
   Box,
-  OutlineButton,
   Button,
   PublicAddress,
   QR
@@ -54,12 +52,12 @@ class LowFundsModal extends React.Component {
         </Box>
 
         <Box mb={4}>
-          <OutlineButton onClick={this.toggleQRVisible}>
+          <Button.Outline onClick={this.toggleQRVisible}>
             <Flex alignItems={"center"}>
               <Icon name="FilterCenterFocus" mr={2} />
               Show account QR code
             </Flex>
-          </OutlineButton>
+          </Button.Outline>
         </Box>
         <Flex justifyContent={"flex-end"}>
           <Box>
@@ -76,7 +74,7 @@ class LowFundsModal extends React.Component {
     return (
       <Modal isOpen={this.props.isOpen}>
         <Card p={5} maxWidth={"960px"}>
-          <TextButton
+          <Button.Text
             icononly
             icon={"Close"}
             color={"moon-gray"}
@@ -132,9 +130,9 @@ class LowFundsModal extends React.Component {
                 </Flex>
 
                 <Text>{this.props.account}</Text>
-                <OutlineButton onClick={this.toggleQRVisible}>
+                <Button.Outline onClick={this.toggleQRVisible}>
                   Close QR
-                </OutlineButton>
+                </Button.Outline>
               </Box>
             )}
           </Flex>

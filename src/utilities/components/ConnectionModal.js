@@ -4,11 +4,11 @@ import {
   Heading,
   Text,
   Icon,
-  TextButton,
   Modal,
   Flex,
   Image,
   Box,
+  Button,
   MetaMaskButton
 } from "rimble-ui";
 import NetworkOverview from "./NetworkOverview";
@@ -19,7 +19,7 @@ class ConnectionModal extends React.Component {
     return (
       <Modal isOpen={this.props.isOpen}>
         <Card p={5} maxWidth={"960px"}>
-          <TextButton
+          <Button.Text
             icononly
             icon={"Close"}
             color={"moon-gray"}

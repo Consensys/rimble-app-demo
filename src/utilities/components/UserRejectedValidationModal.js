@@ -1,15 +1,5 @@
 import React from "react";
-import {
-  Card,
-  Heading,
-  Text,
-  Flex,
-  OutlineButton,
-  Button,
-  Icon,
-  Modal,
-  TextButton
-} from "rimble-ui";
+import { Card, Heading, Text, Flex, Button, Icon, Modal } from "rimble-ui";
 
 class UserRejectedValidationModal extends React.Component {
   sendMessageAgain = event => {
@@ -21,7 +11,7 @@ class UserRejectedValidationModal extends React.Component {
     return (
       <Modal isOpen={this.props.isOpen}>
         <Card p={5} maxWidth={"600px"}>
-          <TextButton
+          <Button.Text
             icononly
             icon={"Close"}
             color={"moon-gray"}
@@ -48,9 +38,9 @@ class UserRejectedValidationModal extends React.Component {
             </Text>
 
             <Flex justifyContent={"flex-end"} mt={4}>
-              <OutlineButton onClick={this.props.closeModal} mr={4}>
+              <Button.Outline onClick={this.props.closeModal} mr={4}>
                 Browse as guest
-              </OutlineButton>
+              </Button.Outline>
               <Button onClick={this.sendMessageAgain}>
                 Send message again
               </Button>
