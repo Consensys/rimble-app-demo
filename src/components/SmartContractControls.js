@@ -99,7 +99,9 @@ class SmartContractControls extends React.Component {
   };
 
   incrementCounter = () => {
+    // TODO: Remove contract wrapper calls
     this.props.contractMethodSendWrapper("incrementCounter");
+
     this.setState({
       needsUpdate: true
     });
