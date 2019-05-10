@@ -302,9 +302,9 @@ class RimbleTransaction extends React.Component {
 
           // Reject the validation
           this.rejectValidation(error);
-          
+
           if (this.state.callback) {
-            this.state.callback('error');
+            this.state.callback("error");
           }
         } else {
           const successMessage =
@@ -320,7 +320,7 @@ class RimbleTransaction extends React.Component {
           });
 
           if (this.state.callback) {
-            this.state.callback('success');
+            this.state.callback("success");
           }
         }
       }
@@ -335,7 +335,7 @@ class RimbleTransaction extends React.Component {
     this.setState({ modals });
   };
 
-  connectAndValidateAccount = async (callback) => {
+  connectAndValidateAccount = async callback => {
     if (!this.web3ActionPreflight()) {
       return;
     }
@@ -437,8 +437,8 @@ class RimbleTransaction extends React.Component {
       ) {
         return;
       }
-      window.ethereum.enable().then(wallets => {
-        const updatedAccount = wallets[0];
+      if (window.ethereum.isConnected()) {
+        const updatedAccount = window.web3.eth.accounts[0];
 
         if (updatedAccount !== account) {
           requiresUpdate = true;
@@ -460,7 +460,7 @@ class RimbleTransaction extends React.Component {
             }
           );
         }
-      });
+      }
     }, 1000);
   };
 
@@ -479,7 +479,7 @@ class RimbleTransaction extends React.Component {
 
     // Is a wallet connected and verified?
     if (!this.state.account || !this.state.accountValidated) {
-      this.openTransactionConnectionModal(null, () => { 
+      this.openTransactionConnectionModal(null, () => {
         console.log("Successfully connected, continuing with Tx");
         this.contractMethodSendWrapper(contractMethod);
       });
@@ -488,7 +488,9 @@ class RimbleTransaction extends React.Component {
 
     // Are there a minimum amount of funds?
     if (this.state.accountBalanceLow) {
-      this.openLowFundsModal(null, () => { alert('tx low funds')});
+      this.openLowFundsModal(null, () => {
+        alert("tx low funds");
+      });
       return;
     }
 
@@ -504,7 +506,7 @@ class RimbleTransaction extends React.Component {
     transaction.type = "contract";
     transaction.status = "started";
 
-    console.log("transaction: ", {...transaction});
+    console.log("transaction: ", { ...transaction });
 
     // Show toast for starting transaction
     this.updateTransaction(transaction);
@@ -595,7 +597,7 @@ class RimbleTransaction extends React.Component {
 
   addTransaction = transaction => {
     const transactions = { ...this.state.transactions };
-    console.log("addTransaction: ", {...transaction})
+    console.log("addTransaction: ", { ...transaction });
     transactions[`tx${transaction.created}`] = transaction;
     this.setState({ transactions });
   };

@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Flex, Button, Heading } from "rimble-ui";
-import NetworkIndicator from "@rimble/network-indicator"
+import NetworkIndicator from "@rimble/network-indicator";
 import AccountOverview from "../utilities/components/AccountOverview";
 
 class Header extends React.Component {
@@ -9,7 +9,10 @@ class Header extends React.Component {
       <Box>
         <Flex alignItems={"center"} justifyContent="flex-end" bg={"white"}>
           <Box mr={4}>
-            <NetworkIndicator currentNetwork={this.props.network.current.id} requiredNetwork={this.props.network.required.id} />
+            <NetworkIndicator
+              currentNetwork={this.props.network.current.id}
+              requiredNetwork={this.props.network.required.id}
+            />
           </Box>
 
           {this.props.account && this.props.accountValidated ? (
@@ -21,13 +24,17 @@ class Header extends React.Component {
           ) : (
             <Button
               m={3}
-              onClick={() => this.props.connectAndValidateAccount((result) => {
-                if (result === 'success') {
-                  alert('Success!');
-                } else if (result === 'error') {
-                  alert('Error :-(');
-                }
-              })}
+              onClick={() =>
+                this.props.connectAndValidateAccount(result => {
+                  if (result === "success") {
+                    // success
+                    console.log("Callback SUCCESS");
+                  } else if (result === "error") {
+                    // error
+                    console.log("Callback ERROR");
+                  }
+                })
+              }
               size="small"
             >
               Connect
