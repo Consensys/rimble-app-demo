@@ -21,7 +21,13 @@ class Header extends React.Component {
           ) : (
             <Button
               m={3}
-              onClick={this.props.connectAndValidateAccount}
+              onClick={() => this.props.connectAndValidateAccount((result) => {
+                if (result === 'success') {
+                  alert('Success!');
+                } else if (result === 'error') {
+                  alert('Error :-(');
+                }
+              })}
               size="small"
             >
               Connect

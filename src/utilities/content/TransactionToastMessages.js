@@ -1,4 +1,12 @@
 const TransactionToastMessages = {
+    initialized: {
+      message: "Change submitted",
+      secondaryMessage: "Confirm in MetaMask",
+      actionHref: "",
+      actionText: "",
+      variant: "default",
+      icon: "InfoOutline"
+    },
     started: {
       message: "Change submitted",
       secondaryMessage: "Confirm in MetaMask",

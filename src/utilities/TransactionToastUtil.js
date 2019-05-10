@@ -89,6 +89,7 @@ class TransactionToastUtil extends React.Component {
   };
 
   showTransactionToast = transaction => {
+    console.log("showTransactionToast: ", { ...transaction })
     // Get text info for toast
     let toastMeta = this.getTransactionToastMeta(transaction);
 
@@ -100,7 +101,12 @@ class TransactionToastUtil extends React.Component {
     let transactionToastMeta = {};
     let status = transaction.status;
 
+    console.log("getTransactionToastMeta: ", {...transaction});
+
     switch (status) {
+      case "initialized":
+        transactionToastMeta = TransactionToastMessages.initialized;
+        break;
       case "started":
         transactionToastMeta = TransactionToastMessages.started;
         break;
