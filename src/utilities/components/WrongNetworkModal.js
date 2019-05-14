@@ -15,8 +15,7 @@ import GeneralUtil from "../GeneralUtil";
 class WrongNetworkModal extends React.Component {
   render() {
     return (
-      // <Modal isOpen={this.props.isOpen}>
-      <Modal isOpen={true}>
+      <Modal isOpen={this.props.isOpen}>
         <Card p={[4, 5]} maxWidth={"600px"}>
           <Flex justifyContent={"flex-end"}>
             <Button.Text
