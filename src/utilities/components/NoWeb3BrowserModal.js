@@ -14,21 +14,18 @@ class NoWeb3BrowserModal extends React.Component {
   render() {
     return (
       <Modal isOpen={this.props.isOpen}>
-        <Card p={5} maxWidth={"600px"}>
-          <Button.Text
-            icononly
-            icon={"Close"}
-            color={"moon-gray"}
-            position={"absolute"}
-            top={0}
-            right={0}
-            mt={3}
-            mr={3}
-            onClick={this.props.closeModal}
-          />
+        <Card p={[3, 5]} maxWidth={"600px"}>
+          <Flex justifyContent={"flex-end"} mr={[-3, -5]} mt={[-3, -5]}>
+            <Button.Text
+              icononly
+              icon={"Close"}
+              color={"moon-gray"}
+              onClick={this.props.closeModal}
+            />
+          </Flex>
 
           <Flex flexDirection={"column"} justifyContent={"space-between"}>
-            <Flex justifyContent={"center"} my={4}>
+            <Flex justifyContent={"center"} my={[3, 4]}>
               <Icon name="Warning" color="gold" size="40" />
             </Flex>
 
@@ -39,9 +36,14 @@ class NoWeb3BrowserModal extends React.Component {
               Try using Chrome.
             </Text>
 
-            <Link href="https://www.google.com/chrome/browser/" target="_blank">
-              <Button.Outline size="small">Download Chrome</Button.Outline>
-            </Link>
+            <Button.Outline
+              size="small"
+              as="a"
+              href="https://www.google.com/chrome/browser/"
+              target="_blank"
+            >
+              Download Chrome
+            </Button.Outline>
           </Flex>
         </Card>
       </Modal>
