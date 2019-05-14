@@ -1,15 +1,15 @@
 {
   "name": "rimble-app-demo",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "dependencies": {
-    "@rimble/connection-banner": "^1.0.0",
-    "@rimble/network-indicator": "^1.0.0",
+    "@rimble/connection-banner": "^1.1.2",
+    "@rimble/network-indicator": "^1.1.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
     "rimble-ui": "^0.8.0",
     "styled-components": "^4.2.0",
-    "web3": "^1.0.0-beta.46"
+    "web3": "^1.0.0-beta.55"
   },
   "devDependencies": {
     "enzyme": "^3.9.0",
