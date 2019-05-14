@@ -1121,26 +1121,26 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@rimble/connection-banner@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@rimble/connection-banner/-/connection-banner-1.1.2.tgz#81685f48e6192f8f75eb8860880ab5a02a308bea"
-  integrity sha512-InUoyTk5LHN1Whi4syUbso6nz8g8mCysI1Wlmq5XCJc4uqKjNmOWzCs79rhTPyBT2WmWAi9H4pyy6h9SyeQfgA==
+"@rimble/connection-banner@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@rimble/connection-banner/-/connection-banner-1.1.3.tgz#4b97bebb27c63bd3a5c5f4cc43f0957755ce3aa9"
+  integrity sha512-eL9m9tU3Ty03GSvcrTAlLt1j+hKDBN+ypRy8YXQ/hjayue0M58UAunA3PjkwCqeg/YNConcVSzTZLjAvtHc7Jg==
   dependencies:
-    "@rimble/utils" "^1.1.1"
+    "@rimble/utils" "^1.1.3"
     rimble-ui "^0.8.0"
 
-"@rimble/network-indicator@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@rimble/network-indicator/-/network-indicator-1.1.2.tgz#60ca95cdf4feefa0b4ebd98530a20ff0f32335ce"
-  integrity sha512-ged1osI20jsN6NIVGTcOFLQmVHLvsSHx59asQdWfS3WiWLWYwsc7md/kdKmZ6SYazVvvutqNs2fTwJSeWaD0Yw==
+"@rimble/network-indicator@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@rimble/network-indicator/-/network-indicator-1.1.3.tgz#fd073277fc1d537f7fd862269ed2e18ae485934d"
+  integrity sha512-8wrjfgYlcVgaz1kElprbQarpUWiAL9/IOuzo9A9A7tbCtpVMBIfTEVxKX4EI62OVpQ7NBroCn9LjnCcgXm7w9A==
   dependencies:
-    "@rimble/utils" "^1.1.1"
+    "@rimble/utils" "^1.1.3"
     rimble-ui "^0.8.0"
 
-"@rimble/utils@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@rimble/utils/-/utils-1.1.1.tgz#d6ca5219b6505d4c2c6b9acbba2b56790e5e7323"
-  integrity sha512-4i3QQhThOCicg/Xa/c2lQ8uTifqRO5Ii9/GuoDKJUUM0M9bUZHGkbHNrUEwCuC396CL0oZnXRTC5MnrVt6Uyzg==
+"@rimble/utils@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@rimble/utils/-/utils-1.1.3.tgz#19f30f814f9c40e9b3bff2bcbc03e085443924d7"
+  integrity sha512-0LQqSPd6iq5GM/v9FBQuGIKMURcTAJGXBdm7eU0p1hiazGGwCqytrd/DoctRJMhzmFwsn3KyGC3tYL+cCyVaNA==
   dependencies:
     bowser "^2.2.0"
     rimble-ui "^0.8.0"
