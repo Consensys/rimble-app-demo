@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Box,
   Card,
   Heading,
   Text,
@@ -9,6 +10,8 @@ import {
   Button,
   Link
 } from "rimble-ui";
+import GeneralUtil from "../GeneralUtil";
+import RimbleUtil from "@rimble/utils";
 
 class NoWeb3BrowserModal extends React.Component {
   render() {
@@ -29,21 +32,114 @@ class NoWeb3BrowserModal extends React.Component {
               <Icon name="Warning" color="gold" size="40" />
             </Flex>
 
-            <Heading.h2 my={3}>Not a Web3 Browser</Heading.h2>
-
-            <Text my={4}>
-              Your current browser does not support interacting with blockchain.
-              Try using Chrome.
-            </Text>
-
-            <Button.Outline
-              size="small"
-              as="a"
-              href="https://www.google.com/chrome/browser/"
-              target="_blank"
+            <Heading.h2
+              fontSize={4}
+              fontWeight={3}
+              lineHeight={"1.375em"}
+              my={3}
             >
-              Download Chrome
-            </Button.Outline>
+              Switch browsers to use the Rimble App Demo
+            </Heading.h2>
+
+            {RimbleUtil.isMobileDevice() ? (
+              <Text my={4}>
+                Your current browser doesn’t support our blockchain features,
+                like Increasing the count value – sorry about that. We recommend
+                using{" "}
+                <Link
+                  href="https://status.im/"
+                  title="status.im website"
+                  target="_blank"
+                >
+                  Status
+                </Link>
+                ,{" "}
+                <Link
+                  href="https://www.cipherbrowser.com/"
+                  title="Cipher Wallet"
+                  target="_blank"
+                >
+                  Cipher
+                </Link>{" "}
+                or{" "}
+                <Link
+                  href="https://wallet.coinbase.com/"
+                  title="Coinbase Wallet"
+                  target="_blank"
+                >
+                  Coinbase wallet
+                </Link>{" "}
+                browsers.
+              </Text>
+            ) : (
+              <Box>
+                <Text my={4}>
+                  Your current browser doesn’t support our blockchain features,
+                  like increasing the count value – sorry about that. Switch to{" "}
+                  <Link
+                    href="https://brave.com/download/"
+                    title="Download Brave browser"
+                    target="_blank"
+                  >
+                    Brave
+                  </Link>
+                  ,{" "}
+                  <Link
+                    href="https://www.mozilla.org/"
+                    title="Download FireFox browser"
+                    target="_blank"
+                  >
+                    FireFox
+                  </Link>
+                  ,{" "}
+                  <Link
+                    href="https://www.opera.com/download"
+                    title="Download Opera Browser"
+                    target="_blank"
+                  >
+                    Opera
+                  </Link>
+                  , or{" "}
+                  <Link
+                    href="https://www.google.com/chrome/"
+                    title="Download Chrome browser"
+                    target="_blank"
+                  >
+                    Chrome
+                  </Link>{" "}
+                  to continue.
+                </Text>
+
+                <Text>
+                  <Text.span bold>Rather use your phone?</Text.span> You can use
+                  the Rimble App Demo in mobile browser wallets like{" "}
+                  <Link
+                    href="https://status.im/"
+                    title="status.im website"
+                    target="_blank"
+                  >
+                    Status
+                  </Link>
+                  ,{" "}
+                  <Link
+                    href="https://www.cipherbrowser.com/"
+                    title="Cipher Wallet"
+                    target="_blank"
+                  >
+                    Cipher
+                  </Link>{" "}
+                  or{" "}
+                  <Link
+                    href="https://wallet.coinbase.com/"
+                    title="Coinbase Wallet"
+                    target="_blank"
+                  >
+                    Coinbase wallet
+                  </Link>
+                  .
+                </Text>
+              </Box>
+            )}
           </Flex>
         </Card>
       </Modal>
