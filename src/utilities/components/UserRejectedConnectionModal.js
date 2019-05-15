@@ -33,16 +33,16 @@ class UserRejectedConnectionModal extends React.Component {
             </Heading.h2>
 
             <Text my={4}>
-              To use Bounties Explorer, you need to confirm the connection
-              request. You can still browse as a guest.
+              To use our blockchain features you need to confirm the connection
+              request.
             </Text>
 
             <Flex justifyContent={"flex-end"} mt={4}>
               <Button.Outline onClick={this.props.closeModal} mr={4}>
-                Browse as guest
+                Cancel connection
               </Button.Outline>
               <Button onClick={this.sendMessageAgain}>
-                Send message again
+                Try again
               </Button>
             </Flex>
           </Flex>
