@@ -8,6 +8,22 @@ const GeneralUtil = {
     }
 
     return hasMetaMask;
+  },
+  // Current device is Android
+  isAndroid: () => {
+    const isAndroid = /android/i.test(navigator.userAgent) ? true : false;
+
+    return isAndroid;
+  },
+
+  // Current device is iOS
+  isIos() {
+    const isIos =
+      /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+        ? true
+        : false;
+
+    return isIos;
   }
 };
 
