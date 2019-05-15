@@ -32,15 +32,10 @@ class WrongNetworkModal extends React.Component {
               <Icon name="Warning" color="gold" size="40" />
             </Flex>
 
-            <Heading.h2 my={3}>Wrong Network</Heading.h2>
+            <Heading.h2 my={3}>Switch to the {this.props.network.required.name} network in MetaMask</Heading.h2>
 
             <Text my={4}>
-              Looks like your account is connected to the{" "}
-              <Text.span style={{ textTransform: "capitalize" }}>
-                {this.props.network.current.name}
-              </Text.span>{" "}
-              network. Head to MetaMask and switch to the{" "}
-              {this.props.network.required.name} network.
+            The Rimble Demo App only works on the {this.props.network.required.name} network. Switch networks in your MetaMask extension to continue. You’re currently on the {this.props.network.current.name} network.
             </Text>
 
             <ToastMessage
