@@ -1,6 +1,6 @@
 import React from "react";
 import Web3 from "web3"; // uses latest 1.x.x version
-import bowser from "bowser";
+import RimbleUtils from "@rimble/utils";
 
 import ConnectionModalUtil from "./ConnectionModalsUtil";
 import TransactionUtil from "./TransactionUtil";
@@ -118,22 +118,9 @@ class RimbleTransaction extends React.Component {
 
   // Validates user's browser is web3 capable
   checkModernBrowser = async () => {
-    // User Agent
-    const browser = bowser.getParser(window.navigator.userAgent);
-    const userAgent = browser.parse().parsedResult;
-
-    const validBrowser = browser.satisfies({
-      desktop: {
-        chrome: ">49",
-        firefox: ">52",
-        opera: ">36"
-      }
-    })
-      ? true
-      : false;
+    const validBrowser = RimbleUtils.browserIsWeb3Capable();
 
     this.setState({
-      userAgent,
       validBrowser
     });
 
