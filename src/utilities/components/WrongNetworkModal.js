@@ -36,14 +36,12 @@ class WrongNetworkModal extends React.Component {
 
           <Flex flexDirection={"column"} justifyContent={"space-between"}>
             <Heading.h2 my={3}>
-              Switch to the Main network in{" "}
+              Switch to the {this.props.network.required.name} network in{" "}
               {GeneralUtil.hasMetaMask() ? `MetaMask` : `Settings`}
             </Heading.h2>
 
             <Text my={4}>
-              dApp only works on the {this.props.network.required.name} network.
-              Switch networks in your MetaMask extension to continue. You’re
-              currently on the{" "}
+              The Rimble Demo App only works on the {this.props.network.required.name} network. You’re currently on the{" "}
               <Text.span style={{ textTransform: "capitalize" }}>
                 {" "}
                 {this.props.network.current.name}
