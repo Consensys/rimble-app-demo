@@ -37,7 +37,7 @@ class ValidationPendingModal extends React.Component {
             </Heading.h2>
 
             <Text my={4}>
-              To connect securely, sign the message that's just appeared. This shows us you have access to this account. If nothing's appeared, open your MetaMask extension.
+              Sign the message that's just appeared and we'll connect you. This shows us you have access to this account. If you can't see a message, open your MetaMask extension.
             </Text>
 
               <Box bg={"#f6f6fc"} p={3} display={["none", "block"]}>
