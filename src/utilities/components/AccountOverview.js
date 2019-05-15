@@ -18,7 +18,7 @@ class AccountOverview extends React.Component {
     return (
       <Flex alignItems={"flex-start"} flexDirection={"column"} my={2} mx={4}>
         <Text fontSize={2}>
-          Connected to <ShortHash hash={this.props.account} />
+          <ShortHash hash={this.props.account} /> connected
         </Text>
         <Text
           fontSize={1}
