@@ -7,48 +7,51 @@ import {
   Icon,
   Modal,
   Button,
-  Link
+  Link,
+  MetaMaskButton
 } from "rimble-ui";
 
 class NoWalletModal extends React.Component {
   render() {
     return (
       <Modal isOpen={this.props.isOpen}>
-        <Card p={5} maxWidth={"600px"}>
-          <Button.Text
-            icononly
-            icon={"Close"}
-            color={"moon-gray"}
-            position={"absolute"}
-            top={0}
-            right={0}
-            mt={3}
-            mr={3}
-            onClick={this.props.closeModal}
-          />
+        <Card p={[3, 5]} maxWidth={"600px"}>
+          <Flex justifyContent={"flex-end"} mr={[-3, -5]} mt={[-3, -5]}>
+            <Button.Text
+              icononly
+              icon={"Close"}
+              color={"moon-gray"}
+              onClick={this.props.closeModal}
+            />
+          </Flex>
 
           <Flex flexDirection={"column"} justifyContent={"space-between"}>
             <Flex justifyContent={"center"} my={4}>
               <Icon name="Warning" color="gold" size="40" />
             </Flex>
 
-            <Heading.h2 my={3}>Install MetaMask to use the Rimble App Demo</Heading.h2>
+            <Heading.h2 my={3}>
+              Install MetaMask to use the Rimble App Demo
+            </Heading.h2>
 
             <Text my={4}>
-              MetaMask is a browser extension that will let you use our blockchain features in this browser. It may take you a few minutes to set up your MetaMask account.
+              MetaMask is a browser extension that will let you use our
+              blockchain features in this browser. It may take you a few minutes
+              to set up your MetaMask account.
             </Text>
 
-            <Link
-              href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
+            <MetaMaskButton
+              as={"a"}
+              href="https://metamask.io"
               target="_blank"
+              title="MetaMask website"
             >
-              <Button.Outline size="small">
-                Get MetaMask Extension
-              </Button.Outline>
-            </Link>
-            <Text mt={'4'}>
-              <Text.span bold>Rather use your phone?</Text.span> You can use
-              the Rimble App Demo in mobile browser wallets like{" "}
+              Install MetaMask
+            </MetaMaskButton>
+
+            <Text mt={"4"}>
+              <Text.span bold>Rather use your phone?</Text.span> You can use the
+              Rimble App Demo in mobile browser wallets like{" "}
               <Link
                 href="https://status.im/"
                 title="status.im website"
