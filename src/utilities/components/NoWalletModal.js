@@ -13,19 +13,19 @@ import {
 class NoWalletModal extends React.Component {
   render() {
     return (
-      <Modal isOpen={this.props.isOpen}>
-        <Card p={5} maxWidth={"600px"}>
-          <Button.Text
-            icononly
-            icon={"Close"}
-            color={"moon-gray"}
-            position={"absolute"}
-            top={0}
-            right={0}
-            mt={3}
-            mr={3}
-            onClick={this.props.closeModal}
-          />
+      // <Modal isOpen={this.props.isOpen}>
+      <Modal isOpen={true}>
+        <Card p={[3, 5]} maxWidth={"600px"}>
+          <Flex justifyContent={"flex-end"}>
+            <Button.Text
+              icononly
+              icon={"Close"}
+              color={"moon-gray"}
+              mt={[-3, -5]}
+              mr={[-3, -5]}
+              onClick={this.props.closeModal}
+            />
+          </Flex>
 
           <Flex flexDirection={"column"} justifyContent={"space-between"}>
             <Flex justifyContent={"center"} my={4}>
@@ -40,8 +40,9 @@ class NoWalletModal extends React.Component {
             </Text>
 
             <Link
-              href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
+              href="https://metamask.io"
               target="_blank"
+              title="MetaMask website"
             >
               <Button.Outline size="small">
                 Get MetaMask Extension
