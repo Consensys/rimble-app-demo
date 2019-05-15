@@ -4,6 +4,7 @@
   "dependencies": {
     "@rimble/connection-banner": "^1.1.3",
     "@rimble/network-indicator": "^1.1.3",
+    "@rimble/utils": "*",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
