@@ -40,5 +40,5 @@
   "resolutions": {
     "styled-components": "4.2.0"
   },
-  "homepage": "https://consensys.github.io/rimble-app-demo"
+  "homepage": "."
 }
