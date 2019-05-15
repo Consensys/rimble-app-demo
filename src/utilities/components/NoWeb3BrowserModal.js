@@ -43,8 +43,7 @@ class NoWeb3BrowserModal extends React.Component {
 
             {RimbleUtil.isMobileDevice() ? (
               <Text my={4}>
-                Your current browser doesn’t support our blockchain features,
-                like Increasing the count value – sorry about that. We recommend
+                You can't use our blockchain features, like increasing the count value, in this browser. We recommend
                 using{" "}
                 <Link
                   href="https://status.im/"
@@ -74,8 +73,7 @@ class NoWeb3BrowserModal extends React.Component {
             ) : (
               <Box>
                 <Text my={4}>
-                  Your current browser doesn’t support our blockchain features,
-                  like increasing the count value – sorry about that. Switch to{" "}
+                  You can't use our blockchain features, like increasing the count value, in this browser. Switch to{" "}
                   <Link
                     href="https://brave.com/download/"
                     title="Download Brave browser"
