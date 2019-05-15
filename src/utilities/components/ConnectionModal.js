@@ -9,7 +9,8 @@ import {
   Image,
   Box,
   Button,
-  MetaMaskButton
+  MetaMaskButton,
+  Link,
 } from "rimble-ui";
 import NetworkOverview from "./NetworkOverview";
 import theme from "../../theme";
@@ -31,86 +32,56 @@ class ConnectionModal extends React.Component {
             onClick={this.props.closeModal}
           />
 
-          <Flex justifyContent={"center"} alignContent={"stretch"}>
-            <Box width={"400px"} flex={"1 1 auto"}>
-              <Flex flexDirection={"column"} alignContent={"center"}>
-                <Box>
-                  <Text color={theme.colors.primary} caps>
-                    Current Network
-                  </Text>
-                  <NetworkOverview network={this.props.currentNetwork} />
-                </Box>
 
-                <Box my={4}>
-                  <Text color={theme.colors.primary} caps>
-                    New to Bounties Explorer?
-                  </Text>
-                  <Text fontWeight={3} mt={3} mb={2}>
-                    What is connecting?
-                  </Text>
-                  <Text>Connecting lets you use Bounties</Text>
-                  <Text>
-                    Explore through your Ethereum account (the long cod that
-                    starts with 0x).
-                  </Text>
-                </Box>
-
-                <Text fontWeight={3}>You need to be connected to:</Text>
-                <ul>
-                  <li>Post bounties</li>
-                  <li>Discuss bounties</li>
-                  <li>Fulfill bounties</li>
-                </ul>
-              </Flex>
-            </Box>
-
-            <Flex borderRight={1} borderColor={"#999"} mx={3}>
-              <Text />
-            </Flex>
-
-            <Flex
-              flexDirection={"column"}
-              justifyContent={"space-between"}
-              p={3}
-              flexShrink={"1"}
-            >
-              <Flex justifyContent={"center"} my={4}>
-                <Icon name="Link" color="#666" size="40" />
-              </Flex>
-
-              <Heading.h2>How would you like to connect?</Heading.h2>
-
-              <Text my={3}>
-                Make sure you've set up MetaMask or your mobile wallet before
-                you continue.
+          <Box mb={3}>
+            <Heading.h2>
+              Before you connect
+            </Heading.h2>
+            <Text my={3}>
+              Connecting lets you use the Rimble Demo App via your Ethereum account.
+            </Text>
+          </Box>
+          <Flex my={4}>
+            <Box flex={"1 1 auto"} width={1/3} mx={2}>
+              <Icon color="primary" size="60" name="Public" />
+              <Heading.h4>
+                The blockchain is public
+              </Heading.h4>
+              <Text>
+                Your Ethereum account activity is public on the blockchain. Choose an account you don’t mind being linked with your activity here.
               </Text>
-
-              <MetaMaskButton onClick={this.props.validateAccount}>
-                Connect with MetaMask
-              </MetaMaskButton>
-
-              <Flex mt={3} mx={4} alignItems="center">
-                <Box mr={3}>
-                  <Image
-                    src="images/phone.png"
-                    alt="mobile phone"
-                    width={"60px"}
-                    height={"92px"}
-                  />
-                </Box>
-
-                <Flex flexDirection={"column"}>
-                  <Text fontWeight={3} mb={2}>
-                    Connect with a mobile app
-                  </Text>
-                  <Text>
-                    You can connect from mobile browser wallets like Cipher,
-                    Status or Coinbase wallet.
-                  </Text>
-                </Flex>
-              </Flex>
-            </Flex>
+            </Box>
+            <Box flex={"1 1 auto"} width={1/3} mx={2}>
+              <Icon Align="Center" color="primary" size="60" name="AccountBalanceWallet" />
+              <Heading.h4>
+                Have some Ether for fees
+              </Heading.h4>
+              <Text>
+                You’ll need Ether to pay transaction fees. Buy Ether from exchanges like Coinbase.
+              </Text>
+              <Link>
+                What are transaction fees?
+              </Link>
+            </Box>
+            <Box flex={"1 1 auto"} width={1/3} mx={2}>
+              <Icon Align="Center" color="primary" size="60" name="People" />
+              <Heading.h4>
+                Have the right account ready
+              </Heading.h4>
+              <Text>
+                If you have multiple Ethereum accounts, check that the one you want to use is active in your browser.
+              </Text>
+            </Box>
           </Flex>
+          <Flex borderTop={1} borderColor={"#999"} />
+          <Box mt={3} textAlign="right">
+                <MetaMaskButton onClick={this.props.validateAccount}>
+                  Connect with MetaMask
+                </MetaMaskButton>
+          </Box>
+
+
+
         </Card>
       </Modal>
     );
