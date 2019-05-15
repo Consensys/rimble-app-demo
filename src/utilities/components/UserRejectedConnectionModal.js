@@ -10,18 +10,15 @@ class UserRejectedConnectionModal extends React.Component {
   render() {
     return (
       <Modal isOpen={this.props.isOpen}>
-        <Card p={5} maxWidth={"600px"}>
-          <Button.Text
-            icononly
-            icon={"Close"}
-            color={"moon-gray"}
-            position={"absolute"}
-            top={0}
-            right={0}
-            mt={3}
-            mr={3}
-            onClick={this.props.closeModal}
-          />
+        <Card p={[3, 5]} maxWidth={"600px"}>
+          <Flex justifyContent={"flex-end"} mr={[-3, -5]} mt={[-3, -5]}>
+            <Button.Text
+              icononly
+              icon={"Close"}
+              color={"moon-gray"}
+              onClick={this.props.closeModal}
+            />
+          </Flex>
 
           <Flex flexDirection={"column"} justifyContent={"space-between"}>
             <Flex justifyContent={"center"} my={4}>
@@ -41,9 +38,7 @@ class UserRejectedConnectionModal extends React.Component {
               <Button.Outline onClick={this.props.closeModal} mr={4}>
                 Cancel connection
               </Button.Outline>
-              <Button onClick={this.sendMessageAgain}>
-                Try again
-              </Button>
+              <Button onClick={this.sendMessageAgain}>Try again</Button>
             </Flex>
           </Flex>
         </Card>

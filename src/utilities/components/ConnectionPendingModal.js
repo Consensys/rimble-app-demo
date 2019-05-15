@@ -34,7 +34,7 @@ class ConnectionPendingModal extends React.Component {
               request, open your{" "}
               {GeneralUtil.hasMetaMask()
                 ? `MetaMask extension`
-                : `dApp browser settings`}{" "}
+                : `dApp browser settings`}
               .
             </Text>
 
