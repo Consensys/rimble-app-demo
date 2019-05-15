@@ -15,8 +15,7 @@ import {
 class ConnectionModal extends React.Component {
   render() {
     return (
-      // <Modal isOpen={this.props.isOpen}>
-      <Modal isOpen={true}>
+      <Modal isOpen={this.props.isOpen}>
         <Card p={[3, 5]} maxWidth={"600px"} style={{ overflow: "scroll" }}>
           <Flex justifyContent={"flex-end"} mr={[-3, -5]} mt={[-3, -5]}>
             <Button.Text
