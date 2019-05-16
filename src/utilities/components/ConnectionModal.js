@@ -57,7 +57,7 @@ class ConnectionModal extends React.Component {
                 style={{ overflow: "auto" }}
                 maxHeight={"calc(100vh - 113px)"}
               >
-                <Box py={[3, 5]} px={[2, 0]}>
+                <Box py={[3, 0]} px={[2, 0]}>
                   <Box mb={3}>
                     <Heading.h2>Before you connect</Heading.h2>
                     <Text my={3}>
@@ -150,7 +150,7 @@ class ConnectionModal extends React.Component {
                 style={{ overflow: "auto" }}
                 maxHeight={"calc(100vh - 113px)"}
               >
-                <Box py={[3, 5]} px={[2, 0]}>
+                <Box py={[3, 0]} px={[2, 0]}>
                   <Heading.h2>Transaction fees</Heading.h2>
                   <Text my={3}>
                     You need to pay a fee to use the Ethereum blockchain. This
