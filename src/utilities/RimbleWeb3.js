@@ -295,7 +295,7 @@ class RimbleTransaction extends React.Component {
           }
         } else {
           const successMessage =
-            ""+ this.shortenHash(this.state.account) + " connected";
+             "Connected!";
           console.log(successMessage, signature);
           window.toastProvider.addMessage(successMessage, {
             variant: "success",
