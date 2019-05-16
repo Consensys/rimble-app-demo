@@ -113,6 +113,13 @@ class RimbleTransaction extends React.Component {
       return false;
     }
 
+    // Is it on the correct network?
+    if (!this.state.network.isCorrectNetwork) {
+      // wrong network modal
+      this.state.modals.methods.openWrongNetworkModal();
+      return false;
+    }
+
     return true;
   };
 
@@ -456,13 +463,6 @@ class RimbleTransaction extends React.Component {
   contractMethodSendWrapper = contractMethod => {
     // Is it web3 capable?
     if (!this.web3ActionPreflight()) {
-      return;
-    }
-
-    // Is it on the correct network?
-    if (!this.state.network.isCorrectNetwork) {
-      // wrong network modal
-      this.state.modals.methods.openWrongNetworkModal();
       return;
     }
 
