@@ -9,7 +9,8 @@ import {
   Box,
   Button,
   PublicAddress,
-  QR
+  QR,
+  Link
 } from "rimble-ui";
 import NetworkOverview from "./NetworkOverview";
 import theme from "../../theme";
@@ -28,36 +29,61 @@ class LowFundsModal extends React.Component {
   RightColumn = () => {
     return (
       <Flex flexDirection={"column"} p={3}>
-        <Flex justifyContent={"center"} my={4}>
-          <Icon name="Warning" color="gold" size="40" />
-        </Flex>
 
-        <Heading.h2>Low Funds</Heading.h2>
+
+        <Heading.h2>
+          You don't have enough Ether for transaction fees
+        </Heading.h2>
 
         <Text mb={4}>
-          To use Bounties Explorer's block chain features, you'll need to own
-          Ether. Deposit Ether into your account via your MetaMask extension or
-          send Funds from another account.
+          This is a blockchain action so you’ll have to pay a transaction fee. A few dollars worth of Ether should be enough but fees do change based on how busy the network is. <strong>Fund your account and try again.</strong>
+          <Link>
+            What are transaction fees?
+          </Link>
         </Text>
+        <Heading.h3>
+          How to add funds
+        </Heading.h3>
+        <Flex my={3}>
+          <Box mx={2} width={1/2}>
+            <Card>
+              <Icon name="SwapHoriz" color="primary" size="60"/>
+              <Heading.h4>
+                Buy ETH from an exchange
+              </Heading.h4>
+              <Text>
+                You can buy ETH from exchanges like Coinbase and send it to your account. If you don’t already have a Coinbase account, it can take a while to get set up.
+              </Text>
+              <Button.Outline my={3}>
+                <Flex alignItems={"center"}>
+                  <Icon name="OpenInNew" mr={2} />
+                  Go to CoinBase
+                </Flex>
+              </Button.Outline>
+            </Card>
+          </Box>
+          <Box mx={2} width={1/2}>
+            <Card>
+              <Icon name="Send" color="primary" size="60"/>
+              <Heading.h4>
+                Send ETH from another account
+              </Heading.h4>
+              <Text>
+                If you have ETH in another Ethereum account, you can send it to this account using your public Ethereum address or QR code.
+              </Text>
+              <Button.Outline my={3} onClick={this.toggleQRVisible}>
+                <Flex alignItems={"center"}>
+                  <Icon name="FilterCenterFocus" mr={2} />
+                  Show account QR code
+                </Flex>
+              </Button.Outline>
+            </Card>
+          </Box>
+        </Flex>
 
-        <PublicAddress address={this.props.account} />
-
-        <Box my={3}>
-          <Text.span bold fontWeight={3} mr={3}>
-            Got another account on a mobile wallet?
-          </Text.span>
-          <Text.span>
-            Send funds by scanning your QR code with your wallet app.
-          </Text.span>
-        </Box>
 
         <Box mb={4}>
-          <Button.Outline onClick={this.toggleQRVisible}>
-            <Flex alignItems={"center"}>
-              <Icon name="FilterCenterFocus" mr={2} />
-              Show account QR code
-            </Flex>
-          </Button.Outline>
+
         </Box>
         <Flex justifyContent={"flex-end"}>
           <Box>
@@ -87,51 +113,20 @@ class LowFundsModal extends React.Component {
           />
 
           <Flex justifyContent={"center"} alignContent={"stretch"}>
-            <Box width={"400px"} flex={"1 1 auto"}>
-              <Flex flexDirection={"column"} alignContent={"center"}>
-                <Box>
-                  <Text color={theme.colors.primary} caps>
-                    Current Network
-                  </Text>
-                  <NetworkOverview network={this.props.currentNetwork} />
-                </Box>
 
-                <Box my={4}>
-                  <Text color={theme.colors.primary} caps>
-                    New to Ether?
-                  </Text>
-                </Box>
 
-                <Text fontWeight={3}>What you'll need Ether for:</Text>
-                <ul>
-                  <li>Submitting a bounty</li>
-                  <li>Paying for a completed bounty</li>
-                  <li>Network fees</li>
-                </ul>
 
-                <Text fontWeight={3}>What are network fees?</Text>
-                <Text>
-                  Network fees pay for a person or group to add a record of your
-                  action to the blockchain and let the network know. It doesn't
-                  go to us.
-                </Text>
-              </Flex>
-            </Box>
-
-            <Flex borderRight={1} borderColor={"#999"} mx={3}>
-              <Text />
-            </Flex>
             {!this.state.showQR ? (
               this.RightColumn()
             ) : (
               <Box>
-                <Flex justifyContent={"center"}>
+                <Flex my={3} justifyContent={"center"}>
                   <QR value={this.props.account} />
                 </Flex>
 
-                <Text>{this.props.account}</Text>
-                <Button.Outline onClick={this.toggleQRVisible}>
-                  Close QR
+                <PublicAddress my={3} address={this.props.account} />
+                <Button.Outline my={3} onClick={this.toggleQRVisible}>
+                  Go back
                 </Button.Outline>
               </Box>
             )}
