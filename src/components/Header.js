@@ -42,7 +42,7 @@ class Header extends React.Component {
           )}
         </Flex>
         <Box bg="primary" p={3} justifyContent="center" flexDirection="column">
-          <Box width="400px" mx="auto">
+          <Box maxWidth="400px" mx="auto">
             <Heading.h2 color={"white"}>Rimble App Demo</Heading.h2>
           </Box>
         </Box>

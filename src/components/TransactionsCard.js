@@ -1,10 +1,10 @@
 import React from "react";
-import { Card, Heading, Box, Flex, Text, Pill } from "rimble-ui";
+import { Card, Heading, Box, Flex, Text } from "rimble-ui";
 
 class TransactionsCard extends React.Component {
   render() {
     return (
-      <Card width={"400px"} mx={"auto"} px={4}>
+      <Card maxWidth={"400px"} mx={"auto"} px={4}>
         <Heading.h2 fontSize={3} textAlign={"center"} px={4} mb={5}>
           Transactions
         </Heading.h2>
@@ -24,7 +24,10 @@ class TransactionsCard extends React.Component {
           ) : null}
 
           {Object.keys(this.props.transactions).length < 1 ? (
-            <Text textAlign={"center"}>No transactions yet. Increase or decrease the smart contract value to start a transaction.</Text>
+            <Text textAlign={"center"}>
+              No transactions yet. Increase or decrease the smart contract value
+              to start a transaction.
+            </Text>
           ) : (
             Object.keys(this.props.transactions).map((keyName, keyIndex) => {
               let txHash = "";

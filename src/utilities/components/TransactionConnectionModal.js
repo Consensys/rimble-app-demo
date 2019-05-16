@@ -31,7 +31,7 @@ class TransactionConnectionModal extends React.Component {
           />
 
           <Flex justifyContent={"center"} alignContent={"stretch"}>
-            <Box width={"400px"} flex={"1 1 auto"}>
+            <Box maxWidth={"400px"} flex={"1 1 auto"}>
               <Flex flexDirection={"column"} alignContent={"center"}>
                 <Box>
                   <Text color={theme.colors.primary} caps>

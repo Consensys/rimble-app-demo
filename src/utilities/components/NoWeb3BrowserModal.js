@@ -10,7 +10,7 @@ import {
   Button,
   Link
 } from "rimble-ui";
-import GeneralUtil from "../GeneralUtil";
+
 import RimbleUtil from "@rimble/utils";
 
 class NoWeb3BrowserModal extends React.Component {
@@ -43,8 +43,8 @@ class NoWeb3BrowserModal extends React.Component {
 
             {RimbleUtil.isMobileDevice() ? (
               <Text my={4}>
-                You can't use our blockchain features, like increasing the count value, in this browser. We recommend
-                using{" "}
+                You can't use our blockchain features, like increasing the count
+                value, in this browser. We recommend using{" "}
                 <Link
                   href="https://status.im/"
                   title="status.im website"
@@ -73,7 +73,8 @@ class NoWeb3BrowserModal extends React.Component {
             ) : (
               <Box>
                 <Text my={4}>
-                  You can't use our blockchain features, like increasing the count value, in this browser. Switch to{" "}
+                  You can't use our blockchain features, like increasing the
+                  count value, in this browser. Switch to{" "}
                   <Link
                     href="https://brave.com/download/"
                     title="Download Brave browser"
