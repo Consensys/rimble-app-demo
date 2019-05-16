@@ -104,7 +104,7 @@ const DebuggerButtons = props => (
 class Web3Debugger extends React.Component {
   render() {
     return (
-      <Card width={"600px"} mx={"auto"} px={4}>
+      <Card maxWidth={"600px"} mx={"auto"} px={4}>
         <Heading.h3 textAlign={"center"}>Get Connected</Heading.h3>
 
         <Box>

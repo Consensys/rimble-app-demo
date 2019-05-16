@@ -4,7 +4,7 @@ import { Card, Heading, Box, Flex, Text } from "rimble-ui";
 class TransactionsCard extends React.Component {
   render() {
     return (
-      <Card width={"400px"} mx={"auto"} px={4}>
+      <Card maxWidth={"400px"} mx={"auto"} px={4}>
         <Heading.h2 fontSize={3} textAlign={"center"} px={4} mb={5}>
           Transactions
         </Heading.h2>

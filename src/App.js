@@ -86,7 +86,7 @@ class App extends Component {
                   network={network}
                 />
 
-                <Flex m={3} justifyContent={'center'}>
+                <Flex m={3} justifyContent={"center"}>
                   <ConnectionBanner
                     currentNetwork={network.current.id}
                     requiredNetwork={this.config.requiredNetwork}
@@ -94,8 +94,8 @@ class App extends Component {
                   />
                 </Flex>
 
-                <Flex justifyContent="center" p={4}>
-                  <Text width="400px">
+                <Flex justifyContent="center" p={3}>
+                  <Text maxWidth="400px">
                     This is a starter React dApp that uses the Rimble UI
                     component library to call methods on a smart contract
                     deployed to the Ethereum Rinkeby testnet.
