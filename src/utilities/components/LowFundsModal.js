@@ -12,8 +12,6 @@ import {
   QR,
   Link
 } from "rimble-ui";
-import NetworkOverview from "./NetworkOverview";
-import theme from "../../theme";
 
 class LowFundsModal extends React.Component {
   state = {
@@ -29,30 +27,27 @@ class LowFundsModal extends React.Component {
   RightColumn = () => {
     return (
       <Flex flexDirection={"column"} p={3}>
-
-
         <Heading.h2>
           You don't have enough Ether for transaction fees
         </Heading.h2>
 
         <Text mb={4}>
-          This is a blockchain action so you’ll have to pay a transaction fee. A few dollars worth of Ether should be enough but fees do change based on how busy the network is. <strong>Fund your account and try again.</strong>
-          <Link>
-            What are transaction fees?
-          </Link>
+          This is a blockchain action so you’ll have to pay a transaction fee. A
+          few dollars worth of Ether should be enough but fees do change based
+          on how busy the network is.{" "}
+          <strong>Fund your account and try again.</strong>
+          <Link>What are transaction fees?</Link>
         </Text>
-        <Heading.h3>
-          How to add funds
-        </Heading.h3>
+        <Heading.h3>How to add funds</Heading.h3>
         <Flex my={3}>
-          <Box mx={2} width={1/2}>
+          <Box mx={2} width={1 / 2}>
             <Card>
-              <Icon name="SwapHoriz" color="primary" size="60"/>
-              <Heading.h4>
-                Buy ETH from an exchange
-              </Heading.h4>
+              <Icon name="SwapHoriz" color="primary" size="60" />
+              <Heading.h4>Buy ETH from an exchange</Heading.h4>
               <Text>
-                You can buy ETH from exchanges like Coinbase and send it to your account. If you don’t already have a Coinbase account, it can take a while to get set up.
+                You can buy ETH from exchanges like Coinbase and send it to your
+                account. If you don’t already have a Coinbase account, it can
+                take a while to get set up.
               </Text>
               <Button.Outline my={3}>
                 <Flex alignItems={"center"}>
@@ -62,14 +57,13 @@ class LowFundsModal extends React.Component {
               </Button.Outline>
             </Card>
           </Box>
-          <Box mx={2} width={1/2}>
+          <Box mx={2} width={1 / 2}>
             <Card>
-              <Icon name="Send" color="primary" size="60"/>
-              <Heading.h4>
-                Send ETH from another account
-              </Heading.h4>
+              <Icon name="Send" color="primary" size="60" />
+              <Heading.h4>Send ETH from another account</Heading.h4>
               <Text>
-                If you have ETH in another Ethereum account, you can send it to this account using your public Ethereum address or QR code.
+                If you have ETH in another Ethereum account, you can send it to
+                this account using your public Ethereum address or QR code.
               </Text>
               <Button.Outline my={3} onClick={this.toggleQRVisible}>
                 <Flex alignItems={"center"}>
@@ -81,10 +75,7 @@ class LowFundsModal extends React.Component {
           </Box>
         </Flex>
 
-
-        <Box mb={4}>
-
-        </Box>
+        <Box mb={4} />
         <Flex justifyContent={"flex-end"}>
           <Box>
             <Button onClick={this.props.closeModal}>
@@ -113,9 +104,6 @@ class LowFundsModal extends React.Component {
           />
 
           <Flex justifyContent={"center"} alignContent={"stretch"}>
-
-
-
             {!this.state.showQR ? (
               this.RightColumn()
             ) : (
