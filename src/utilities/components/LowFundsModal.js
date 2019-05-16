@@ -12,25 +12,36 @@ import {
   QR,
   Link
 } from "rimble-ui";
+import TransactionFeeModal from "./TransactionFeeModal";
 
 class LowFundsModal extends React.Component {
   state = {
-    showSecondary: false
+    showSecondary: false,
+    showTxFees: false
   };
 
-  toggleSecondary = () => {
+  toggleQRVisible = () => {
     this.setState({
       showSecondary: !this.state.showSecondary
     });
   };
 
+  toggleShowTxFees = e => {
+    console.log("showTxFees", this.state.showTxFees);
+    e.preventDefault();
+
+    this.setState({
+      showTxFees: !this.state.showTxFees
+    });
+  };
+
   render() {
     return (
-      // <Modal isOpen={this.props.isOpen}>
-      <Modal isOpen={true}>
+      <Modal isOpen={this.props.isOpen}>
         <Card
           px={[0, 5]}
           pt={[4, 5]}
+          pb={["68px", "68px"]}
           maxWidth={"960px"}
           overflow={"hidden"}
           position={"relative"}
@@ -56,14 +67,15 @@ class LowFundsModal extends React.Component {
             </Flex>
           </Box>
 
-          {this.state.showSecondary === false ? (
+          {this.state.showSecondary === false &&
+          this.state.showTxFees === false ? (
             <Box>
               <Box
                 style={{ overflow: "auto" }}
                 maxHeight={"calc(100vh - 148px)"}
               >
                 {/* Start primary content */}
-                <Box p={[3, 0]} mb={[5, 0]} pb={[3, 5]}>
+                <Box p={[3, 0]} mb={[5, 0]} pb={[0, 3]}>
                   <Heading.h2>
                     You don't have enough Ether for transaction fees
                   </Heading.h2>
@@ -72,8 +84,15 @@ class LowFundsModal extends React.Component {
                     This is a blockchain action so you’ll have to pay a
                     transaction fee. A few dollars worth of Ether should be
                     enough but fees do change based on how busy the network is.{" "}
-                    <strong>Fund your account and try again.</strong>
-                    <Link>What are transaction fees?</Link>
+                    <strong>Fund your account and try again.</strong>{" "}
+                    <Link
+                      title="Learn about Ethereum transaction fees"
+                      as={"a"}
+                      href="#"
+                      onClick={this.toggleShowTxFees}
+                    >
+                      What are transaction fees?
+                    </Link>
                   </Text>
 
                   <Heading.h3>How to add funds</Heading.h3>
@@ -176,16 +195,22 @@ class LowFundsModal extends React.Component {
                 {/* End primary footer */}
               </Box>
             </Box>
-          ) : (
+          ) : null}
+
+          {this.state.showSecondary ? (
             <Box mb={3}>
               {/* Start secondary content */}
               <Box
                 style={{ overflow: "auto" }}
                 maxHeight={"calc(100vh - 148px)"}
+                px={[3, 0]}
+                pb={[4, 0]}
               >
                 <Box>
                   <Flex my={3} justifyContent={"center"}>
                     <QR
+                      width={"100%"}
+                      size={"260"}
                       value={
                         this.props.account ? this.props.account : "1234512345"
                       }
@@ -208,14 +233,14 @@ class LowFundsModal extends React.Component {
                 {/* Start secondary footer */}
                 <Flex
                   mt={3}
+                  py={3}
                   justifyContent={["center", "flex-end"]}
-                  pt={3}
                   borderTop={1}
                   borderColor={"#999"}
                 >
                   <Button.Outline
                     width={[1, "auto"]}
-                    onClick={this.toggleSecondary}
+                    onClick={this.toggleQRVisible}
                   >
                     Go back
                   </Button.Outline>
@@ -223,7 +248,44 @@ class LowFundsModal extends React.Component {
                 {/* End secondary footer */}
               </Box>
             </Box>
-          )}
+          ) : null}
+
+          {this.state.showTxFees ? (
+            <Box>
+              <Box
+                style={{ overflow: "auto" }}
+                maxHeight={"calc(100vh - 148px)"}
+              >
+                <Box p={[3, 0]} mb={[5, 0]} pb={[3, 5]}>
+                  {/* Start tx fee content */}
+                  <TransactionFeeModal />
+                  {/* End tx fee content */}
+                </Box>
+              </Box>
+              <Box
+                position={"absolute"}
+                bottom={"0"}
+                left={"0"}
+                right={"0"}
+                px={[3, 5]}
+                bg={"white"}
+              >
+                {/* Start primary footer */}
+                <Flex
+                  mt={3}
+                  py={3}
+                  justifyContent={["center", "flex-end"]}
+                  borderTop={1}
+                  borderColor={"#999"}
+                >
+                  <Button.Outline onClick={this.toggleShowTxFees}>
+                    Go Back
+                  </Button.Outline>
+                </Flex>
+                {/* End primary footer */}
+              </Box>
+            </Box>
+          ) : null}
         </Card>
       </Modal>
     );
