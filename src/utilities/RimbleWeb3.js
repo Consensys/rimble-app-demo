@@ -200,27 +200,45 @@ class RimbleTransaction extends React.Component {
   initAccount = async () => {
     this.openConnectionPendingModal();
 
-    try {
-      // Request account access if needed
-      await window.ethereum.enable().then(wallets => {
-        const account = wallets[0];
+    // First try EIP 1102 Connect method
+    if (window.ethereum) {
+      try {
+        // Request account access if needed
+        await window.ethereum.enable().then(wallets => {
+          const account = wallets[0];
+          this.closeConnectionPendingModal();
+          this.setState({ account });
+
+          console.log("wallet address:", this.state.account);
+
+          // After account is complete, get the balance
+          this.getAccountBalance();
+
+          // Watch for account change
+          this.pollAccountUpdates();
+        });
+      } catch (error) {
+        // User denied account access...
+        console.log("User cancelled connect request. Error:", error);
+
+        // Reject Connect
+        this.rejectAccountConnect(error);
+      }
+    } else {
+      // Revert back to directly getting wallet address
+      try {
+        const account = window.web3.eth.accounts[0];
         this.closeConnectionPendingModal();
         this.setState({ account });
 
-        console.log("wallet address:", this.state.account);
+        console.log("fallback wallet address:", this.state.account);
+      } catch (error) {
+        console.log("Could not get account address. Error: ", error);
 
-        // After account is complete, get the balance
-        this.getAccountBalance();
-
-        // Watch for account change
-        this.pollAccountUpdates();
-      });
-    } catch (error) {
-      // User denied account access...
-      console.log("User cancelled connect request. Error:", error);
-
-      // Reject Connect
-      this.rejectAccountConnect(error);
+        // Reject Connect
+        // TODO: This needs a new modal
+        this.rejectAccountConnect(error);
+      }
     }
   };
 
@@ -237,15 +255,20 @@ class RimbleTransaction extends React.Component {
       await this.state.web3.eth
         .getBalance(this.state.account)
         .then(accountBalance => {
-          accountBalance = this.state.web3.utils.fromWei(
-            accountBalance,
-            "ether"
-          );
-          accountBalance = parseFloat(accountBalance);
-          this.setState({ accountBalance });
-          console.log("account balance: ", accountBalance);
+          if (!isNaN(accountBalance)) {
+            accountBalance = this.state.web3.utils.fromWei(
+              accountBalance,
+              "ether"
+            );
+            accountBalance = parseFloat(accountBalance);
+            this.setState({ accountBalance });
+            console.log("account balance: ", accountBalance);
 
-          this.determineAccountLowBalance();
+            this.determineAccountLowBalance();
+          } else {
+            this.setState({ accountBalance: "--" });
+            console.log("account balance FAILED", accountBalance);
+          }
         });
     } catch (error) {
       console.log("Failed to get account balance.");
