@@ -11,7 +11,7 @@ import {
   MetaMaskButton,
   Link
 } from "rimble-ui";
-
+import GeneralUtil from "../GeneralUtil";
 class ConnectionModal extends React.Component {
   state = {
     showTxFees: false
@@ -101,9 +101,15 @@ class ConnectionModal extends React.Component {
               </Flex>
               <Flex borderTop={1} borderColor={"#999"} />
               <Box mt={3} textAlign="right">
-                <MetaMaskButton onClick={this.props.validateAccount}>
-                  Connect with MetaMask
-                </MetaMaskButton>
+
+                  {GeneralUtil.hasMetaMask() ? <MetaMaskButton onClick={this.props.validateAccount}>
+                    Connect with MetaMask
+                  </MetaMaskButton> : <Button onClick={this.props.validateAccount}>
+                    Connect
+                  </Button>}
+
+
+
               </Box>
             </Box>
           ) : (
