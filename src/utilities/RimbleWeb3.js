@@ -1,6 +1,6 @@
 import React from "react";
 import Web3 from "web3"; // uses latest 1.x.x version
-import bowser from "bowser";
+import RimbleUtils from "@rimble/utils";
 
 import ConnectionModalUtil from "./ConnectionModalsUtil";
 import TransactionUtil from "./TransactionUtil";
@@ -113,27 +113,21 @@ class RimbleTransaction extends React.Component {
       return false;
     }
 
+    // Is it on the correct network?
+    if (!this.state.network.isCorrectNetwork) {
+      // wrong network modal
+      this.state.modals.methods.openWrongNetworkModal();
+      return false;
+    }
+
     return true;
   };
 
   // Validates user's browser is web3 capable
   checkModernBrowser = async () => {
-    // User Agent
-    const browser = bowser.getParser(window.navigator.userAgent);
-    const userAgent = browser.parse().parsedResult;
-
-    const validBrowser = browser.satisfies({
-      desktop: {
-        chrome: ">49",
-        firefox: ">52",
-        opera: ">36"
-      }
-    })
-      ? true
-      : false;
+    const validBrowser = RimbleUtils.browserIsWeb3Capable();
 
     this.setState({
-      userAgent,
       validBrowser
     });
 
@@ -292,7 +286,9 @@ class RimbleTransaction extends React.Component {
     console.log("Requesting web3 personal sign");
     return window.web3.personal.sign(
       window.web3.fromUtf8(
-        `Hi there from Rimble! To connect, sign this message to prove you have access to this account. This won’t cost you any Ether. To stop hackers pretending to be you, here’s a unique message ID they won't be able to guess: 012345`
+        `Hi there from Rimble! To connect, sign this message to prove you have access to this account. This won’t cost you any Ether.
+ 
+        Message ID: 48d4f84f-f402-4268-8af4-a692fabff5da (this is for security, you don’t need to remember this)`
       ),
       this.state.account,
       (error, signature) => {
@@ -308,10 +304,11 @@ class RimbleTransaction extends React.Component {
           }
         } else {
           const successMessage =
-            "Wallet " + this.shortenHash(this.state.account) + " connected";
+             "Connected!";
           console.log(successMessage, signature);
           window.toastProvider.addMessage(successMessage, {
-            variant: "success"
+            variant: "success",
+            secondaryMessage: 'Welcome to the Rimble Demo App 🎉',
           });
 
           this.closeValidationPendingModal();
@@ -467,13 +464,6 @@ class RimbleTransaction extends React.Component {
   contractMethodSendWrapper = contractMethod => {
     // Is it web3 capable?
     if (!this.web3ActionPreflight()) {
-      return;
-    }
-
-    // Is it on the correct network?
-    if (!this.state.network.isCorrectNetwork) {
-      // wrong network modal
-      this.state.modals.methods.openWrongNetworkModal();
       return;
     }
 
