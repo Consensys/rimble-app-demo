@@ -279,7 +279,9 @@ class RimbleTransaction extends React.Component {
     console.log("Requesting web3 personal sign");
     return window.web3.personal.sign(
       window.web3.fromUtf8(
-        `Hi there from Rimble! To connect, sign this message to prove you have access to this account. This won’t cost you any Ether. To stop hackers pretending to be you, here’s a unique message ID they won't be able to guess: 012345`
+        `Hi there from Rimble! To connect, sign this message to prove you have access to this account. This won’t cost you any Ether.
+ 
+        Message ID: 48d4f84f-f402-4268-8af4-a692fabff5da (this is for security, you don’t need to remember this)`
       ),
       this.state.account,
       (error, signature) => {
