@@ -88,7 +88,7 @@ class LowFundsModal extends React.Component {
         <Flex justifyContent={"flex-end"}>
           <Box>
             <Button onClick={this.props.closeModal}>
-              Continue to Bounties Explorer
+              Back to Rimble App Demo
             </Button>
           </Box>
         </Flex>
