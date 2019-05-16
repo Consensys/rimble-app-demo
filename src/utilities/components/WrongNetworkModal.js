@@ -44,11 +44,7 @@ class WrongNetworkModal extends React.Component {
               <Text.span style={{ textTransform: "capitalize" }}>
                 {this.props.network.required.name}
               </Text.span>{" "}
-              network. Switch networks in your{" "}
-              {GeneralUtil.hasMetaMask()
-                ? `MetaMask extension`
-                : `dApp browser settings`}{" "}
-              to continue. You’re currently on the{" "}
+              network. You’re currently on the{" "}
               <Text.span style={{ textTransform: "capitalize" }}>
                 {" "}
                 {this.props.network.current.name}
