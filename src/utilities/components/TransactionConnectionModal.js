@@ -12,7 +12,7 @@ import {
   Link
 } from "rimble-ui";
 import GeneralUtil from "../GeneralUtil";
-class ConnectionModal extends React.Component {
+class TransactionConnectionModal extends React.Component {
   state = {
     showTxFees: false
   };
@@ -228,4 +228,4 @@ class ConnectionModal extends React.Component {
   }
 }
 
-export default ConnectionModal;
+export default TransactionConnectionModal;
