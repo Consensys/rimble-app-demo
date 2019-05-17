@@ -77,12 +77,12 @@ class LowFundsModal extends React.Component {
                 {/* Start primary content */}
                 <Box p={[3, 0]} mb={[5, 0]} pb={[0, 3]}>
                 <Flex>
-                  <Box>
-                    <Icon name="Warning" size="60" color="yellow" />
+                  <Box alignContent="center" alignSelf="center" py={3}>
+                    <Icon mr={3} name="Warning" size="60" color="gold" />
                   </Box>
-                  <Box>
+                  <Box alignContent="center" py={3}>
                     <Heading.h2>
-                      You don't have enough Ether for transaction fees
+                      Not enough Ether for transaction fees
                     </Heading.h2>
                   </Box>
                 </Flex>
