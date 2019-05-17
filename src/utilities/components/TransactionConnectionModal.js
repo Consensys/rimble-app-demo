@@ -78,7 +78,7 @@ class TransactionConnectionModal extends React.Component {
                       </Flex>
                       <Heading.h5>The blockchain is public</Heading.h5>
                       <Text fontSize="1">
-                        Your Ethereum account activity is public on the
+                        Your account activity is public on the
                         blockchain. Choose an account you don’t mind being
                         linked with your activity here.
                       </Text>
@@ -151,26 +151,27 @@ class TransactionConnectionModal extends React.Component {
               >
                 <Box py={[3, 0]} px={[2, 0]}>
                   <Heading.h2>Transaction fees</Heading.h2>
-                  <Text my={3}>
+                  <Text mt={3} mb={4}>
                     You need to pay a fee to use the Ethereum blockchain. This
                     pays for someone to process your transaction and store the
                     data.
                   </Text>
-                  <Heading.h4>What are you paying for?</Heading.h4>
+                  <Heading.h4 mt={4}>What are you paying for?</Heading.h4>
                   <Flex
                     flexWrap={"wrap"}
                     justifyContent={"space-between"}
                     mx={-2}
-                    my={3}
+                    mt={4}
+                    mb={4}
                   >
                     <Box width={[1, 1, 1 / 3]} px={2} my={3}>
                       <Flex justifyContent={"center"}>
                         <Icon color="primary" size="60" name="Fingerprint" />
                       </Flex>
-                      <Heading.h4>Undeniable proof</Heading.h4>
-                      <Text>
-                        You get a public record of any funds you send or
-                        receive, a bit like a deed for a house.
+                      <Heading.h5>Undeniable proof</Heading.h5>
+                      <Text fontSize="1">
+                        You get a public record of anything you send or
+                        receive, like a deed for a house.
                       </Text>
                     </Box>
                     <Box width={[1, 1, 1 / 3]} px={2} my={3}>
@@ -181,8 +182,8 @@ class TransactionConnectionModal extends React.Component {
                           name="EnhancedEncryption"
                         />
                       </Flex>
-                      <Heading.h4>Unbreakable encryption</Heading.h4>
-                      <Text>
+                      <Heading.h5>Unbreakable encryption</Heading.h5>
+                      <Text fontSize="1">
                         Your funds can only ever go to your intended recipients.
                       </Text>
                     </Box>
@@ -191,8 +192,8 @@ class TransactionConnectionModal extends React.Component {
                         <Icon color="primary" size="60" name="AccountBalance" />
                         <Icon color="primary" size="60" name="NotInterested" />
                       </Flex>
-                      <Heading.h4>Unparalleled control</Heading.h4>
-                      <Text>
+                      <Heading.h5>Unparalleled control</Heading.h5>
+                      <Text fontSize="1">
                         You can pay or get paid without using any banks or
                         companies.
                       </Text>
