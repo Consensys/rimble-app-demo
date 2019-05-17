@@ -271,10 +271,13 @@ class RimbleTransaction extends React.Component {
                 "ether"
               );
               accountBalance = parseFloat(accountBalance);
-              this.setState({ accountBalance });
-              console.log("account balance: ", accountBalance);
 
-              this.determineAccountLowBalance();
+              // Only update if changed
+              if (accountBalance !== this.state.accountBalance) {
+                this.setState({ accountBalance });
+                console.log("account balance: ", accountBalance);
+                this.determineAccountLowBalance();
+              }
             } else {
               this.setState({ accountBalance: "--" });
               console.log("account balance FAILED", accountBalance);
@@ -303,6 +306,18 @@ class RimbleTransaction extends React.Component {
     this.setState({
       accountBalanceLow
     });
+
+    if (
+      accountBalanceLow === false &&
+      this.state.modals.data.lowFundsModalIsOpen
+    ) {
+      this.closeLowFundsModal();
+
+      window.toastProvider.addMessage("Received Funds!", {
+        variant: "success",
+        secondaryMessage: "You now have enough ETH"
+      });
+    }
   };
 
   validateAccount = async () => {
@@ -477,6 +492,8 @@ class RimbleTransaction extends React.Component {
           requiresUpdate = true;
         }
 
+        this.getAccountBalance();
+
         if (requiresUpdate) {
           clearInterval(accountInterval);
           let modals = { ...this.state.modals };
@@ -486,7 +503,8 @@ class RimbleTransaction extends React.Component {
             {
               modals: modals,
               account: "",
-              accountValidated: null
+              accountValidated: null,
+              transactions: []
             },
             () => {
               this.initAccount();
