@@ -1,6 +1,7 @@
 import React from "react";
 import Web3 from "web3"; // uses latest 1.x.x version
 import RimbleUtils from "@rimble/utils";
+import GeneralUtil from "./GeneralUtil";
 
 import ConnectionModalUtil from "./ConnectionModalsUtil";
 import TransactionUtil from "./TransactionUtil";
@@ -466,8 +467,9 @@ class RimbleTransaction extends React.Component {
       if (window.ethereum.isConnected()) {
         const updatedAccount = window.web3.eth.accounts[0];
 
-        if (updatedAccount !== account) {
+        if (updatedAccount.toLowerCase() !== account.toLowerCase()) {
           requiresUpdate = true;
+          alert("Require updates: " + updatedAccount + ": " + account);
         }
 
         if (requiresUpdate) {
