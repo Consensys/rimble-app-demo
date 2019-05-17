@@ -13,8 +13,7 @@ class InstructionsCard extends React.Component {
             <Box>
               <Heading.h4>You're going to need Rinkeby ETH</Heading.h4>
               <Text mb={4}>
-                If you don't have any Rinkeby ETH, request some funds. You'll
-                need a Facebook or Twitter account to request funds.{" "}
+                If you don't have any, you can request some for free. All you need is a Facebook or Twitter account.{" "}
                 <Link
                   href="https://faucet.rinkeby.io/"
                   target="_blank"
