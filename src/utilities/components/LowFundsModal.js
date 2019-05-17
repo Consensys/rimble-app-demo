@@ -76,10 +76,16 @@ class LowFundsModal extends React.Component {
               >
                 {/* Start primary content */}
                 <Box p={[3, 0]} mb={[5, 0]} pb={[0, 3]}>
-                  <Heading.h2>
-                    You don't have enough Ether for transaction fees
-                  </Heading.h2>
-
+                <Flex>
+                  <Box>
+                    <Icon name="Warning" size="60" color="yellow" />
+                  </Box>
+                  <Box>
+                    <Heading.h2>
+                      You don't have enough Ether for transaction fees
+                    </Heading.h2>
+                  </Box>
+                </Flex>
                   <Text mb={4}>
                     This is a blockchain action so you’ll have to pay a
                     transaction fee. A few dollars worth of Ether should be
@@ -112,16 +118,10 @@ class LowFundsModal extends React.Component {
                           height={"100%"}
                         >
                           <Box>
-                            <Flex justifyContent={"center"}>
-                              <Icon
-                                name="SwapHoriz"
-                                color="primary"
-                                size="60"
-                              />
-                            </Flex>
 
-                            <Heading.h4>Buy ETH from an exchange</Heading.h4>
-                            <Text>
+
+                            <Heading.h5>Buy ETH from an exchange</Heading.h5>
+                            <Text fontSize="1">
                               You can buy ETH from exchanges like Coinbase and
                               send it to your account. If you don’t already have
                               a Coinbase account, it can take a while to get set
@@ -146,14 +146,12 @@ class LowFundsModal extends React.Component {
                           height={"100%"}
                         >
                           <Box>
-                            <Flex justifyContent={"center"}>
-                              <Icon name="Send" color="primary" size="60" />
-                            </Flex>
 
-                            <Heading.h4>
+
+                            <Heading.h5>
                               Send ETH from another account
-                            </Heading.h4>
-                            <Text>
+                            </Heading.h5>
+                            <Text fontSize="1">
                               If you have ETH in another Ethereum account, you
                               can send it to this account using your public
                               Ethereum address or QR code.
@@ -209,8 +207,7 @@ class LowFundsModal extends React.Component {
                 <Box>
                   <Flex my={3} justifyContent={"center"}>
                     <QR
-                      width={"100%"}
-                      size={"260"}
+                      size="130"
                       value={
                         this.props.account ? this.props.account : "1234512345"
                       }
