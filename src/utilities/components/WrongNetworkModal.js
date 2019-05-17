@@ -27,11 +27,11 @@ class WrongNetworkModal extends React.Component {
             />
           </Flex>
 
-          <Box display={["block", "none"]}>
+          <Flex flexDirection={"column"} justifyContent={"space-between"}>
             <Flex justifyContent={"center"} my={4}>
               <Icon name="Warning" color="gold" size="40" />
             </Flex>
-          </Box>
+          </Flex>
 
           <Flex flexDirection={"column"} justifyContent={"space-between"}>
             <Heading.h2 my={3}>

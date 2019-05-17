@@ -8,82 +8,54 @@ import {
   Modal,
   Flex,
   Box,
-  ToastMessage
+  Loader
 } from "rimble-ui";
-import NetworkOverview from "./NetworkOverview";
-import theme from "./../../theme";
+import GeneralUtil from "../GeneralUtil";
 
 class ConnectionPendingModal extends React.Component {
   render() {
     return (
       <Modal isOpen={this.props.isOpen}>
-        <Card p={5} maxWidth={"960px"}>
-          <Button.Text
-            icononly
-            icon={"Close"}
-            color={"moon-gray"}
-            position={"absolute"}
-            top={0}
-            right={0}
-            mt={3}
-            mr={3}
-            onClick={this.props.closeModal}
-          />
+        <Card p={[3, 5]} maxWidth={"600px"}>
+          <Flex justifyContent={"flex-end"} mr={[-3, -5]} mt={[-3, -5]}>
+            <Button.Text
+              icononly
+              icon={"Close"}
+              color={"moon-gray"}
+              onClick={this.props.closeModal}
+            />
+          </Flex>
 
-          <Flex justifyContent={"center"} alignContent={"stretch"}>
-            <Box maxWidth={"400px"} flex={"1 1 auto"}>
-              <Flex flexDirection={"column"} alignContent={"center"}>
+          <Flex flexDirection={"column"} justifyContent={"space-between"}>
+            <Heading.h2 my={3}>Connect Ethereum account</Heading.h2>
+
+            <Text my={4}>
+              Confirm the request that's just appeared. If you can't see a
+              request, open your{" "}
+              {GeneralUtil.hasMetaMask()
+                ? `MetaMask extension`
+                : `dApp browser settings`}
+              .
+            </Text>
+
+            <Box bg={"#f6f6fc"} p={3} display={["none", "block"]}>
+              <Flex alignItems={"center"}>
+                <Box position={"relative"} width={"4em"}>
+                  <Box>
+                    <Loader size={"3em"} />
+                  </Box>
+                  <Box position={"absolute"} top={"1em"} left={"1em"}>
+                    <Icon name="Settings" size={"1em"} />
+                  </Box>
+                </Box>
                 <Box>
-                  <Text color={theme.colors.primary} caps>
-                    Current Network
+                  <Text fontWeight={4}>
+                    Waiting for connection confirmation...
                   </Text>
-                  <NetworkOverview network={this.props.currentNetwork} />
+                  <Text fontWeight={2}>This won’t cost you any Ether</Text>
                 </Box>
-
-                <Box my={4}>
-                  <Text color={theme.colors.primary} caps>
-                    New to Bounties Explorer?
-                  </Text>
-                  <Text>
-                    It's possible to use your account's address to see all your
-                    blockchain activity. Only connect accounts you don't mind
-                    being linked to your Bounties Explorer profile.
-                  </Text>
-                </Box>
-
-                <Text fontWeight={3}>What does connection mean?</Text>
-                <ul>
-                  <li>Shares your Ethereum account address with us</li>
-                  <li>
-                    Allows us to start transactions on the blockchain (at your
-                    request)
-                  </li>
-                </ul>
               </Flex>
             </Box>
-
-            <Flex borderRight={1} borderColor={"#999"} mx={3}>
-              <Text />
-            </Flex>
-
-            <Flex flexDirection={"column"} p={3}>
-              <Flex justifyContent={"center"} my={4}>
-                <Icon name="Link" color="#666" size="40" />
-              </Flex>
-
-              <Heading.h2>Connect your account</Heading.h2>
-
-              <Text mb={4}>
-                A connection request should automatically appear. If not, open
-                it using the MetaMask extension icon in your browser.
-              </Text>
-
-              <ToastMessage
-                message={"Waiting for connection confirmation..."}
-                secondaryMessage={"This won't cost your any Ether"}
-                icon={"InfoOutline"}
-              />
-            </Flex>
           </Flex>
         </Card>
       </Modal>
