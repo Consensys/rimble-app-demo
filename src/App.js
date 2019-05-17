@@ -27,7 +27,7 @@ class App extends Component {
 
   // Optional parameters to pass into RimbleWeb3
   config = {
-    accountBalanceMinimum: 0.0001,
+    accountBalanceMinimum: 0.001,
     requiredNetwork: 4
   };
 

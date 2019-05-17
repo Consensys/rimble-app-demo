@@ -213,7 +213,7 @@ class RimbleTransaction extends React.Component {
           console.log("wallet address:", this.state.account);
 
           // After account is complete, get the balance
-          this.getAccountBalance();
+          this.getAccountBalance(account);
 
           // Watch for account change
           this.pollAccountUpdates();
@@ -235,7 +235,7 @@ class RimbleTransaction extends React.Component {
         console.log("fallback wallet address:", this.state.account);
 
         // After account is complete, get the balance
-        this.getAccountBalance();
+        this.getAccountBalance(account);
 
         // Watch for account change
         // TODO: This type of wallet browser probably doesn't inject window.ethereum
@@ -258,33 +258,39 @@ class RimbleTransaction extends React.Component {
     this.setState({ modals });
   };
 
-  getAccountBalance = async () => {
-    try {
-      await this.state.web3.eth
-        .getBalance(this.state.account)
-        .then(accountBalance => {
-          if (!isNaN(accountBalance)) {
-            accountBalance = this.state.web3.utils.fromWei(
-              accountBalance,
-              "ether"
-            );
-            accountBalance = parseFloat(accountBalance);
-            this.setState({ accountBalance });
-            console.log("account balance: ", accountBalance);
+  getAccountBalance = async account => {
+    const localAccount = account ? account : this.state.account;
+    if (localAccount) {
+      try {
+        await this.state.web3.eth
+          .getBalance(localAccount)
+          .then(accountBalance => {
+            if (!isNaN(accountBalance)) {
+              accountBalance = this.state.web3.utils.fromWei(
+                accountBalance,
+                "ether"
+              );
+              accountBalance = parseFloat(accountBalance);
+              this.setState({ accountBalance });
+              console.log("account balance: ", accountBalance);
 
-            this.determineAccountLowBalance();
-          } else {
-            this.setState({ accountBalance: "--" });
-            console.log("account balance FAILED", accountBalance);
-          }
-        });
-    } catch (error) {
-      console.log("Failed to get account balance.");
+              this.determineAccountLowBalance();
+            } else {
+              this.setState({ accountBalance: "--" });
+              console.log("account balance FAILED", accountBalance);
+            }
+          });
+      } catch (error) {
+        console.log("Failed to get account balance." + error);
+      }
+    } else {
+      console.log("No account on which to get balance");
+      return false;
     }
   };
 
   determineAccountLowBalance = () => {
-    // If provided a minimum from config then use it, else default to 1
+    // If provided a minimum from http://192.168.1.103:3000/ then use it, else default to 1
     const accountBalanceMinimum =
       typeof this.props.config !== "undefined" &&
       typeof this.props.config.accountBalanceMinimum !== "undefined"
@@ -469,7 +475,6 @@ class RimbleTransaction extends React.Component {
 
         if (updatedAccount.toLowerCase() !== account.toLowerCase()) {
           requiresUpdate = true;
-          alert("Require updates: " + updatedAccount + ": " + account);
         }
 
         if (requiresUpdate) {
@@ -509,9 +514,7 @@ class RimbleTransaction extends React.Component {
 
     // Are there a minimum amount of funds?
     if (this.state.accountBalanceLow) {
-      this.openLowFundsModal(null, () => {
-        alert("tx low funds");
-      });
+      this.openLowFundsModal(null, () => {});
       return;
     }
 
