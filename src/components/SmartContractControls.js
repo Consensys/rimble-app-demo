@@ -165,7 +165,7 @@ class SmartContractControls extends React.Component {
           flexWrap={"wrap"}
         >
           <Button
-            size={"small"}
+            size="medium"
             width={[1, "initial"]}
             onClick={this.decrementCounter}
             m={1}
@@ -173,7 +173,7 @@ class SmartContractControls extends React.Component {
             Decrease value
           </Button>
           <Button
-            size={"small"}
+            size="medium"
             width={[1, "initial"]}
             onClick={this.incrementCounter}
             m={1}

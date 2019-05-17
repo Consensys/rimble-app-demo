@@ -232,6 +232,13 @@ class RimbleTransaction extends React.Component {
         this.setState({ account });
 
         console.log("fallback wallet address:", this.state.account);
+
+        // After account is complete, get the balance
+        this.getAccountBalance();
+
+        // Watch for account change
+        // TODO: This type of wallet browser probably doesn't inject window.ethereum
+        // this.pollAccountUpdates();
       } catch (error) {
         console.log("Could not get account address. Error: ", error);
 
@@ -326,12 +333,11 @@ class RimbleTransaction extends React.Component {
             this.state.callback("error");
           }
         } else {
-          const successMessage =
-             "Connected!";
+          const successMessage = "Connected!";
           console.log(successMessage, signature);
           window.toastProvider.addMessage(successMessage, {
             variant: "success",
-            secondaryMessage: 'Welcome to the Rimble Demo App 🎉',
+            secondaryMessage: "Welcome to the Rimble Demo App 🎉"
           });
 
           this.closeValidationPendingModal();

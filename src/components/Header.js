@@ -7,7 +7,13 @@ class Header extends React.Component {
   render() {
     return (
       <Box>
-        <Flex alignItems={"center"} justifyContent="flex-end" bg={"white"}>
+        <Flex
+          alignItems={"center"}
+          justifyContent={["space-between", "flex-end"]}
+          bg={"white"}
+          px={3}
+          py={2}
+        >
           <Box mr={4}>
             <NetworkIndicator
               currentNetwork={this.props.network.current.id}
@@ -23,7 +29,6 @@ class Header extends React.Component {
             />
           ) : (
             <Button
-              m={3}
               onClick={() =>
                 this.props.connectAndValidateAccount(result => {
                   if (result === "success") {
