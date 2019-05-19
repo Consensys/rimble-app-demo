@@ -1,8 +1,6 @@
 import React from "react";
 import Web3 from "web3"; // uses latest 1.x.x version
 import RimbleUtils from "@rimble/utils";
-import GeneralUtil from "./GeneralUtil";
-
 import ConnectionModalUtil from "./ConnectionModalsUtil";
 import TransactionUtil from "./TransactionUtil";
 
@@ -515,7 +513,8 @@ class RimbleTransaction extends React.Component {
     }, 1000);
   };
 
-  contractMethodSendWrapper = contractMethod => {
+  contractMethodSendWrapper = (contractMethod, callback) => {
+    console.log("contractMethodSendWrapper Callback: ", callback);
     // Is it web3 capable?
     if (!this.web3ActionPreflight()) {
       return;
@@ -525,7 +524,7 @@ class RimbleTransaction extends React.Component {
     if (!this.state.account || !this.state.accountValidated) {
       this.openTransactionConnectionModal(null, () => {
         console.log("Successfully connected, continuing with Tx");
-        this.contractMethodSendWrapper(contractMethod);
+        this.contractMethodSendWrapper(contractMethod, callback);
       });
       return;
     }
@@ -565,6 +564,9 @@ class RimbleTransaction extends React.Component {
           transaction.status = "pending";
           transaction.recentEvent = "transactionHash";
           this.updateTransaction(transaction);
+          if (callback) {
+            callback("transactionHash", transaction);
+          }
         })
         .on("confirmation", (confirmationNumber, receipt) => {
           // Update confirmation count on each subsequent confirmation that's received
@@ -592,11 +594,17 @@ class RimbleTransaction extends React.Component {
           // Update transaction with receipt details
           transaction.recentEvent = "confirmation";
           this.updateTransaction(transaction);
+          if (callback) {
+            callback("confirmation", transaction);
+          }
         })
         .on("receipt", receipt => {
           // Received receipt, met total number of confirmations
           transaction.recentEvent = "receipt";
           this.updateTransaction(transaction);
+          if (callback) {
+            callback("receipt", transaction);
+          }
         })
         .on("error", error => {
           // Errored out
@@ -611,6 +619,9 @@ class RimbleTransaction extends React.Component {
             actionText: "",
             variant: "failure"
           });
+          if (callback) {
+            callback("error: " + error, transaction);
+          }
         });
     } catch (error) {
       transaction.status = "error";
@@ -623,6 +634,9 @@ class RimbleTransaction extends React.Component {
         actionText: "",
         variant: "failure"
       });
+      if (callback) {
+        callback("error: " + error, error);
+      }
     }
   };
 
@@ -651,7 +665,6 @@ class RimbleTransaction extends React.Component {
     transaction.lastUpdated = Date.now();
     transactions[`tx${updatedTransaction.created}`] = transaction;
     this.setState({ transactions });
-    console.log("updateTransaction: ", transaction);
   };
 
   // UTILITY
