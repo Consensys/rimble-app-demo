@@ -65,6 +65,9 @@ The dApp demonstrates an informative, tested, and effective UI to get user's con
 - Personal signature request of specialized nonce to ensure connection with wallet's owner
 - Helper modals for low funds and instructions to acquire ETH
 - Transaction-initiated modals that will connect, verify, and check funds with 1 click
+- Polling for account changes and balance updates
+
+[View full onboarding flow](https://whimsical.com/AEj6t36cCytKBciCzT8WoL)
 
 ### Customize toast message content
 
