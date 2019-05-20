@@ -31,12 +31,19 @@ class ConnectionModal extends React.Component {
   render() {
     return (
       <Modal isOpen={this.props.isOpen}>
-        <Card py={[3, 5]} px={[0, 5]} maxWidth={"960px"} overflow={"hidden"}>
+        <Card
+          pr={[0, 5]}
+          pl={[0, 5]}
+          pt={["48px", 5]}
+          pb={["97px", 4]}
+          maxWidth={"960px"}
+          overflow={"hidden"}
+        >
           <Box position={"relative"}>
             <Flex
               justifyContent={"flex-end"}
               mr={[0, -5]}
-              mt={[-3, -5]}
+              mt={["-48px", -5]}
               position={"absolute"}
               top={"0"}
               left={"0"}
@@ -57,11 +64,12 @@ class ConnectionModal extends React.Component {
               {/* Modal content */}
               <Box
                 style={{ overflow: "auto" }}
-                maxHeight={"calc(100vh - 113px)"}
+                maxHeight={"calc(100vh - 195px)"}
               >
-                <Box py={[3, 0]} px={[2, 0]}>
-                  <Box mb={3}>
-                    <Heading.h2>Before you connect</Heading.h2>
+                <Box px={[4, 0]} pt={[0, 0]} pb={[4, 5]}>
+                  {/* Start primary content */}
+                  <Box>
+                    <Heading.h2 mt={[0, 0]}>Before you connect</Heading.h2>
                     <Text my={3}>
                       Connecting lets you use the Rimble Demo App via your
                       Ethereum account.
@@ -72,8 +80,8 @@ class ConnectionModal extends React.Component {
                     flexWrap={"wrap"}
                     justifyContent={"space-between"}
                     mx={-2}
-                    mt={4}
-                    mb={4}
+                    mt={[0, 4]}
+                    mb={[0, 4]}
                   >
                     <Box width={[1, 1, 1 / 3]} px={2} my={3}>
                       <Flex justifyContent={"center"}>
@@ -119,20 +127,22 @@ class ConnectionModal extends React.Component {
                       </Text>
                     </Box>
                   </Flex>
+                  {/* End Modal Content */}
                 </Box>
               </Box>
-              {/* End Modal Content */}
 
               <Box
                 position={"absolute"}
                 bottom={"0"}
                 left={"0"}
                 right={"0"}
-                p={2}
+                px={[4, 5]}
+                pt={0}
+                pb={4}
                 bg={"white"}
               >
                 <Flex borderTop={1} borderColor={"#999"} />
-                <Flex mt={3} justifyContent={["center", "flex-end"]}>
+                <Flex pt={4} justifyContent={["center", "flex-end"]}>
                   {GeneralUtil.hasMetaMask() ? (
                     <MetaMaskButton onClick={this.props.validateAccount}>
                       Connect with MetaMask
@@ -147,27 +157,29 @@ class ConnectionModal extends React.Component {
             </Box>
           ) : (
             <Box mb={3}>
-              {/* Start modal content */}
               <Box
                 style={{ overflow: "auto" }}
-                maxHeight={"calc(100vh - 113px)"}
+                maxHeight={"calc(100vh - 195px)"}
               >
-                <Box py={[3, 0]} px={[2, 0]}>
+                <Box px={[4, 0]} pt={[0, 0]} pb={[4, 5]}>
+                  {/* Start modal content */}
                   <TransactionFeeModal />
+                  {/* End Modal Content */}
                 </Box>
               </Box>
-              {/* End Modal Content */}
 
               <Box
                 position={"absolute"}
                 bottom={"0"}
                 left={"0"}
                 right={"0"}
-                p={2}
+                px={[4, 5]}
+                pt={0}
+                pb={4}
                 bg={"white"}
               >
                 <Flex borderTop={1} borderColor={"#999"} />
-                <Flex mt={3} justifyContent={["center", "flex-end"]}>
+                <Flex mt={4} justifyContent={["center", "flex-end"]}>
                   <Button.Outline
                     width={[1, "auto"]}
                     onClick={this.toggleShowTxFees}
