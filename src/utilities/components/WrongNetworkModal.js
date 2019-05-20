@@ -17,20 +17,14 @@ class WrongNetworkModal extends React.Component {
   render() {
     return (
       <Modal isOpen={this.props.isOpen}>
-        <Card p={[3, 5]} maxWidth={"600px"}>
-          <Flex justifyContent={"flex-end"} mr={[-3, -5]} mt={[-3, -5]}>
+        <Card p={[4, 5]} maxWidth={"600px"}>
+          <Flex justifyContent={"flex-end"} mr={[-4, -5]} mt={[-4, -5]}>
             <Button.Text
               icononly
               icon={"Close"}
               color={"moon-gray"}
               onClick={this.props.closeModal}
             />
-          </Flex>
-
-          <Flex flexDirection={"column"} justifyContent={"space-between"}>
-            <Flex justifyContent={"center"} my={4}>
-              <Icon name="Warning" color="gold" size="40" />
-            </Flex>
           </Flex>
 
           <Flex flexDirection={"column"} justifyContent={"space-between"}>

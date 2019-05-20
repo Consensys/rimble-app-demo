@@ -1,15 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Card,
-  Heading,
-  Text,
-  Flex,
-  Icon,
-  Modal,
-  Button,
-  Link
-} from "rimble-ui";
+import { Box, Card, Heading, Text, Flex, Modal, Button, Link } from "rimble-ui";
 
 import RimbleUtil from "@rimble/utils";
 
@@ -17,8 +7,8 @@ class NoWeb3BrowserModal extends React.Component {
   render() {
     return (
       <Modal isOpen={this.props.isOpen}>
-        <Card p={[3, 5]} maxWidth={"600px"}>
-          <Flex justifyContent={"flex-end"} mr={[-3, -5]} mt={[-3, -5]}>
+        <Card p={[4, 5]} maxWidth={"600px"}>
+          <Flex justifyContent={"flex-end"} mr={[-4, -5]} mt={[-4, -5]}>
             <Button.Text
               icononly
               icon={"Close"}
@@ -28,10 +18,6 @@ class NoWeb3BrowserModal extends React.Component {
           </Flex>
 
           <Flex flexDirection={"column"} justifyContent={"space-between"}>
-            <Flex justifyContent={"center"} my={[3, 4]}>
-              <Icon name="Warning" color="gold" size="40" />
-            </Flex>
-
             <Heading.h2
               fontSize={4}
               fontWeight={3}

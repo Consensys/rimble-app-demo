@@ -39,9 +39,10 @@ class LowFundsModal extends React.Component {
     return (
       <Modal isOpen={this.props.isOpen}>
         <Card
-          px={[0, 5]}
-          pt={[4, 5]}
-          pb={["68px", "68px"]}
+          pr={[0, 5]}
+          pl={[0, 5]}
+          pt={["48px", 5]}
+          pb={["97px", 4]}
           maxWidth={"960px"}
           overflow={"hidden"}
           position={"relative"}
@@ -50,7 +51,7 @@ class LowFundsModal extends React.Component {
             <Flex
               justifyContent={"flex-end"}
               mr={[0, -5]}
-              mt={[-4, -5]}
+              mt={["-48px", -5]}
               position={"absolute"}
               top={"0"}
               left={"0"}
@@ -72,20 +73,16 @@ class LowFundsModal extends React.Component {
             <Box>
               <Box
                 style={{ overflow: "auto" }}
-                maxHeight={"calc(100vh - 148px)"}
+                maxHeight={"calc(100vh - 195px)"}
               >
-                {/* Start primary content */}
-                <Box p={[3, 0]} mb={[5, 0]} pb={[0, 3]}>
-                <Flex>
-                  <Box alignContent="center" alignSelf="center" py={3}>
-                    <Icon mr={3} name="Warning" size="60" color="gold" />
-                  </Box>
+                <Box px={[4, 0]} pt={[0, 0]} pb={[4, 5]}>
+                  {/* Start primary content */}
+
                   <Box alignContent="center" py={3}>
                     <Heading.h2>
                       Not enough Ether for transaction fees
                     </Heading.h2>
                   </Box>
-                </Flex>
                   <Text mb={4}>
                     This is a blockchain action so you’ll have to pay a
                     transaction fee. A few dollars worth of Ether should be
@@ -104,10 +101,9 @@ class LowFundsModal extends React.Component {
                   <Heading.h3>How to add funds</Heading.h3>
 
                   <Flex
-                    mt={3}
-                    mb={4}
                     alignItems={"stretch"}
-                    mx={[0, -2]}
+                    mx={0}
+                    mb={[4, 5]}
                     flexWrap={["wrap", "no-wrap"]}
                   >
                     <Box p={2} width={[1, 1 / 2]}>
@@ -118,8 +114,6 @@ class LowFundsModal extends React.Component {
                           height={"100%"}
                         >
                           <Box>
-
-
                             <Heading.h5>Buy ETH from an exchange</Heading.h5>
                             <Text fontSize="1">
                               You can buy ETH from exchanges like Coinbase and
@@ -146,8 +140,6 @@ class LowFundsModal extends React.Component {
                           height={"100%"}
                         >
                           <Box>
-
-
                             <Heading.h5>
                               Send ETH from another account
                             </Heading.h5>
@@ -167,26 +159,23 @@ class LowFundsModal extends React.Component {
                       </Card>
                     </Box>
                   </Flex>
+                  {/* End primary content */}
                 </Box>
-                {/* End primary content */}
               </Box>
               <Box
                 position={"absolute"}
                 bottom={"0"}
                 left={"0"}
                 right={"0"}
-                px={[3, 5]}
+                px={[4, 5]}
+                pt={0}
+                pb={4}
                 bg={"white"}
               >
                 {/* Start primary footer */}
-                <Flex
-                  mt={3}
-                  py={3}
-                  justifyContent={["center", "flex-end"]}
-                  borderTop={1}
-                  borderColor={"#999"}
-                >
-                  <Button onClick={this.props.closeModal}>
+                <Flex borderTop={1} borderColor={"#999"} />
+                <Flex pt={4} justifyContent={["center", "flex-end"]}>
+                  <Button onClick={this.props.closeModal} width={[1, "auto"]}>
                     Back to Rimble App Demo
                   </Button>
                 </Flex>
@@ -197,14 +186,12 @@ class LowFundsModal extends React.Component {
 
           {this.state.showSecondary ? (
             <Box mb={3}>
-              {/* Start secondary content */}
               <Box
                 style={{ overflow: "auto" }}
-                maxHeight={"calc(100vh - 148px)"}
-                px={[3, 0]}
-                pb={[4, 0]}
+                maxHeight={"calc(100vh - 195px)"}
               >
-                <Box>
+                <Box px={[4, 0]} pt={[0, 0]} pb={[4, 5]}>
+                  {/* Start secondary content */}
                   <Flex my={3} justifyContent={"center"}>
                     <QR
                       size="130"
@@ -214,27 +201,25 @@ class LowFundsModal extends React.Component {
                     />
                   </Flex>
 
-                  <PublicAddress my={3} address={this.props.account} />
+                  <PublicAddress my={4} address={this.props.account} />
+                  <Flex mb={3} />
+                  {/* End secondary content */}
                 </Box>
               </Box>
-              {/* End secondary content */}
 
               <Box
                 position={"absolute"}
                 bottom={"0"}
                 left={"0"}
                 right={"0"}
-                px={[3, 5]}
+                px={[4, 5]}
+                pt={0}
+                pb={4}
                 bg={"white"}
               >
                 {/* Start secondary footer */}
-                <Flex
-                  mt={3}
-                  py={3}
-                  justifyContent={["center", "flex-end"]}
-                  borderTop={1}
-                  borderColor={"#999"}
-                >
+                <Flex borderTop={1} borderColor={"#999"} />
+                <Flex mt={4} justifyContent={["center", "flex-end"]}>
                   <Button.Outline
                     width={[1, "auto"]}
                     onClick={this.toggleQRVisible}
@@ -248,12 +233,12 @@ class LowFundsModal extends React.Component {
           ) : null}
 
           {this.state.showTxFees ? (
-            <Box>
+            <Box mb={3}>
               <Box
                 style={{ overflow: "auto" }}
-                maxHeight={"calc(100vh - 148px)"}
+                maxHeight={"calc(100vh - 195px)"}
               >
-                <Box p={[3, 0]} mb={[5, 0]} pb={[3, 5]}>
+                <Box px={[4, 0]} pt={[0, 0]} pb={[4, 5]}>
                   {/* Start tx fee content */}
                   <TransactionFeeModal />
                   {/* End tx fee content */}
@@ -264,18 +249,22 @@ class LowFundsModal extends React.Component {
                 bottom={"0"}
                 left={"0"}
                 right={"0"}
-                px={[3, 5]}
+                px={[4, 5]}
+                pt={0}
+                pb={4}
                 bg={"white"}
               >
                 {/* Start primary footer */}
                 <Flex
-                  mt={3}
-                  py={3}
+                  pt={4}
                   justifyContent={["center", "flex-end"]}
                   borderTop={1}
                   borderColor={"#999"}
                 >
-                  <Button.Outline onClick={this.toggleShowTxFees}>
+                  <Button.Outline
+                    width={[1, "auto"]}
+                    onClick={this.toggleShowTxFees}
+                  >
                     Go Back
                   </Button.Outline>
                 </Flex>
