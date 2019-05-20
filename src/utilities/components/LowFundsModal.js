@@ -37,8 +37,7 @@ class LowFundsModal extends React.Component {
 
   render() {
     return (
-      // <Modal isOpen={this.props.isOpen}>
-      <Modal isOpen={true}>
+      <Modal isOpen={this.props.isOpen}>
         <Card
           pr={[0, 5]}
           pl={[0, 5]}
