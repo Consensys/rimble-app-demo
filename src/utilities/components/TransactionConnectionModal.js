@@ -29,12 +29,19 @@ class TransactionConnectionModal extends React.Component {
   render() {
     return (
       <Modal isOpen={this.props.isOpen}>
-        <Card py={[3, 5]} px={[0, 5]} maxWidth={"960px"} overflow={"hidden"}>
+        <Card
+          pr={[0, 5]}
+          pl={[0, 5]}
+          pt={["48px", 5]}
+          pb={["97px", 4]}
+          maxWidth={"960px"}
+          overflow={"hidden"}
+        >
           <Box position={"relative"}>
             <Flex
               justifyContent={"flex-end"}
               mr={[0, -5]}
-              mt={[-3, -5]}
+              mt={["-48px", -5]}
               position={"absolute"}
               top={"0"}
               left={"0"}
@@ -55,13 +62,15 @@ class TransactionConnectionModal extends React.Component {
               {/* Modal content */}
               <Box
                 style={{ overflow: "auto" }}
-                maxHeight={"calc(100vh - 113px)"}
+                maxHeight={"calc(100vh - 195px)"}
               >
-                <Box py={[3, 0]} px={[2, 0]}>
+                <Box px={[4, 0]} pt={[0, 0]} pb={[4, 5]}>
+                  {/* Start primary content */}
                   <Box mb={3}>
                     <Heading.h2>Connect to Rimble App Demo</Heading.h2>
                     <Text my={3}>
-                      You need to connect your Ethereum account to use our blockchain features.
+                      You need to connect your Ethereum account to use our
+                      blockchain features.
                     </Text>
                   </Box>
 
@@ -78,9 +87,9 @@ class TransactionConnectionModal extends React.Component {
                       </Flex>
                       <Heading.h5>The blockchain is public</Heading.h5>
                       <Text fontSize="1">
-                        Your account activity is public on the
-                        blockchain. Choose an account you don’t mind being
-                        linked with your activity here.
+                        Your account activity is public on the blockchain.
+                        Choose an account you don’t mind being linked with your
+                        activity here.
                       </Text>
                     </Box>
                     <Box width={[1, 1, 1 / 3]} px={2} my={3}>
@@ -116,26 +125,34 @@ class TransactionConnectionModal extends React.Component {
                       </Text>
                     </Box>
                   </Flex>
+                  {/* End Modal Content */}
                 </Box>
               </Box>
-              {/* End Modal Content */}
 
               <Box
                 position={"absolute"}
                 bottom={"0"}
                 left={"0"}
                 right={"0"}
-                p={2}
+                px={[4, 5]}
+                pt={0}
+                pb={4}
                 bg={"white"}
               >
                 <Flex borderTop={1} borderColor={"#999"} />
-                <Flex mt={3} justifyContent={["center", "flex-end"]}>
+                <Flex pt={4} justifyContent={["center", "flex-end"]}>
                   {GeneralUtil.hasMetaMask() ? (
-                    <MetaMaskButton onClick={this.props.validateAccount}>
+                    <MetaMaskButton
+                      width={[1, "auto"]}
+                      onClick={this.props.validateAccount}
+                    >
                       Connect with MetaMask
                     </MetaMaskButton>
                   ) : (
-                    <Button onClick={this.props.validateAccount}>
+                    <Button
+                      width={[1, "auto"]}
+                      onClick={this.props.validateAccount}
+                    >
                       Connect
                     </Button>
                   )}
@@ -144,12 +161,12 @@ class TransactionConnectionModal extends React.Component {
             </Box>
           ) : (
             <Box mb={3}>
-              {/* Start modal content */}
               <Box
                 style={{ overflow: "auto" }}
-                maxHeight={"calc(100vh - 113px)"}
+                maxHeight={"calc(100vh - 195px)"}
               >
-                <Box py={[3, 0]} px={[2, 0]}>
+                <Box px={[4, 0]} pt={[0, 0]} pb={[4, 5]}>
+                  {/* Start modal content */}
                   <Heading.h2>Transaction fees</Heading.h2>
                   <Text mt={3} mb={4}>
                     You need to pay a fee to use the Ethereum blockchain. This
@@ -170,8 +187,8 @@ class TransactionConnectionModal extends React.Component {
                       </Flex>
                       <Heading.h5>Undeniable proof</Heading.h5>
                       <Text fontSize="1">
-                        You get a public record of anything you send or
-                        receive, like a deed for a house.
+                        You get a public record of anything you send or receive,
+                        like a deed for a house.
                       </Text>
                     </Box>
                     <Box width={[1, 1, 1 / 3]} px={2} my={3}>
@@ -199,20 +216,22 @@ class TransactionConnectionModal extends React.Component {
                       </Text>
                     </Box>
                   </Flex>
+                  {/* End Modal Content */}
                 </Box>
               </Box>
-              {/* End Modal Content */}
 
               <Box
                 position={"absolute"}
                 bottom={"0"}
                 left={"0"}
                 right={"0"}
-                p={2}
+                px={[4, 5]}
+                pt={0}
+                pb={4}
                 bg={"white"}
               >
                 <Flex borderTop={1} borderColor={"#999"} />
-                <Flex mt={3} justifyContent={["center", "flex-end"]}>
+                <Flex mt={4} justifyContent={["center", "flex-end"]}>
                   <Button.Outline
                     width={[1, "auto"]}
                     onClick={this.toggleShowTxFees}
