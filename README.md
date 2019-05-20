@@ -1,4 +1,4 @@
-![Rimble Demo App](./_assets/rimble-demo.webp)
+![Rimble Demo App](./_assets/rimble-demo-2.webp)
 
 # Rimble Demo App
 
