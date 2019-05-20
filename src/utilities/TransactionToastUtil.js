@@ -61,10 +61,14 @@ class TransactionToastUtil extends React.Component {
         prevCollection,
         currentCollection
       );
-      prevTx = this.getTransactionFromCollection(
-        currentTx.created,
-        prevCollection
-      );
+      if (currentTx) {
+        prevTx = this.getTransactionFromCollection(
+          currentTx.created,
+          prevCollection
+        );
+      } else {
+        return false;
+      }
 
       if (currentTx.status !== prevTx.status) {
         tx = currentTx;
@@ -83,13 +87,13 @@ class TransactionToastUtil extends React.Component {
       );
     }
 
-    if (tx !== null && typeof tx !== "undefined") {
+    if (tx !== null && tx !== false && typeof tx !== "undefined") {
       this.showTransactionToast(tx);
     }
   };
 
   showTransactionToast = transaction => {
-    console.log("showTransactionToast: ", { ...transaction })
+    console.log("showTransactionToast: ", { ...transaction });
     // Get text info for toast
     let toastMeta = this.getTransactionToastMeta(transaction);
 
@@ -101,7 +105,7 @@ class TransactionToastUtil extends React.Component {
     let transactionToastMeta = {};
     let status = transaction.status;
 
-    console.log("getTransactionToastMeta: ", {...transaction});
+    console.log("getTransactionToastMeta: ", { ...transaction });
 
     switch (status) {
       case "initialized":
