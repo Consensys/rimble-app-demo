@@ -1,16 +1,16 @@
-![Rimble Toast Demo](./_assets/rimble-demo.webp)
+![Rimble Demo App](./_assets/rimble-demo.webp)
 
-# Rimble toast demo
+# Rimble Demo App
 
-This is a starter React dApp that uses the Rimble UI component library to call methods on a smart contract deployed to the Ethereum Rinkeby testnet.
+This is a React dApp that uses the Rimble UI component library and Rimble Web3 Components to walk a new user through connecting, verifying and transacting with a smart contract deployed to the Ethereum Rinkeby testnet.
 
-[Live Demo](https://consensys.github.io/rimble-app-demo/)
+[Live Demo](https://rimble-app-demo.netlify.com/)
 
 ## Overview
 
-- Implements a web3 component library (Rimble UI)
+- Implements Rimble UI, a dApp-first design system for faster dApp development
+- Integrates Rimble Web3 Components with web3 provider for better dApp UX
 - Wraps common web3 functions for consumption by React components
-- Integrates Rimble UI web3 components with web3 provider
 
 ### Requirements
 
@@ -53,6 +53,18 @@ The smart contract address and the application binary interface (ABI) for the co
 ### Calling methods
 
 The `RimbleWeb3.js` component passes a proper for the `web3.eth.contract.send` method and only needs the smart contract's method name.
+
+### Onboarding Flow
+
+The dApp demonstrates an informative, tested, and effective UI to get user's connected to your app and interacting with minimal frustration. The dApp addresses these scenarios:
+
+- Not on a web3-capable browser
+- No MetaMask (web3) extension available
+- Connected to wrong Ethereum network
+- EIP 1102 Connection request (with graceful fallback)
+- Personal signature request of specialized nonce to ensure connection with wallet's owner
+- Helper modals for low funds and instructions to acquire ETH
+- Transaction-initiated modals that will connect, verify, and check funds with 1 click
 
 ### Customize toast message content
 
