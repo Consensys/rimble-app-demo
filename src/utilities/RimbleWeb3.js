@@ -1,7 +1,6 @@
 import React from "react";
 import Web3 from "web3"; // uses latest 1.x.x version
 import RimbleUtils from "@rimble/utils";
-import GeneralUtil from "./GeneralUtil";
 
 import ConnectionModalUtil from "./ConnectionModalsUtil";
 import TransactionUtil from "./TransactionUtil";

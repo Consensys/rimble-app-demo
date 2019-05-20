@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Heading, Text, Flex, Button, Icon, Modal } from "rimble-ui";
+import { Card, Heading, Text, Flex, Button, Modal } from "rimble-ui";
 
 class UserRejectedValidationModal extends React.Component {
   sendMessageAgain = event => {
@@ -10,8 +10,8 @@ class UserRejectedValidationModal extends React.Component {
   render() {
     return (
       <Modal isOpen={this.props.isOpen}>
-        <Card p={[3, 5]} maxWidth={"600px"}>
-          <Flex justifyContent={"flex-end"} mr={[-3, -5]} mt={[-3, -5]}>
+        <Card p={[4, 5]} maxWidth={"600px"}>
+          <Flex justifyContent={"flex-end"} mr={[-4, -5]} mt={[-4, -5]}>
             <Button.Text
               icononly
               icon={"Close"}
@@ -21,10 +21,6 @@ class UserRejectedValidationModal extends React.Component {
           </Flex>
 
           <Flex flexDirection={"column"} justifyContent={"space-between"}>
-            <Flex justifyContent={"center"} my={4}>
-              <Icon name="Warning" color="gold" size="40" />
-            </Flex>
-
             <Heading.h2 my={3}>
               You can't continue without signing the message
             </Heading.h2>

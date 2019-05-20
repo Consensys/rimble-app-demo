@@ -144,11 +144,17 @@ class ConnectionModal extends React.Component {
                 <Flex borderTop={1} borderColor={"#999"} />
                 <Flex pt={4} justifyContent={["center", "flex-end"]}>
                   {GeneralUtil.hasMetaMask() ? (
-                    <MetaMaskButton onClick={this.props.validateAccount}>
+                    <MetaMaskButton
+                      onClick={this.props.validateAccount}
+                      width={[1, "auto"]}
+                    >
                       Connect with MetaMask
                     </MetaMaskButton>
                   ) : (
-                    <Button onClick={this.props.validateAccount}>
+                    <Button
+                      onClick={this.props.validateAccount}
+                      width={[1, "auto"]}
+                    >
                       Connect
                     </Button>
                   )}
