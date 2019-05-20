@@ -105,8 +105,6 @@ class TransactionToastUtil extends React.Component {
     let transactionToastMeta = {};
     let status = transaction.status;
 
-    console.log("getTransactionToastMeta: ", { ...transaction });
-
     switch (status) {
       case "initialized":
         transactionToastMeta = TransactionToastMessages.initialized;

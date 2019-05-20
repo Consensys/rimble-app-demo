@@ -70,6 +70,7 @@ class SmartContractControls extends React.Component {
         .then(value => {
           value = Number(value.toString());
           this.setState({ value, needsUpdate: false });
+          console.log("Updated number");
         })
         .catch(error => {
           console.log(error);
@@ -84,11 +85,14 @@ class SmartContractControls extends React.Component {
   processTransactionUpdates = prevProps => {
     Object.keys(this.props.transactions).map(key => {
       let tx = this.props.transactions[key];
+      console.log("Needs updated number: ", tx.status, this.state.needsUpdate);
+      // Will not work if there is a tx started before a prior tx has success -- first will flip needsUpdate to false
       if (tx.status === "success" && this.state.needsUpdate) {
         console.log("Getting updated number.");
         this.getNumber();
         return false;
       } else {
+        console.log("Not updating number.");
         return false;
       }
     });
@@ -99,19 +103,25 @@ class SmartContractControls extends React.Component {
   };
 
   incrementCounter = () => {
-    // TODO: Remove contract wrapper calls
-    this.props.contractMethodSendWrapper("incrementCounter");
-
-    this.setState({
-      needsUpdate: true
-    });
+    let needsUpdate = true;
+    this.props.contractMethodSendWrapper(
+      "incrementCounter",
+      (txStatus, transaction) => {
+        console.log("incrementCounter callback: ", txStatus, transaction);
+        if (
+          txStatus === "confirmation" &&
+          transaction.status === "success" &&
+          needsUpdate
+        ) {
+          this.getNumber();
+          needsUpdate = false;
+        }
+      }
+    );
   };
 
   decrementCounter = () => {
     this.props.contractMethodSendWrapper("decrementCounter");
-    this.setState({
-      needsUpdate: true
-    });
   };
 
   componentDidMount() {
@@ -123,7 +133,7 @@ class SmartContractControls extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    this.processTransactionUpdates(prevProps);
+    // this.processTransactionUpdates(prevProps);
   }
 
   render() {
