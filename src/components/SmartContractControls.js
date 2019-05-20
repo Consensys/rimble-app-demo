@@ -139,39 +139,77 @@ class SmartContractControls extends React.Component {
   render() {
     return (
       <Box>
-        <Flex
-          px={0}
-          pb={4}
+        <Box display={["none", "block"]}>
+          <Flex px={0} justifyContent="space-between" alignItems="end">
+            <Text mb={2} fontSize={3}>
+              Smart contract value
+            </Text>
+
+            <Button.Outline
+              size={"small"}
+              onClick={this.resetCounter}
+              disabled={!this.props.account}
+            >
+              Reset
+            </Button.Outline>
+          </Flex>
+        </Box>
+
+        <Box display={["block", "none"]}>
+          <Button
+            size="medium"
+            width={[1, "initial"]}
+            onClick={this.incrementCounter}
+            my={1}
+            px={3}
+          >
+            Increase value
+          </Button>
+        </Box>
+
+        <Box
+          my={4}
+          pt={3}
+          pb={3}
+          borderTop={1}
           borderBottom={1}
           borderColor={"#E8E8E8"}
-          justifyContent="space-between"
-          alignItems="end"
         >
-          <Text mb={2} fontSize={3}>
-            Smart contract value
-          </Text>
+          <Box display={["block", "none"]}>
+            <Flex px={0} justifyContent="space-between" alignItems="end">
+              <Text mb={2} fontSize={3}>
+                Smart contract value
+              </Text>
 
-          <Button.Outline
-            size={"small"}
-            onClick={this.resetCounter}
-            disabled={!this.props.account}
-          >
-            Reset
-          </Button.Outline>
-        </Flex>
-
-        <Box py={4}>
+              <Button.Outline
+                size={"small"}
+                onClick={this.resetCounter}
+                disabled={!this.props.account}
+              >
+                Reset
+              </Button.Outline>
+            </Flex>
+          </Box>
           <Text fontSize={6} textAlign={"center"}>
             {this.state.value}
           </Text>
         </Box>
 
-        <Box mx={-1}>
+        <Box display={["block", "none"]}>
+          <Button
+            size="medium"
+            width={[1, "initial"]}
+            onClick={this.decrementCounter}
+            my={1}
+            px={3}
+          >
+            Decrease value
+          </Button>
+        </Box>
+
+        <Box mx={-1} display={["none", "block"]}>
           <Flex
             px={0}
-            pt={4}
-            borderTop={1}
-            borderColor={"#E8E8E8"}
             justifyContent="space-between"
             flexWrap={["wrap", "no-wrap"]}
           >
