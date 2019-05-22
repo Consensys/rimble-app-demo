@@ -41,7 +41,7 @@ yarn install
 Start local server
 
 ```bash
-yarn develop
+yarn start
 ```
 
 Navigate to http://localhost:3000 in your browser
