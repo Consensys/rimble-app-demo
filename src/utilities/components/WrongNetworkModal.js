@@ -53,9 +53,6 @@ class WrongNetworkModal extends React.Component {
                     <Box>
                       <Loader size={"3em"} />
                     </Box>
-                    <Box position={"absolute"} top={"1em"} left={"1em"}>
-                      <Icon name="Settings" size={"1em"} />
-                    </Box>
                   </Box>
                   <Box>
                     <Text fontWeight={4}>Waiting for the right network...</Text>
