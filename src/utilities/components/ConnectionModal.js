@@ -32,31 +32,25 @@ class ConnectionModal extends React.Component {
     return (
       <Modal isOpen={this.props.isOpen}>
         <Card
-          pr={[0, 5]}
-          pl={[0, 5]}
-          pt={["48px", 5]}
-          pb={["97px", 4]}
+          border={0}
+          p={0}
           maxWidth={"960px"}
           overflow={"hidden"}
         >
-          <Box position={"relative"}>
-            <Flex
-              justifyContent={"flex-end"}
-              mr={[0, -5]}
-              mt={["-48px", -5]}
+          <Box
+            position={"absolute"}
+            top={'0'}
+            right={'0'}
+          >
+            <Button.Text
               position={"absolute"}
-              top={"0"}
-              left={"0"}
-              right={"0"}
-              bg={"white"}
-            >
-              <Button.Text
-                icononly
-                icon={"Close"}
-                color={"moon-gray"}
-                onClick={this.props.closeModal}
-              />
-            </Flex>
+              top={'0'}
+              right={'0'}
+              icononly
+              icon={"Close"}
+              mainColor={"moon-gray"}
+              onClick={this.props.closeModal}
+            />
           </Box>
 
           {this.state.showTxFees === false ? (
@@ -66,10 +60,10 @@ class ConnectionModal extends React.Component {
                 style={{ overflow: "auto" }}
                 maxHeight={"calc(100vh - 195px)"}
               >
-                <Box px={[4, 0]} pt={[0, 0]} pb={[4, 5]}>
+                <Box px={3}>
                   {/* Start primary content */}
                   <Box>
-                    <Heading.h2 mt={[0, 0]}>Before you connect</Heading.h2>
+                    <Heading fontSize={4}>Before you connect</Heading>
                     <Text my={3}>
                       Connecting lets you use the Rimble Demo App via your
                       Ethereum account.
@@ -79,16 +73,15 @@ class ConnectionModal extends React.Component {
                   <Flex
                     flexWrap={"wrap"}
                     justifyContent={"space-between"}
-                    mx={-2}
                     mt={[0, 4]}
                     mb={[0, 4]}
                   >
-                    <Box width={[1, 1, 1 / 3]} px={2} my={3}>
-                      <Flex justifyContent={"center"}>
-                        <Icon color="primary" size="60" name="Public" />
+                    <Box width={[1, 1, 1/3]} my={3}>
+                      <Flex justifyContent={"center"} mb={3}>
+                        <Icon name="Public" color="primary" size="4rem" />
                       </Flex>
-                      <Heading.h4>The blockchain is public</Heading.h4>
-                      <Text>
+                      <Heading fontSize={2}>The blockchain is public</Heading>
+                      <Text fontSize={1}>
                         Your Ethereum account activity is public on the
                         blockchain. Choose an account you don’t mind being
                         linked with your activity here.
@@ -132,17 +125,13 @@ class ConnectionModal extends React.Component {
               </Box>
 
               <Box
-                position={"absolute"}
-                bottom={"0"}
-                left={"0"}
-                right={"0"}
-                px={[4, 5]}
-                pt={0}
-                pb={4}
+                borderTop={1}
+                borderColor={'moon-gray'}
                 bg={"white"}
+                p={3}
               >
-                <Flex borderTop={1} borderColor={"#999"} />
-                <Flex pt={4} justifyContent={["center", "flex-end"]}>
+                <Flex />
+                <Flex justifyContent={["center", "flex-end"]}>
                   {GeneralUtil.hasMetaMask() ? (
                     <MetaMaskButton
                       onClick={this.props.validateAccount}
