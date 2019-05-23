@@ -207,27 +207,20 @@ class SmartContractControls extends React.Component {
           </Button>
         </Box>
 
-        <Box mx={-1} display={["none", "block"]}>
+        <Box display={["none", "block"]}>
           <Flex
-            px={0}
-            justifyContent="space-between"
-            flexWrap={["wrap", "no-wrap"]}
+            flexDirection={['column', 'row']}
           >
             <Button
-              size="medium"
-              width={[1, "initial"]}
               onClick={this.decrementCounter}
-              my={1}
-              px={3}
+              flex={'1'}
+              mr={[0, 3]}
             >
               Decrease value
             </Button>
             <Button
-              size="medium"
-              width={[1, "initial"]}
               onClick={this.incrementCounter}
-              my={1}
-              px={3}
+              flex={'1'}
             >
               Increase value
             </Button>
