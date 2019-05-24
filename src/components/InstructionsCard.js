@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Heading, Text, Link, Flex, Button, Icon } from "rimble-ui";
+import { Box, Heading, Text, Link, Flex, Button, Icon, Flash } from "rimble-ui";
 
 class InstructionsCard extends React.Component {
   render() {
@@ -60,6 +60,33 @@ class InstructionsCard extends React.Component {
               </Button.Outline>
             )}
           </Flex>
+          <Flash variant="">
+          <Flex>
+          <Box alignItems="center" alignSelf="center" mr={3}>
+            <Icon name="Build" />
+          </Box>
+          <Box alignItems="center" alignSelf="center">
+            <Text fontSize="1">
+              Built with{' '}
+                <Link
+                  href="https://github.com/ConsenSys/rimble-ui"
+                  target="_blank"
+                  title="Repo for Rimble UI components"
+                  mb={[3, "initial"]}>
+                Rimble-UI components
+                </Link>{' '}
+              and{' '}
+              <Link
+                href="https://github.com/ConsenSys/rimble-web3-components"
+                target="_blank"
+                title="Repo for Rimble Web3 components"
+                mb={[3, "initial"]}>
+              Rimble-Web3-components
+              </Link>
+            </Text>
+            </Box>
+            </Flex>
+          </Flash>
         </Box>
       </Flex>
     );

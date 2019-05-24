@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ThemeProvider, Box, Text, Flex } from "rimble-ui";
+import { ThemeProvider, Box, Text, Flex, Heading } from "rimble-ui";
 
 import RimbleWeb3 from "./utilities/RimbleWeb3";
 import ConnectionBanner from "@rimble/connection-banner";
@@ -95,10 +95,10 @@ class App extends Component {
                 </Flex>
 
                 <Flex justifyContent="center" p={3}>
+                  <Heading.h2 role="img" aria-label="Waving hand" mr={3}>👋</Heading.h2>
+
                   <Text maxWidth="400px">
-                    This is a starter React dApp that uses the Rimble UI
-                    component library to call methods on a smart contract
-                    deployed to the Ethereum Rinkeby testnet.
+                    Hi there, see Rimble components in action with our demo Ethereum dApp. Change the value below to get started. Check out our repos – links are in the footer!
                   </Text>
                 </Flex>
 
