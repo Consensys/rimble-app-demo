@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { ThemeProvider, Box, Text, Flex } from "rimble-ui";
+import { ThemeProvider, Flex, Box, Card, Text } from "rimble-ui";
 
 import RimbleWeb3 from "./utilities/RimbleWeb3";
 import ConnectionBanner from "@rimble/connection-banner";
+import NetworkIndicator from "@rimble/network-indicator";
+
 
 import Header from "./components/Header";
 import WalletBlock from "./components/WalletBlock";
@@ -87,6 +89,13 @@ class App extends Component {
                     deployed to the Ethereum Rinkeby testnet.
                   </Text>
                 </Flex>
+
+                <Card maxWidth={'640px'} mx={'auto'}>
+                  <NetworkIndicator
+                    currentNetwork={network.current.id}
+                    requiredNetwork={network.required.id}
+                  />
+                </Card>
 
                 <WalletBlock
                   account={account}
