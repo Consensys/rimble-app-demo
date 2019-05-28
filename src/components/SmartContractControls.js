@@ -190,7 +190,7 @@ class SmartContractControls extends React.Component {
               </Button.Outline>
             </Flex>
           </Box>
-          <Text fontSize={6} textAlign={"center"}>
+          <Text fontSize={7} lineHeight={1} textAlign={"center"}>
             {this.state.value}
           </Text>
         </Box>
