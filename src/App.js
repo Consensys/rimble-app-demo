@@ -5,20 +5,10 @@ import RimbleWeb3 from "./utilities/RimbleWeb3";
 import ConnectionBanner from "@rimble/connection-banner";
 
 import Header from "./components/Header";
+import WalletBlock from "./components/WalletBlock";
 import PrimaryCard from "./components/PrimaryCard";
 import InstructionsCard from "./components/InstructionsCard";
 import Web3Debugger from "./components/Web3Debugger";
-
-import theme from "./theme";
-import { createGlobalStyle } from "styled-components";
-
-const GlobalStyle = createGlobalStyle`
-  body, html {
-    margin: 0;
-    padding: 0;
-    background-color: #efefef;
-  }
-`;
 
 class App extends Component {
   state = {
@@ -39,7 +29,7 @@ class App extends Component {
 
   render() {
     return (
-      <ThemeProvider theme={theme} className="App">
+      <ThemeProvider>
         <RimbleWeb3 config={this.config}>
           <RimbleWeb3.Consumer>
             {({
@@ -64,11 +54,7 @@ class App extends Component {
               transaction,
               web3Fallback
             }) => (
-              <Box
-                style={{
-                  paddingBottom: !network.isCorrectNetwork ? "8em" : "0"
-                }}
-              >
+              <Box>
                 <Header
                   account={account}
                   accountBalance={accountBalance}
@@ -102,6 +88,14 @@ class App extends Component {
                   </Text>
                 </Flex>
 
+                <WalletBlock
+                  account={account}
+                  accountBalance={accountBalance}
+                  accountBalanceLow={accountBalanceLow}
+                  accountValidated={accountValidated}
+                  connectAndValidateAccount={connectAndValidateAccount}
+                />
+
                 {this.state.route === "default" ? <PrimaryCard /> : null}
 
                 {this.state.route === "onboarding" ? (
@@ -134,7 +128,6 @@ class App extends Component {
             )}
           </RimbleWeb3.Consumer>
         </RimbleWeb3>
-        <GlobalStyle />
       </ThemeProvider>
     );
   }
