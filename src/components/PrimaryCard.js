@@ -20,7 +20,7 @@ class PrimaryCard extends React.Component {
           contractMethodSendWrapper
         }) => (
           <div>
-            <Card maxWidth={'640px'} px={4} mx={'auto'} my={3}>
+            <Card maxWidth={'640px'} px={4} mx={'auto'}>
               <SmartContractControls
                 contract={contract}
                 account={account}

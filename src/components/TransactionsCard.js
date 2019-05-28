@@ -23,7 +23,7 @@ const TransactionTable = styled(Table)`
 class TransactionsCard extends React.Component {
   render() {
     return (
-      <Card maxWidth={'640px'} px={4} mx={'auto'} my={3}>
+      <Card maxWidth={'640px'} px={4} mx={'auto'}>
 
         <Heading fontSize={3} textAlign={'center'} px={4}>
           Transactions
