@@ -1,13 +1,10 @@
 import React from "react";
 import {
-  Card,
   Heading,
   Text,
-  Icon,
   Modal,
   Flex,
   Box,
-  Button,
   Loader
 } from "rimble-ui";
 import ModalCard from './ModalCard';
@@ -45,7 +42,7 @@ class ValidationPendingModal extends React.Component {
       </React.Fragment>
     );
   }
-  
+
   render() {
     return (
       <Modal isOpen={this.props.isOpen}>

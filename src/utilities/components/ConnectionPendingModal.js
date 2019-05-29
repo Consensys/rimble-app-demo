@@ -1,10 +1,7 @@
 import React from "react";
 import {
-  Card,
   Heading,
   Text,
-  Icon,
-  Button,
   Modal,
   Flex,
   Box,

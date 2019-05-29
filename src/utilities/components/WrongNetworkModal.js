@@ -1,10 +1,8 @@
 import React from "react";
 import {
-  Card,
   Heading,
   Text,
   Flex,
-  Icon,
   Modal,
   Button,
   Box,
@@ -62,7 +60,7 @@ class WrongNetworkModal extends React.Component {
       </React.Fragment>
     )
   }
-  
+
   render() {
     return (
       <Modal isOpen={this.props.isOpen}>

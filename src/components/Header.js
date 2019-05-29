@@ -1,6 +1,5 @@
 import React from "react";
-import { Box, Flex, Button, Heading } from "rimble-ui";
-import NetworkIndicator from "@rimble/network-indicator";
+import { Box, Heading } from "rimble-ui";
 
 class Header extends React.Component {
   render() {

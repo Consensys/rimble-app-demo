@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ThemeProvider, Flex, Box, Card, Text } from "rimble-ui";
+import { ThemeProvider, Box, Card, Text } from "rimble-ui";
 
 import RimbleWeb3 from "./utilities/RimbleWeb3";
 import ConnectionBanner from "@rimble/connection-banner";

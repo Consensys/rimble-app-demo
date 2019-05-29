@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Heading, Text, Flex, Modal, Button, Link } from "rimble-ui";
+import { Box, Heading, Text, Modal, Link } from "rimble-ui";
 import ModalCard from './ModalCard';
 import RimbleUtil from "@rimble/utils";
 

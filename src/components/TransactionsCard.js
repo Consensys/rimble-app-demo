@@ -1,6 +1,6 @@
 import React from "react";
 import styled from 'styled-components'
-import { Card, Heading, Box, Flex, Text, Table, Pill, Link } from "rimble-ui";
+import { Card, Text, Table, Pill, Link } from "rimble-ui";
 
 const TransactionTable = styled(Table)`
   & {

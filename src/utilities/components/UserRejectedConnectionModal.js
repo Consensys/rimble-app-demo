@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading, Text, Flex, Box, Button, Modal } from "rimble-ui";
+import { Heading, Text, Flex, Button, Modal } from "rimble-ui";
 import ModalCard from './ModalCard';
 
 class UserRejectedConnectionModal extends React.Component {

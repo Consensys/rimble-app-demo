@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Box, Card, Text, Button } from 'rimble-ui';
+import { Card, Text, Button } from 'rimble-ui';
 
 import AccountOverview from "../utilities/components/AccountOverview";
 

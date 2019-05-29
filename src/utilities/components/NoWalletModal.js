@@ -2,9 +2,7 @@ import React from "react";
 import {
   Heading,
   Text,
-  Flex,
   Modal,
-  Button,
   Link,
   MetaMaskButton
 } from "rimble-ui";
