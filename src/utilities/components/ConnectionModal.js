@@ -14,6 +14,57 @@ import {
 import GeneralUtil from "../GeneralUtil";
 import TransactionFeeModal from "./TransactionFeeModal";
 
+const ModalCard = ({children, closeFunc, ...props}) => (
+  <Card
+    border={0}
+    m={0}
+    p={0}
+    maxWidth={"960px"}
+    height={['100vh', 'auto']}
+    overflow={"hidden"}
+  >
+    <Box
+      position={"absolute"}
+      top={'0'}
+      right={'0'}
+      m={3}
+      borderRadius={'100%'}
+      bg={'white'}
+    >
+      <Button.Text
+        icononly
+        icon={"Close"}
+        mainColor={"moon-gray"}
+        onClick={closeFunc}
+        size={'2.5rem'}
+      />
+    </Box>
+    <Flex flexDirection={'column'} height={'100%'}>
+      {children}
+    </Flex>
+  </Card>
+);
+
+ModalCard.Body = ({children, ...props}) => (
+  <Flex flex={'1'} style={{ overflow: 'auto' }} >
+    <Box p={['4', '5']} m={'auto'}>
+      {children}
+    </Box>
+  </Flex>
+);
+
+ModalCard.Footer = ({children, ...props}) => (
+  <Flex
+    flex={'0'}
+    justifyContent={'center'}
+    borderTop={1}
+    borderColor={'light-gray'}
+    p={3}
+  >
+    {children}
+  </Flex>
+);
+
 class ConnectionModal extends React.Component {
   state = {
     showTxFees: false
@@ -127,76 +178,36 @@ class ConnectionModal extends React.Component {
   render() {
     return (
       <Modal isOpen={this.props.isOpen}>
-        <Card
-          border={0}
-          p={0}
-          m={0}
-          maxWidth={"960px"}
-          height={['100vh', 'auto']}
-          overflow={"hidden"}
-        >
-          <Box
-            position={"absolute"}
-            top={'0'}
-            right={'0'}
-            m={3}
-            borderRadius={'100%'}
-            bg={'white'}
-          >
-            <Button.Text
-              icononly
-              icon={"Close"}
-              mainColor={"moon-gray"}
-              onClick={this.props.closeModal}
-              size={'2.5rem'}
-            />
-          </Box>
-
-          {this.state.showTxFees === false ? (
-            <Flex flexDirection={'column'} height={'100%'}>
-              {/* Modal body */}
-              <Flex flex={'1'} style={{ overflow: "auto" }} >
-                <Box p={['4', '5']} m={'auto'}>
+        <ModalCard closeFunc={this.props.closeModal}>
+            {this.state.showTxFees === false ? (
+              <React.Fragment>
+                <ModalCard.Body>
                   {this.renderModalContent()}
+                </ModalCard.Body>
+                <ModalCard.Footer>
+                  {this.renderConnectButton()}
+                </ModalCard.Footer>
+              </React.Fragment>
+            ) : (
+              <ModalCard.Body>
+                <TransactionFeeModal />
+                <Box
+                  position={'absolute'}
+                  top={'0'}
+                  left={'0'}
+                  m={3}
+                  bg={'white'}
+                >
+                  <Button.Outline
+                    onClick={this.toggleShowTxFees}
+                    icononly
+                    icon={'ArrowBack'}
+                    size={'2.5rem'}
+                  />
                 </Box>
-              </Flex>
-              {/* Modal footer */}
-              <Flex
-                flex={'0'}
-                justifyContent={'center'}
-                borderTop={1}
-                borderColor={'light-gray'}
-                p={3}
-              >
-                {this.renderConnectButton()}
-              </Flex>
-            </Flex>
-          ) : (
-            <Flex flexDirection={'column'} height={'100%'}>
-              {/* Modal body */}
-              <Flex flex={'1'} style={{ overflow: "auto" }} >
-                <Box p={['4', '5']} m={'auto'}>
-                  <TransactionFeeModal />
-                </Box>
-              </Flex>
-              {/* Modal footer */}
-              <Box
-                position={'absolute'}
-                top={'0'}
-                left={'0'}
-                m={3}
-                bg={'white'}
-              >
-                <Button.Outline
-                  onClick={this.toggleShowTxFees}
-                  icononly
-                  icon={'ArrowBack'}
-                  size={'2.5rem'}
-                />
-              </Box>
-            </Flex>
-          )}
-        </Card>
+              </ModalCard.Body>
+            )}
+        </ModalCard>
       </Modal>
     );
   }
