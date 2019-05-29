@@ -11,25 +11,8 @@ import {
   Link
 } from "rimble-ui";
 import ModalCard from './ModalCard';
-import GeneralUtil from "../GeneralUtil";
 import TransactionFeeModal from "./TransactionFeeModal";
-
-const ModalBackButton = ({onClick, ...props}) => (
-  <Box
-    position={'absolute'}
-    top={'0'}
-    left={'0'}
-    m={3}
-    bg={'white'}
-  >
-    <Button.Outline
-      onClick={onClick}
-      icononly
-      icon={'ArrowBack'}
-      size={'2.5rem'}
-    />
-  </Box>
-);
+import GeneralUtil from "../GeneralUtil";
 
 class ConnectionModal extends React.Component {
   state = {
@@ -145,21 +128,23 @@ class ConnectionModal extends React.Component {
     return (
       <Modal isOpen={this.props.isOpen}>
         <ModalCard closeFunc={this.props.closeModal}>
-            {this.state.showTxFees === false ? (
-              <React.Fragment>
-                <ModalCard.Body>
-                  {this.renderModalContent()}
-                </ModalCard.Body>
-                <ModalCard.Footer>
-                  {this.renderConnectButton()}
-                </ModalCard.Footer>
-              </React.Fragment>
-            ) : (
+
+          {this.state.showTxFees === false ? (
+            <React.Fragment>
               <ModalCard.Body>
-                <TransactionFeeModal />
-                <ModalBackButton onClick={this.toggleShowTxFees} />
+                {this.renderModalContent()}
               </ModalCard.Body>
-            )}
+              <ModalCard.Footer>
+                {this.renderConnectButton()}
+              </ModalCard.Footer>
+            </React.Fragment>
+          ) : (
+            <ModalCard.Body>
+              <TransactionFeeModal />
+              <ModalCard.BackButton onClick={this.toggleShowTxFees} />
+            </ModalCard.Body>
+          )}
+
         </ModalCard>
       </Modal>
     );
