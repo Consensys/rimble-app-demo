@@ -12,7 +12,6 @@ const TransactionTable = styled(Table)`
 
   th,
   td {
-
     border: solid;
     border-width: 1px;
     border-color: inherit;
@@ -24,10 +23,9 @@ class TransactionsCard extends React.Component {
   render() {
     return (
       <Card maxWidth={'640px'} px={4} mx={'auto'}>
-
-        <Heading fontSize={3} textAlign={'center'} px={4}>
-          Transactions
-        </Heading>
+        <Text fontWeight={3} mb={3}>
+          Activity (Transactions):
+        </Text>
 
         <TransactionTable>
 

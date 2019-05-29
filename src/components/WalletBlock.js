@@ -29,21 +29,19 @@ class WalletBlock extends Component {
       )
     } else {
       return (
-        <Box>
-          <Text mb={3}>
-            You are not connected…
-          </Text>
-          <Button onClick={this.handleConnectAccount} width={1}>
-            Connect your wallet
-          </Button>
-        </Box>
+        <Button onClick={this.handleConnectAccount} width={1}>
+          Connect your wallet
+        </Button>
       )
     }
   }
 
   render() {
     return (
-      <Card maxWidth={'640px'} mx={'auto'}>
+      <Card maxWidth={'640px'} mx={'auto'} p={4} >
+        <Text fontWeight={3} mb={3}>
+          Wallet:
+        </Text>
         {this.renderContent()}
       </Card>
     );

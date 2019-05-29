@@ -74,23 +74,21 @@ class App extends Component {
                   network={network}
                 />
 
-                <Flex m={3} justifyContent={"center"}>
+                <Box mx={'auto'} p={3} maxWidth={'1024px'}>
                   <ConnectionBanner
                     currentNetwork={network.current.id}
                     requiredNetwork={this.config.requiredNetwork}
                     onWeb3Fallback={web3Fallback}
                   />
-                </Flex>
+                </Box>
 
-                <Flex justifyContent="center" p={3}>
-                  <Text maxWidth="400px">
-                    This is a starter React dApp that uses the Rimble UI
-                    component library to call methods on a smart contract
-                    deployed to the Ethereum Rinkeby testnet.
-                  </Text>
-                </Flex>
+                <Text mx={'auto'} p={4} maxWidth="400px">
+                  This is a starter React dApp that uses the Rimble UI
+                  component library to call methods on a smart contract
+                  deployed to the Ethereum Rinkeby testnet.
+                </Text>
 
-                <Card maxWidth={'640px'} mx={'auto'}>
+                <Card maxWidth={'640px'} mx={'auto'} p={3} px={4}>
                   <NetworkIndicator
                     currentNetwork={network.current.id}
                     requiredNetwork={network.required.id}

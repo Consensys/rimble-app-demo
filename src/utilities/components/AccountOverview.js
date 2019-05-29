@@ -17,7 +17,6 @@ class AccountOverview extends React.Component {
     const roundedBalance = this.trimEth(this.props.accountBalance);
     return (
       <Flex alignItems={"flex-start"}>
-
         <Flex mr={3}>
           <Flex border={1} borderColor={'moon-gray'} p={1} mr={1}>
             <Blockie opts={{
@@ -34,25 +33,20 @@ class AccountOverview extends React.Component {
             />
           </Flex>
         </Flex>
-
         <Box>
-          <Text fontWeight={3} color={'success'}>
-            wallet connected
-          </Text>
-          <Text fontSize={1} color={'mid-gray'}>
+          <Text.span fontSize={1} color={'mid-gray'}>
             Public Address:
-            <div>
+            <div style={{'word-break': 'break-word'}}>
               {this.props.account}
             </div>
-          </Text>
+          </Text.span>
           <Text
             fontSize={1}
             color={this.props.accountBalanceLow ? 'red' : 'mid-gray'}
             >
               Balance: {roundedBalance} ETH
-            </Text>
+          </Text>
         </Box>
-
       </Flex>
     );
   }
