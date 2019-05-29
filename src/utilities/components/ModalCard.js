@@ -57,4 +57,22 @@ ModalCard.Footer = ({children, ...props}) => (
   </Flex>
 );
 
+
+ModalCard.BackButton = ({onClick, ...props}) => (
+  <Box
+    position={'absolute'}
+    top={'0'}
+    left={'0'}
+    m={3}
+    bg={'white'}
+  >
+    <Button.Outline
+      onClick={onClick}
+      icononly
+      icon={'ArrowBack'}
+      size={'2.5rem'}
+    />
+  </Box>
+);
+
 export default ModalCard;
