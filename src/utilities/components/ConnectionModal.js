@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Card,
   Heading,
   Text,
   Icon,
@@ -11,58 +10,25 @@ import {
   MetaMaskButton,
   Link
 } from "rimble-ui";
+import ModalCard from './ModalCard';
 import GeneralUtil from "../GeneralUtil";
 import TransactionFeeModal from "./TransactionFeeModal";
 
-const ModalCard = ({children, closeFunc, ...props}) => (
-  <Card
-    border={0}
-    m={0}
-    p={0}
-    maxWidth={"960px"}
-    height={['100vh', 'auto']}
-    overflow={"hidden"}
+const ModalBackButton = ({onClick, ...props}) => (
+  <Box
+    position={'absolute'}
+    top={'0'}
+    left={'0'}
+    m={3}
+    bg={'white'}
   >
-    <Box
-      position={"absolute"}
-      top={'0'}
-      right={'0'}
-      m={3}
-      borderRadius={'100%'}
-      bg={'white'}
-    >
-      <Button.Text
-        icononly
-        icon={"Close"}
-        mainColor={"moon-gray"}
-        onClick={closeFunc}
-        size={'2.5rem'}
-      />
-    </Box>
-    <Flex flexDirection={'column'} height={'100%'}>
-      {children}
-    </Flex>
-  </Card>
-);
-
-ModalCard.Body = ({children, ...props}) => (
-  <Flex flex={'1'} style={{ overflow: 'auto' }} >
-    <Box p={['4', '5']} m={'auto'}>
-      {children}
-    </Box>
-  </Flex>
-);
-
-ModalCard.Footer = ({children, ...props}) => (
-  <Flex
-    flex={'0'}
-    justifyContent={'center'}
-    borderTop={1}
-    borderColor={'light-gray'}
-    p={3}
-  >
-    {children}
-  </Flex>
+    <Button.Outline
+      onClick={onClick}
+      icononly
+      icon={'ArrowBack'}
+      size={'2.5rem'}
+    />
+  </Box>
 );
 
 class ConnectionModal extends React.Component {
@@ -191,20 +157,7 @@ class ConnectionModal extends React.Component {
             ) : (
               <ModalCard.Body>
                 <TransactionFeeModal />
-                <Box
-                  position={'absolute'}
-                  top={'0'}
-                  left={'0'}
-                  m={3}
-                  bg={'white'}
-                >
-                  <Button.Outline
-                    onClick={this.toggleShowTxFees}
-                    icononly
-                    icon={'ArrowBack'}
-                    size={'2.5rem'}
-                  />
-                </Box>
+                <ModalBackButton onClick={this.toggleShowTxFees} />
               </ModalCard.Body>
             )}
         </ModalCard>
