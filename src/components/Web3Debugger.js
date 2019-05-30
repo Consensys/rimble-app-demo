@@ -21,7 +21,7 @@ const DebuggerButtons = props => (
       mr={2}
       mb={2}
     >
-      Blocking Wrong Network
+      Wrong network modal
     </Button>
 
     <Button
@@ -30,7 +30,7 @@ const DebuggerButtons = props => (
       mr={2}
       mb={2}
     >
-      Connection
+      Connection modal
     </Button>
     <Button
       size="small"
@@ -38,7 +38,7 @@ const DebuggerButtons = props => (
       mr={2}
       mb={2}
     >
-      Connection Pending
+      Connection pending modal
     </Button>
     <Button
       size="small"
@@ -46,7 +46,7 @@ const DebuggerButtons = props => (
       mr={2}
       mb={2}
     >
-      Connection Rejected
+      Connection rejected error
     </Button>
     <Button
       size="small"
@@ -54,7 +54,7 @@ const DebuggerButtons = props => (
       mr={2}
       mb={2}
     >
-      Transaction Connection
+      Transaction connection
     </Button>
     <Button
       size="small"
@@ -62,7 +62,7 @@ const DebuggerButtons = props => (
       mr={2}
       mb={2}
     >
-      Validation Pending
+      Verification pending modal
     </Button>
     <Button
       size="small"
@@ -70,7 +70,7 @@ const DebuggerButtons = props => (
       mr={2}
       mb={2}
     >
-      User Rejected Validation
+      Verification rejected error
     </Button>
     <Button
       size="small"
@@ -80,7 +80,7 @@ const DebuggerButtons = props => (
       mr={2}
       mb={2}
     >
-      Low Funds
+      Low funds
     </Button>
     <Button
       size="small"
@@ -88,7 +88,7 @@ const DebuggerButtons = props => (
       mr={2}
       mb={2}
     >
-      Not Web3 Browser
+      Not web3 browser
     </Button>
     <Button
       size="small"
@@ -96,7 +96,7 @@ const DebuggerButtons = props => (
       mr={2}
       mb={2}
     >
-      No Wallet
+      No Ethereum account
     </Button>
   </Box>
 );
