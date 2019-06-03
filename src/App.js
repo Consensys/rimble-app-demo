@@ -83,7 +83,11 @@ class App extends Component {
                 </Box>
 
                 <Flex mx={'auto'} p={4} maxWidth="400px">
-                  <Heading.h2 role="img" aria-label="Waving hand" mr={3}>👋</Heading.h2>
+                  <Heading.h2 mr={3}>
+                    <span role="img" aria-label="Waving hand">
+                      👋
+                    </span>
+                  </Heading.h2>
 
                   <Text maxWidth="400px">
                     Hi there, see Rimble components in action with our demo Ethereum dApp. Change the value below to get started. Check out our repos – links are in the footer!
