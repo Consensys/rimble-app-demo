@@ -26,6 +26,7 @@ class NoWalletModal extends React.Component {
           href="https://metamask.io"
           target="_blank"
           title="MetaMask website"
+          mb={[4, 0]}
         >
           Install MetaMask
         </MetaMaskButton>

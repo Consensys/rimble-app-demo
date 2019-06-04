@@ -102,6 +102,7 @@ class TransactionConnectionModal extends React.Component {
         <MetaMaskButton
           onClick={this.props.validateAccount}
           width={[1, 1/2]}
+          mb={[4, 0]}
         >
           Connect with MetaMask
         </MetaMaskButton>
