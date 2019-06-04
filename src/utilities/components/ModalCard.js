@@ -40,7 +40,7 @@ const ModalCard = ({children, closeFunc, ...props}) => (
 );
 
 ModalCard.Body = ({children, ...props}) => (
-  <Flex flex={'1'} style={{ overflow: 'auto' }} >
+  <Flex flex={'1 1 auto'} style={{ overflow: 'auto' }} >
     <Box width={1} p={['4', '5']} m={'auto'}>
       {children}
     </Box>
@@ -49,7 +49,7 @@ ModalCard.Body = ({children, ...props}) => (
 
 ModalCard.Footer = ({children, ...props}) => (
   <Flex
-    flex={'0'}
+    flex={'1 0 auto'}
     justifyContent={'center'}
     borderTop={1}
     borderColor={'light-gray'}
