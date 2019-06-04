@@ -18,13 +18,6 @@ class AccountOverview extends React.Component {
     return (
       <Flex alignItems={"flex-start"}>
         <Flex mr={3}>
-          <Flex border={1} borderColor={'moon-gray'} p={1} mr={1}>
-            <Blockie opts={{
-              seed: this.props.account,
-              size: 8,
-              scale: 8,
-            }} />
-          </Flex>
           <Flex border={1} borderColor={'moon-gray'} p={1}>
             <QR
               value={this.props.account}

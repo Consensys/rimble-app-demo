@@ -5,7 +5,6 @@ import RimbleWeb3 from "./utilities/RimbleWeb3";
 import ConnectionBanner from "@rimble/connection-banner";
 import NetworkIndicator from "@rimble/network-indicator";
 
-
 import Header from "./components/Header";
 import WalletBlock from "./components/WalletBlock";
 import PrimaryCard from "./components/PrimaryCard";
@@ -74,7 +73,7 @@ class App extends Component {
                   network={network}
                 />
 
-                <Box mx={'auto'} p={3} maxWidth={'1024px'}>
+                <Box maxWidth={'640px'} mx={'auto'} p={3} >
                   <ConnectionBanner
                     currentNetwork={network.current.id}
                     requiredNetwork={this.config.requiredNetwork}
@@ -82,14 +81,14 @@ class App extends Component {
                   />
                 </Box>
 
-                <Flex mx={'auto'} p={4} maxWidth="400px">
+                <Flex maxWidth={'640px'} mx={'auto'} p={3}>
                   <Heading.h2 mr={3}>
                     <span role="img" aria-label="Waving hand">
                       👋
                     </span>
                   </Heading.h2>
 
-                  <Text maxWidth="400px">
+                  <Text>
                     Hi there, see Rimble components in action with our demo Ethereum dApp. Change the value below to get started. Check out our repos – links are in the footer!
                   </Text>
                 </Flex>

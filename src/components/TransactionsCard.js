@@ -44,7 +44,7 @@ class TransactionsCard extends React.Component {
 
           <tbody>
             {Object.keys(this.props.transactions).length < 1 ? (
-              <Text textAlign={"center"}>
+              <Text textAlign={"center"} p={3}>
                 No transactions yet. Increase or decrease the smart contract value
                 to start a transaction.
               </Text>
