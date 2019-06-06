@@ -139,101 +139,43 @@ class SmartContractControls extends React.Component {
   render() {
     return (
       <Box>
-        <Box display={["none", "block"]}>
-          <Flex px={0} justifyContent="space-between" alignItems="end">
-            <Text mb={2} fontSize={3}>
-              Smart contract value
-            </Text>
 
-            <Button.Outline
-              size={"small"}
-              onClick={this.resetCounter}
-              disabled={!this.props.account}
-            >
-              Reset
-            </Button.Outline>
-          </Flex>
-        </Box>
-
-        <Box display={["block", "none"]}>
-          <Button
-            size="medium"
-            width={[1, "initial"]}
-            onClick={this.incrementCounter}
-            my={1}
-            px={3}
-          >
-            Increase value
-          </Button>
-        </Box>
-
-        <Box
-          my={4}
-          pt={3}
-          pb={3}
-          borderTop={1}
-          borderBottom={1}
-          borderColor={"#E8E8E8"}
-        >
-          <Box display={["block", "none"]}>
-            <Flex px={0} justifyContent="space-between" alignItems="end">
-              <Text mb={2} fontSize={3}>
-                Smart contract value
-              </Text>
-
-              <Button.Outline
-                size={"small"}
-                onClick={this.resetCounter}
-                disabled={!this.props.account}
-              >
-                Reset
-              </Button.Outline>
-            </Flex>
-          </Box>
-          <Text fontSize={6} textAlign={"center"}>
-            {this.state.value}
+        <Flex px={0} justifyContent="space-between" alignItems={'center'}>
+          <Text fontWeight={3}>
+            Smart contract value:
           </Text>
-        </Box>
 
-        <Box display={["block", "none"]}>
+          <Button.Outline
+            size={"small"}
+            onClick={this.resetCounter}
+            disabled={!this.props.account}
+          >
+            Reset
+          </Button.Outline>
+        </Flex>
+
+        <Text fontSize={'5rem'} fontWeight={1} lineHeight={1} textAlign={'center'} my={5}>
+          {this.state.value}
+        </Text>
+
+        <Flex flexDirection={'row'}>
           <Button
-            size="medium"
-            width={[1, "initial"]}
             onClick={this.decrementCounter}
-            my={1}
-            px={3}
+            flex={'1'}
+            mr={[2, 3]}
           >
             Decrease value
           </Button>
-        </Box>
-
-        <Box mx={-1} display={["none", "block"]}>
-          <Flex
-            px={0}
-            justifyContent="space-between"
-            flexWrap={["wrap", "no-wrap"]}
+          <Button
+            onClick={this.incrementCounter}
+            flex={'1'}
           >
-            <Button
-              size="medium"
-              width={[1, "initial"]}
-              onClick={this.decrementCounter}
-              my={1}
-              px={3}
-            >
-              Decrease value
-            </Button>
-            <Button
-              size="medium"
-              width={[1, "initial"]}
-              onClick={this.incrementCounter}
-              my={1}
-              px={3}
-            >
-              Increase value
-            </Button>
-          </Flex>
-        </Box>
+            Increase value
+          </Button>
+        </Flex>
+
       </Box>
+
     );
   }
 }

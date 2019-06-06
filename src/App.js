@@ -1,24 +1,15 @@
 import React, { Component } from "react";
-import { ThemeProvider, Box, Text, Flex, Heading } from "rimble-ui";
+import { ThemeProvider, Box, Flex, Card, Text, Heading } from "rimble-ui";
 
 import RimbleWeb3 from "./utilities/RimbleWeb3";
 import ConnectionBanner from "@rimble/connection-banner";
+import NetworkIndicator from "@rimble/network-indicator";
 
 import Header from "./components/Header";
+import WalletBlock from "./components/WalletBlock";
 import PrimaryCard from "./components/PrimaryCard";
 import InstructionsCard from "./components/InstructionsCard";
 import Web3Debugger from "./components/Web3Debugger";
-
-import theme from "./theme";
-import { createGlobalStyle } from "styled-components";
-
-const GlobalStyle = createGlobalStyle`
-  body, html {
-    margin: 0;
-    padding: 0;
-    background-color: #efefef;
-  }
-`;
 
 class App extends Component {
   state = {
@@ -39,7 +30,7 @@ class App extends Component {
 
   render() {
     return (
-      <ThemeProvider theme={theme} className="App">
+      <ThemeProvider>
         <RimbleWeb3 config={this.config}>
           <RimbleWeb3.Consumer>
             {({
@@ -64,11 +55,7 @@ class App extends Component {
               transaction,
               web3Fallback
             }) => (
-              <Box
-                style={{
-                  paddingBottom: !network.isCorrectNetwork ? "8em" : "0"
-                }}
-              >
+              <Box>
                 <Header
                   account={account}
                   accountBalance={accountBalance}
@@ -86,21 +73,40 @@ class App extends Component {
                   network={network}
                 />
 
-                <Flex m={3} justifyContent={"center"}>
+                <Box maxWidth={'640px'} mx={'auto'} p={3} >
                   <ConnectionBanner
                     currentNetwork={network.current.id}
                     requiredNetwork={this.config.requiredNetwork}
                     onWeb3Fallback={web3Fallback}
                   />
-                </Flex>
+                </Box>
 
-                <Flex justifyContent="center" p={3}>
-                  <Heading.h2 role="img" aria-label="Waving hand" mr={3}>👋</Heading.h2>
+                <Flex maxWidth={'640px'} mx={'auto'} p={3}>
+                  <Heading.h2 mr={3}>
+                    <span role="img" aria-label="Waving hand">
+                      👋
+                    </span>
+                  </Heading.h2>
 
-                  <Text maxWidth="400px">
+                  <Text>
                     Hi there, see Rimble components in action with our demo Ethereum dApp. Change the value below to get started. Check out our repos – links are in the footer!
                   </Text>
                 </Flex>
+
+                <Card maxWidth={'640px'} mx={'auto'} p={3} px={4}>
+                  <NetworkIndicator
+                    currentNetwork={network.current.id}
+                    requiredNetwork={network.required.id}
+                  />
+                </Card>
+
+                <WalletBlock
+                  account={account}
+                  accountBalance={accountBalance}
+                  accountBalanceLow={accountBalanceLow}
+                  accountValidated={accountValidated}
+                  connectAndValidateAccount={connectAndValidateAccount}
+                />
 
                 {this.state.route === "default" ? <PrimaryCard /> : null}
 
@@ -134,7 +140,6 @@ class App extends Component {
             )}
           </RimbleWeb3.Consumer>
         </RimbleWeb3>
-        <GlobalStyle />
       </ThemeProvider>
     );
   }

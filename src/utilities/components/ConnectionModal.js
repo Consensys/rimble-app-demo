@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Card,
   Heading,
   Text,
   Icon,
@@ -11,8 +10,9 @@ import {
   MetaMaskButton,
   Link
 } from "rimble-ui";
-import GeneralUtil from "../GeneralUtil";
+import ModalCard from './ModalCard';
 import TransactionFeeModal from "./TransactionFeeModal";
+import GeneralUtil from "../GeneralUtil";
 
 class ConnectionModal extends React.Component {
   state = {
@@ -28,175 +28,125 @@ class ConnectionModal extends React.Component {
     });
   };
 
+  renderModalContent = () => {
+    return (
+      <React.Fragment>
+        {/* Start primary content */}
+        <Box mt={4} mb={5}>
+          <Heading fontSize={[4, 5]}>Before you connect</Heading>
+          <Text fontSize={[2, 3]} my={3}>
+            Connecting lets you use the Rimble Demo App via your
+            Ethereum account.
+          </Text>
+        </Box>
+
+        <Flex
+          flexDirection={['column', 'row']}
+          justifyContent={"space-between"}
+          my={[0, 4]}
+        >
+          <Box flex={'1 1'} width={1} mt={[3, 0]} mb={[4, 0]} mr={4}>
+            <Flex justifyContent={"center"} mb={3}>
+              <Icon
+                name="Public"
+                color="primary"
+                size="4rem"
+              />
+            </Flex>
+            <Heading fontSize={2}>The blockchain is public</Heading>
+            <Text fontSize={1}>
+              Your Ethereum account activity is public on the
+              blockchain. Choose an account you don’t mind being
+              linked with your activity here.
+            </Text>
+          </Box>
+          <Box flex={'1 1'} width={1} mt={[3, 0]} mb={[4, 0]} mr={4}>
+            <Flex justifyContent={"center"} mb={3}>
+              <Icon
+                name="AccountBalanceWallet"
+                color="primary"
+                size="4rem"
+              />
+            </Flex>
+            <Heading fontSize={2}>Have some Ether for fees</Heading>
+            <Text fontSize={1} mb={3}>
+              You’ll need Ether to pay transaction fees. Buy Ether
+              from exchanges like Coinbase.
+            </Text>
+            <Link
+              title="Learn about Ethereum transaction fees"
+              as={"a"}
+              href="#"
+              onClick={this.toggleShowTxFees}
+            >
+              What are transaction fees?
+            </Link>
+          </Box>
+          <Box flex={'1 1'} width={1} mt={[3, 0]} mb={[4, 0]}>
+            <Flex justifyContent={"center"} mb={3}>
+              <Icon
+                name="People"
+                color="primary"
+                size="4rem"
+              />
+            </Flex>
+            <Heading fontSize={2}>Have the right account ready</Heading>
+            <Text fontSize={1}>
+              If you have multiple Ethereum accounts, check that the
+              one you want to use is active in your browser.
+            </Text>
+          </Box>
+        </Flex>
+        {/* End Modal Content */}
+      </React.Fragment>
+    );
+  }
+
+  renderConnectButton = () => {
+    if (GeneralUtil.hasMetaMask()) {
+      return (
+        <MetaMaskButton
+          onClick={this.props.validateAccount}
+          width={[1, 1/2]}
+          mb={[5, 0]}
+        >
+          Connect with MetaMask
+        </MetaMaskButton>
+      )
+    } else {
+      return (
+        <Button
+          onClick={this.props.validateAccount}
+          width={[1, 'auto']}
+        >
+          Connect
+        </Button>
+      )
+    }
+  }
+
   render() {
     return (
       <Modal isOpen={this.props.isOpen}>
-        <Card
-          pr={[0, 5]}
-          pl={[0, 5]}
-          pt={["48px", 5]}
-          pb={["97px", 4]}
-          maxWidth={"960px"}
-          overflow={"hidden"}
-        >
-          <Box position={"relative"}>
-            <Flex
-              justifyContent={"flex-end"}
-              mr={[0, -5]}
-              mt={["-48px", -5]}
-              position={"absolute"}
-              top={"0"}
-              left={"0"}
-              right={"0"}
-              bg={"white"}
-            >
-              <Button.Text
-                icononly
-                icon={"Close"}
-                color={"moon-gray"}
-                onClick={this.props.closeModal}
-              />
-            </Flex>
-          </Box>
+        <ModalCard closeFunc={this.props.closeModal}>
 
           {this.state.showTxFees === false ? (
-            <Box>
-              {/* Modal content */}
-              <Box
-                style={{ overflow: "auto" }}
-                maxHeight={"calc(100vh - 195px)"}
-              >
-                <Box px={[4, 0]} pt={[0, 0]} pb={[4, 5]}>
-                  {/* Start primary content */}
-                  <Box>
-                    <Heading.h2 mt={[0, 0]}>Before you connect</Heading.h2>
-                    <Text my={3}>
-                      Connecting lets you use the Rimble Demo App via your
-                      Ethereum account.
-                    </Text>
-                  </Box>
-
-                  <Flex
-                    flexWrap={"wrap"}
-                    justifyContent={"space-between"}
-                    mx={-2}
-                    mt={[0, 4]}
-                    mb={[0, 4]}
-                  >
-                    <Box width={[1, 1, 1 / 3]} px={2} my={3}>
-                      <Flex justifyContent={"center"}>
-                        <Icon color="primary" size="60" name="Public" />
-                      </Flex>
-                      <Heading.h4>The blockchain is public</Heading.h4>
-                      <Text>
-                        Your Ethereum account activity is public on the
-                        blockchain. Choose an account you don’t mind being
-                        linked with your activity here.
-                      </Text>
-                    </Box>
-                    <Box width={[1, 1, 1 / 3]} px={2} my={3}>
-                      <Flex justifyContent={"center"}>
-                        <Icon
-                          color="primary"
-                          size="60"
-                          name="AccountBalanceWallet"
-                        />
-                      </Flex>
-                      <Heading.h4>Have some Ether for fees</Heading.h4>
-                      <Text>
-                        You’ll need Ether to pay transaction fees. Buy Ether
-                        from exchanges like Coinbase.
-                      </Text>
-                      <Link
-                        title="Learn about Ethereum transaction fees"
-                        as={"a"}
-                        href="#"
-                        onClick={this.toggleShowTxFees}
-                      >
-                        What are transaction fees?
-                      </Link>
-                    </Box>
-                    <Box width={[1, 1, 1 / 3]} px={2} my={3}>
-                      <Flex justifyContent={"center"}>
-                        <Icon color="primary" size="60" name="People" />
-                      </Flex>
-                      <Heading.h4>Have the right account ready</Heading.h4>
-                      <Text>
-                        If you have multiple Ethereum accounts, check that the
-                        one you want to use is active in your browser.
-                      </Text>
-                    </Box>
-                  </Flex>
-                  {/* End Modal Content */}
-                </Box>
-              </Box>
-
-              <Box
-                position={"absolute"}
-                bottom={"0"}
-                left={"0"}
-                right={"0"}
-                px={[4, 5]}
-                pt={0}
-                pb={4}
-                bg={"white"}
-              >
-                <Flex borderTop={1} borderColor={"#999"} />
-                <Flex pt={4} justifyContent={["center", "flex-end"]}>
-                  {GeneralUtil.hasMetaMask() ? (
-                    <MetaMaskButton
-                      onClick={this.props.validateAccount}
-                      width={[1, "auto"]}
-                    >
-                      Connect with MetaMask
-                    </MetaMaskButton>
-                  ) : (
-                    <Button
-                      onClick={this.props.validateAccount}
-                      width={[1, "auto"]}
-                    >
-                      Connect
-                    </Button>
-                  )}
-                </Flex>
-              </Box>
-            </Box>
+            <React.Fragment>
+              <ModalCard.Body>
+                {this.renderModalContent()}
+              </ModalCard.Body>
+              <ModalCard.Footer>
+                {this.renderConnectButton()}
+              </ModalCard.Footer>
+            </React.Fragment>
           ) : (
-            <Box mb={3}>
-              <Box
-                style={{ overflow: "auto" }}
-                maxHeight={"calc(100vh - 195px)"}
-              >
-                <Box px={[4, 0]} pt={[0, 0]} pb={[4, 5]}>
-                  {/* Start modal content */}
-                  <TransactionFeeModal />
-                  {/* End Modal Content */}
-                </Box>
-              </Box>
-
-              <Box
-                position={"absolute"}
-                bottom={"0"}
-                left={"0"}
-                right={"0"}
-                px={[4, 5]}
-                pt={0}
-                pb={4}
-                bg={"white"}
-              >
-                <Flex borderTop={1} borderColor={"#999"} />
-                <Flex mt={4} justifyContent={["center", "flex-end"]}>
-                  <Button.Outline
-                    width={[1, "auto"]}
-                    onClick={this.toggleShowTxFees}
-                  >
-                    Go back
-                  </Button.Outline>
-                </Flex>
-              </Box>
-            </Box>
+            <ModalCard.Body>
+              <TransactionFeeModal />
+              <ModalCard.BackButton onClick={this.toggleShowTxFees} />
+            </ModalCard.Body>
           )}
-        </Card>
+
+        </ModalCard>
       </Modal>
     );
   }
