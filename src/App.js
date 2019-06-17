@@ -11,6 +11,8 @@ import PrimaryCard from "./components/PrimaryCard";
 import InstructionsCard from "./components/InstructionsCard";
 import Web3Debugger from "./components/Web3Debugger";
 
+import EthToUsd from "./utilities/conversion/ethusd";
+
 class App extends Component {
   state = {
     route: "default"
@@ -53,7 +55,9 @@ class App extends Component {
               modals,
               network,
               transaction,
-              web3Fallback
+              web3Fallback,
+              initContract,
+              contract
             }) => (
               <Box>
                 <Header
@@ -73,7 +77,7 @@ class App extends Component {
                   network={network}
                 />
 
-                <Box maxWidth={'640px'} mx={'auto'} p={3} >
+                <Box maxWidth={"640px"} mx={"auto"} p={3}>
                   <ConnectionBanner
                     currentNetwork={network.current.id}
                     requiredNetwork={this.config.requiredNetwork}
@@ -81,7 +85,7 @@ class App extends Component {
                   />
                 </Box>
 
-                <Flex maxWidth={'640px'} mx={'auto'} p={3}>
+                <Flex maxWidth={"640px"} mx={"auto"} p={3}>
                   <Heading.h2 mr={3}>
                     <span role="img" aria-label="Waving hand">
                       👋
@@ -89,11 +93,22 @@ class App extends Component {
                   </Heading.h2>
 
                   <Text>
-                    Hi there, see Rimble components in action with our demo Ethereum dApp. Change the value below to get started. Check out our repos – links are in the footer!
+                    Hi there, see Rimble components in action with our demo
+                    Ethereum dApp. Change the value below to get started. Check
+                    out our repos – links are in the footer!
                   </Text>
                 </Flex>
 
-                <Card maxWidth={'640px'} mx={'auto'} p={3} px={4}>
+                <Card maxWidth={"640px"} mx={"auto"} p={3} px={4}>
+                  <EthToUsd
+                    initContract={initContract}
+                    web3={web3}
+                    contract={contract}
+                    account={account}
+                  />
+                </Card>
+
+                <Card maxWidth={"640px"} mx={"auto"} p={3} px={4}>
                   <NetworkIndicator
                     currentNetwork={network.current.id}
                     requiredNetwork={network.required.id}
