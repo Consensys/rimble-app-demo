@@ -154,7 +154,10 @@ class EthConvervsion extends React.Component {
         accountBalanceConverted
       });
 
-      this.props.updateAccountBalanceUsd(accountBalanceConverted);
+      this.props.updateAccountBalanceUsd(
+        accountBalanceConverted,
+        this.state.lastUpdated
+      );
     }
   };
 

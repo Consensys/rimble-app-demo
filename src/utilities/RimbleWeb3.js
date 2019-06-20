@@ -319,8 +319,11 @@ class RimbleTransaction extends React.Component {
     }
   };
 
-  updateAccountBalanceUsd = balance => {
-    this.setState({ accountBalanceUsd: balance });
+  updateAccountBalanceUsd = (balance, updated) => {
+    this.setState({
+      accountBalanceUsd: balance,
+      accountBalanceUsdUpdated: updated
+    });
   };
 
   validateAccount = async () => {

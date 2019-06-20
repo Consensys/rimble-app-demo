@@ -59,7 +59,8 @@ class App extends Component {
               initContract,
               contract,
               updateAccountBalanceUsd,
-              accountBalanceUsd
+              accountBalanceUsd,
+              accountBalanceUsdUpdated
             }) => (
               <Box>
                 <Header
@@ -115,6 +116,7 @@ class App extends Component {
                   accountValidated={accountValidated}
                   connectAndValidateAccount={connectAndValidateAccount}
                   accountBalanceUsd={accountBalanceUsd}
+                  accountBalanceUsdUpdated={accountBalanceUsdUpdated}
                 />
 
                 <EthConversion

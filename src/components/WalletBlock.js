@@ -24,6 +24,7 @@ class WalletBlock extends Component {
           accountBalanceLow={this.props.accountBalanceLow}
           accountBalance={this.props.accountBalance}
           accountBalanceUsd={this.props.accountBalanceUsd}
+          accountBalanceUsdUpdated={this.props.accountBalanceUsdUpdated}
         />
       );
     } else {

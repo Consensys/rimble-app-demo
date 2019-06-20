@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Box, Text, Blockie, QR } from "rimble-ui";
+import { Flex, Box, Text, Blockie, QR, Tooltip } from "rimble-ui";
 import ShortHash from "./ShortHash";
 
 class AccountOverview extends React.Component {
@@ -33,7 +33,16 @@ class AccountOverview extends React.Component {
             fontSize={1}
             color={this.props.accountBalanceLow ? "red" : "mid-gray"}
           >
-            Balance: {roundedBalance} ETH / ${this.props.accountBalanceUsd} USD
+            Balance: {roundedBalance} ETH /{" "}
+            <Tooltip
+              message={
+                "ETH price last updated " +
+                this.props.accountBalanceUsdUpdated +
+                " minutes ago"
+              }
+            >
+              ${this.props.accountBalanceUsd} USD
+            </Tooltip>
           </Text>
         </Box>
       </Flex>
