@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
-import { Card, Text, Button } from 'rimble-ui';
+import React, { Component } from "react";
+import { Card, Text, Button } from "rimble-ui";
 
 import AccountOverview from "../utilities/components/AccountOverview";
 
-
 class WalletBlock extends Component {
-
   handleConnectAccount = () => {
     this.props.connectAndValidateAccount(result => {
       if (result === "success") {
@@ -15,8 +13,8 @@ class WalletBlock extends Component {
         // error
         console.log("Callback ERROR");
       }
-    })
-  }
+    });
+  };
 
   renderContent = () => {
     if (this.props.account && this.props.accountValidated) {
@@ -25,20 +23,21 @@ class WalletBlock extends Component {
           account={this.props.account}
           accountBalanceLow={this.props.accountBalanceLow}
           accountBalance={this.props.accountBalance}
+          accountBalanceUsd={this.props.accountBalanceUsd}
         />
-      )
+      );
     } else {
       return (
         <Button onClick={this.handleConnectAccount} width={1}>
           Connect your wallet
         </Button>
-      )
+      );
     }
-  }
+  };
 
   render() {
     return (
-      <Card maxWidth={'640px'} mx={'auto'} p={4} >
+      <Card maxWidth={"640px"} mx={"auto"} p={4}>
         <Text fontWeight={3} mb={3}>
           Wallet:
         </Text>
@@ -46,7 +45,6 @@ class WalletBlock extends Component {
       </Card>
     );
   }
-
 }
 
 export default WalletBlock;

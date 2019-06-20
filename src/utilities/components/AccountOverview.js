@@ -18,26 +18,22 @@ class AccountOverview extends React.Component {
     return (
       <Flex alignItems={"flex-start"}>
         <Flex mr={3}>
-          <Flex border={1} borderColor={'moon-gray'} p={1}>
-            <QR
-              value={this.props.account}
-              size={'4rem'}
-              renderAs={'svg'}
-            />
+          <Flex border={1} borderColor={"moon-gray"} p={1}>
+            <QR value={this.props.account} size={"4rem"} renderAs={"svg"} />
           </Flex>
         </Flex>
         <Box>
-          <Text.span fontSize={1} color={'mid-gray'}>
+          <Text.span fontSize={1} color={"mid-gray"}>
             Public Address:
-            <div style={{'word-break': 'break-word'}}>
+            <div style={{ "word-break": "break-word" }}>
               {this.props.account}
             </div>
           </Text.span>
           <Text
             fontSize={1}
-            color={this.props.accountBalanceLow ? 'red' : 'mid-gray'}
-            >
-              Balance: {roundedBalance} ETH
+            color={this.props.accountBalanceLow ? "red" : "mid-gray"}
+          >
+            Balance: {roundedBalance} ETH / ${this.props.accountBalanceUsd} USD
           </Text>
         </Box>
       </Flex>

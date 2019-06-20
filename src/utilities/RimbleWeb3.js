@@ -22,6 +22,7 @@ const RimbleTransactionContext = React.createContext({
   rejectValidation: () => {},
   validateAccount: () => {},
   connectAndValidateAccount: () => {},
+  updateAccountBalanceUsd: () => {},
   network: {
     required: {},
     current: {},
@@ -316,6 +317,10 @@ class RimbleTransaction extends React.Component {
         secondaryMessage: "You now have enough ETH"
       });
     }
+  };
+
+  updateAccountBalanceUsd = balance => {
+    this.setState({ accountBalanceUsd: balance });
   };
 
   validateAccount = async () => {
@@ -930,6 +935,7 @@ class RimbleTransaction extends React.Component {
     rejectValidation: this.rejectValidation,
     validateAccount: this.validateAccount,
     connectAndValidateAccount: this.connectAndValidateAccount,
+    updateAccountBalanceUsd: this.updateAccountBalanceUsd,
     network: {
       required: {},
       current: {},

@@ -1,11 +1,4 @@
-import React from "react";
-import { Flex, Box, Text } from "rimble-ui";
-
-// Address of the deployed smart contract (from etherscan)
-const contractAddress = "0x729D19f657BD0614b4985Cf1D82531c67569197B";
-
-// Copied from remix ide
-const contractAbi = [
+const MakerDaoEthUsd = [
   {
     constant: false,
     inputs: [{ name: "owner_", type: "address" }],
@@ -196,85 +189,4 @@ const contractAbi = [
   }
 ];
 
-class EthToUsd extends React.Component {
-  state = {
-    value: 0,
-    lastUpdated: Date.now(),
-    runAgain: true
-  };
-
-  componentDidMount() {}
-
-  componentDidUpdate() {
-    if (this.state.runAgain === false) {
-      return;
-    }
-    if (typeof this.props.web3 !== "undefined" && this.props.web3 !== null) {
-      // Init the contract after the web3 provider has been determined
-      const contract = new this.props.web3.eth.Contract(
-        contractAbi,
-        contractAddress
-      );
-
-      window.contract = contract;
-      window.Web3 = this.props.web3;
-
-      debugger;
-
-      console.log("Contract: ", contract);
-
-      let contractValue = {};
-
-      try {
-        contract.methods.read.call((error, result) => {
-          console.log("result:", result);
-          contractValue = result;
-        });
-      } catch (error) {
-        console.log("error: ", error);
-      }
-
-      var output = contract.methods.read().call((error, result) => {
-        console.log("error:", error);
-        console.log("result:", result);
-        contractValue = result;
-        return result;
-      });
-
-      console.log("output: ", output);
-
-      // const contractValue = contract.methods.compute()[0];
-
-      console.log("Contract value: ", contractValue);
-
-      // const value = this.props.web3.utils.fromWei(contractValue);
-
-      // console.log("Value: ", value);
-
-      // this.setState({ value: value });
-      this.setState({ runAgain: false });
-    }
-  }
-
-  render() {
-    return (
-      <Box>
-        <Flex px={0} justifyContent="space-between" alignItems={"center"}>
-          <Text fontWeight={3}>Eth to USD:</Text>
-        </Flex>
-
-        <Text
-          fontSize={"5rem"}
-          fontWeight={1}
-          lineHeight={1}
-          textAlign={"center"}
-          my={5}
-        >
-          {this.state.value}
-        </Text>
-      </Box>
-    );
-  }
-}
-
-export default EthToUsd;
+export default MakerDaoEthUsd;

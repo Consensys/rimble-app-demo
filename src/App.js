@@ -11,7 +11,7 @@ import PrimaryCard from "./components/PrimaryCard";
 import InstructionsCard from "./components/InstructionsCard";
 import Web3Debugger from "./components/Web3Debugger";
 
-import EthToUsd from "./utilities/conversion/ethusd";
+import EthConversion from "./utilities/conversion/EthConversion";
 
 class App extends Component {
   state = {
@@ -57,7 +57,9 @@ class App extends Component {
               transaction,
               web3Fallback,
               initContract,
-              contract
+              contract,
+              updateAccountBalanceUsd,
+              accountBalanceUsd
             }) => (
               <Box>
                 <Header
@@ -100,15 +102,6 @@ class App extends Component {
                 </Flex>
 
                 <Card maxWidth={"640px"} mx={"auto"} p={3} px={4}>
-                  <EthToUsd
-                    initContract={initContract}
-                    web3={web3}
-                    contract={contract}
-                    account={account}
-                  />
-                </Card>
-
-                <Card maxWidth={"640px"} mx={"auto"} p={3} px={4}>
                   <NetworkIndicator
                     currentNetwork={network.current.id}
                     requiredNetwork={network.required.id}
@@ -121,6 +114,16 @@ class App extends Component {
                   accountBalanceLow={accountBalanceLow}
                   accountValidated={accountValidated}
                   connectAndValidateAccount={connectAndValidateAccount}
+                  accountBalanceUsd={accountBalanceUsd}
+                />
+
+                <EthConversion
+                  initContract={initContract}
+                  web3={web3}
+                  contract={contract}
+                  account={account}
+                  accountBalance={accountBalance}
+                  updateAccountBalanceUsd={updateAccountBalanceUsd}
                 />
 
                 {this.state.route === "default" ? <PrimaryCard /> : null}
