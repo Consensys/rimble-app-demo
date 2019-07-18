@@ -9116,6 +9116,19 @@ rimble-ui@^0.9.0:
     rmdi "^1.0.1"
     styled-system "^4.1.0"
 
+rimble-ui@^0.9.5:
+  version "0.9.5"
+  resolved "https://registry.yarnpkg.com/rimble-ui/-/rimble-ui-0.9.5.tgz#50a678edfeacae5ba35d9fc10dd077f3f5d5570a"
+  integrity sha512-Vu+0LjqmsVpQgnMOhzEZ/K/iPUKHMbvgKsQs18bReYGCWcrjbDEnamBmAoWW4aStucBpxbI1NFKf2MHsxYPjiQ==
+  dependencies:
+    "@d8660091/react-popper" "^1.0.4"
+    "@svgr/rollup" "^4.2.0"
+    ethereum-blockies "^0.1.1"
+    polished "^3.2.0"
+    qrcode.react "^0.9.3"
+    rmdi "^1.0.1"
+    styled-system "^4.1.0"
+
 rimraf@2.6.3, rimraf@^2.2.8, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6.2, rimraf@^2.6.3:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.3.tgz#b2d104fe0d8fb27cf9e0a1cda8262dd3833c6cab"

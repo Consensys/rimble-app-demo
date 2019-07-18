@@ -20,9 +20,21 @@ const TransactionTable = styled(Table)`
 `;
 
 class TransactionsCard extends React.Component {
+  
+  getTimeDifference = (startTime, currentTime) => {
+    let timeDiff = currentTime - startTime;
+    return timeDiff;
+  }
+
+  formatToMinSeconds = (millis) => {
+    var minutes = Math.floor(millis / 60000);
+    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+  }
+
   render() {
     return (
-      <Card maxWidth={'640px'} px={4} mx={'auto'}>
+      <Card>
         <Text fontWeight={3} mb={3}>
           Activity (Transactions):
         </Text>
@@ -32,12 +44,11 @@ class TransactionsCard extends React.Component {
           <thead>
             {Object.keys(this.props.transactions).length > 0 ? (
               <tr>
-                <th>Method</th>
-                <th>Status</th>
-                <th>Created</th>
-                <th>Updated</th>
-                <th>Confirmations</th>
-                <th>txHash</th>
+                <th>Initialized</th>
+                <th>Timestamps</th>
+                <th>Confirmation count</th>
+                <th>Total elapsed time</th>
+                <th>Etherscan link</th>
               </tr>
             ) : null}
         </thead>
@@ -61,28 +72,31 @@ class TransactionsCard extends React.Component {
                 }
 
                 let eventCreated = new Date(this.props.transactions[keyName].created);
-                let eventUpdated = new Date(this.props.transactions[keyName].lastUpdated);
-
+                let eventUpdated = this.props.transactions[keyName].lastUpdated;
+                
+                const timestamps = this.props.transactions[keyName].timestamps;
                 return (
                   <tr key={keyIndex}>
                     <td>
-                      <code>
-                        {this.props.transactions[keyName].method}
-                      </code>
+                      {eventCreated.getHours()}:{eventCreated.getMinutes()}.{eventCreated.getSeconds()}
                     </td>
                     <td>
-                      <Pill>
-                        {this.props.transactions[keyName].status}
-                      </Pill>
-                    </td>
-                    <td>
-                      {eventCreated.toDateString()}
-                    </td>
-                    <td>
-                      {eventUpdated.toTimeString()}
+                      {Object.keys(timestamps).map((timestampName, timestampIndex) => {
+                        const entry = timestamps[timestampName];
+                        const formattedTime = this.formatToMinSeconds(this.getTimeDifference(eventCreated, entry.timestamp));
+
+                        return (
+                          <pre key={timestampIndex}>
+                            {entry.state}: {formattedTime}
+                          </pre>
+                        )
+                      })}
                     </td>
                     <td>
                       {this.props.transactions[keyName].confirmationCount}
+                    </td>
+                    <td>
+                      {eventUpdated && this.formatToMinSeconds(this.getTimeDifference(eventCreated, eventUpdated))}
                     </td>
                     <td>
                       <Link href={'//rinkeby.etherscan.io/tx/'+txHash} target='_blank'>
