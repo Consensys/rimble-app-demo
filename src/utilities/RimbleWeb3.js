@@ -573,7 +573,7 @@ class RimbleTransaction extends React.Component {
           transaction.confirmationCount += 1;
 
           // How many confirmations should be received before informing the user
-          const confidenceThreshold = 3;
+          const confidenceThreshold = this.props.config.txConfirmations;
 
           if (transaction.confirmationCount === 1) {
             // Initial confirmation receipt
@@ -647,6 +647,7 @@ class RimbleTransaction extends React.Component {
     transaction.lastUpdated = Date.now();
     transaction.status = "initialized";
     transaction.confirmationCount = 0;
+    transaction.timestamps = [{state: "created", timestamp: Date.now()}]
 
     return transaction;
   };
@@ -663,7 +664,26 @@ class RimbleTransaction extends React.Component {
     const transactions = { ...this.state.transactions };
     const transaction = { ...updatedTransaction };
     transaction.lastUpdated = Date.now();
-    transactions[`tx${updatedTransaction.created}`] = transaction;
+
+    if (transaction.status === 'started') {
+      transaction.timestamps.push({state: transaction.status, timestamp: Date.now()});
+
+    }
+
+    if (transaction.status === 'pending') {
+      transaction.timestamps.push({state: transaction.status, timestamp: Date.now()});
+    }
+
+    if (transaction.status === 'confirmed') {
+      transaction.timestamps.push({state: transaction.status, timestamp: Date.now()});
+    }
+    if (transaction.status === 'success') {
+      transaction.timestamps.push({state: transaction.status, timestamp: Date.now()});
+    }
+
+    const combinedTx = Object.assign({}, transactions[`tx${updatedTransaction.created}`], transaction);
+
+    transactions[`tx${updatedTransaction.created}`] = combinedTx;
     this.setState({ transactions });
   };
 
