@@ -12,6 +12,7 @@ const RimbleTransactionContext = React.createContext({
   web3: {},
   web3Fallback: {},
   transactions: {},
+  gasStationInfo: {},
   checkPreflight: () => {},
   initWeb3: () => {},
   initContract: () => {},
@@ -519,11 +520,43 @@ class RimbleTransaction extends React.Component {
         console.log("getTransaction:", result);
         transaction.details = result;
         console.log("transaction:", transaction);
+        this.updateTransaction(transaction);
       });
     } catch(error) {
       console.log("getTransactionGas failed", error);
     }
   }
+
+  getTransactionReceipt = async (transaction) => {
+    try {
+      return this.state.web3.eth.getTransactionReceipt(transaction.transactionHash, (error, result) => {
+        console.log("getTransactionReceipt:", result);
+        transaction.receipt = result;
+        console.log("transactionReceipt:", transaction);
+        this.updateTransaction(transaction);
+      });
+    } catch(error) {
+      console.log("getTransactionReceipt failed", error);
+    }
+  }
+
+  getGasStationInfo = async() => {
+    const url = "https://ethgasstation.info/json/predictTable.json";
+    try {
+      const results = await fetch(url)
+        .then(response => {
+          return response.json();
+        })
+        .then(results => {
+          console.log(JSON.stringify(results));
+          this.setState({ gasStationInfo: results });
+          return results;
+        });
+      return results;
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
 
   contractMethodSendWrapper = (contractMethod, callback) => {
     console.log("contractMethodSendWrapper Callback: ", callback);
@@ -585,17 +618,14 @@ class RimbleTransaction extends React.Component {
           // Update confirmation count on each subsequent confirmation that's received
           transaction.confirmationCount += 1;
 
-          // Get tx details
-          if (transaction.confirmationCount === 1) {
-            this.getTransactionGas(transaction);
-          }
-
           // How many confirmations should be received before informing the user
           const confidenceThreshold = this.props.config.txConfirmations;
 
           if (transaction.confirmationCount === 1) {
             // Initial confirmation receipt
             transaction.status = "confirmed";
+            // Get tx details
+            this.getTransactionGas(transaction);
           } else if (transaction.confirmationCount < confidenceThreshold) {
             // Not enough confirmations to match threshold
           } else if (transaction.confirmationCount === confidenceThreshold) {
@@ -619,6 +649,10 @@ class RimbleTransaction extends React.Component {
         .on("receipt", receipt => {
           // Received receipt, met total number of confirmations
           transaction.recentEvent = "receipt";
+
+          // Get tx details
+          this.getTransactionReceipt(transaction);
+
           this.updateTransaction(transaction);
           if (callback) {
             callback("receipt", transaction);
@@ -1022,6 +1056,7 @@ class RimbleTransaction extends React.Component {
   componentDidMount() {
     // Performs a check on browser and will load a web3 provider
     // this.initWeb3();
+    this.getGasStationInfo();
   }
 
   render() {

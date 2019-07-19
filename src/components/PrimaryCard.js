@@ -15,6 +15,7 @@ class PrimaryCard extends React.Component {
           contract,
           account,
           transactions,
+          gasStationInfo,
           initContract,
           initAccount,
           contractMethodSendWrapper
@@ -30,7 +31,7 @@ class PrimaryCard extends React.Component {
               />
             </Card>
 
-            <TransactionsCard transactions={transactions} />
+            <TransactionsCard transactions={transactions} gasStationInfo={gasStationInfo} />
             <TransactionToastUtil transactions={transactions} />
           </div>
         )}

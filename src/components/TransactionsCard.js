@@ -1,6 +1,6 @@
 import React from "react";
 import styled from 'styled-components'
-import { Card, Text, Table, Pill, Link } from "rimble-ui";
+import { Card, Text, Table, Pill, Link, Box } from "rimble-ui";
 
 const TransactionTable = styled(Table)`
   & {
@@ -119,7 +119,14 @@ class TransactionsCard extends React.Component {
                       {this.props.transactions[keyName].details && (
                         <>
                           {this.props.transactions[keyName].details.gas} gas <br />
-                          {this.props.transactions[keyName].details.gasPrice} gasPrice
+                          {this.props.transactions[keyName].details.gasPrice} gasPrice <br />
+                        </>
+                      )}
+                      
+                      {this.props.transactions[keyName].receipt && (
+                        <>
+                          {this.props.transactions[keyName].receipt.gasUsed} gasUsed <br />
+                          {this.props.transactions[keyName].receipt.cumulativeGasUsed} cumulativeGasUsed
                         </>
                       )}
                     </td>
@@ -135,6 +142,12 @@ class TransactionsCard extends React.Component {
           </tbody>
 
         </TransactionTable>
+
+        <Box>
+          <Text>Gas Station Prediction results</Text>
+          <pr>{JSON.stringify(this.props.gasStationInfo, null, 2) }</pr>
+        </Box>
+
 
       </Card>
     );
