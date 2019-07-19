@@ -81,16 +81,31 @@ class TransactionsCard extends React.Component {
                       {eventCreated.getHours()}:{eventCreated.getMinutes()}.{eventCreated.getSeconds()}
                     </td>
                     <td>
-                      {Object.keys(timestamps).map((timestampName, timestampIndex) => {
-                        const entry = timestamps[timestampName];
-                        const formattedTime = this.formatToMinSeconds(this.getTimeDifference(eventCreated, entry.timestamp));
+                      <Table>
+                        <tr>
+                          {Object.keys(timestamps).map((timestampName, timestampIndex) => {
+                            const entry = timestamps[timestampName];
+                            return (                                
+                              <th key={timestampIndex}>{entry.state} {entry.confirmation}</th>
+                            )
+                          })}
+                        </tr>
+                        
+                        <tr>
+                          {Object.keys(timestamps).map((timestampName, timestampIndex) => {
+                            const entry = timestamps[timestampName];
+                            const formattedTime = this.formatToMinSeconds(this.getTimeDifference(eventCreated, entry.timestamp));
 
-                        return (
-                          <pre key={timestampIndex}>
-                            {entry.state}: {formattedTime}
-                          </pre>
-                        )
-                      })}
+                            return (
+                              <td key={timestampIndex}>
+                                <pre>
+                                  {formattedTime}
+                                </pre>
+                              </td>
+                            )
+                          })}
+                        </tr>
+                      </Table>
                     </td>
                     <td>
                       {this.props.transactions[keyName].confirmationCount}

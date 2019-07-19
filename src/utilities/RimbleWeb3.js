@@ -675,10 +675,10 @@ class RimbleTransaction extends React.Component {
     }
 
     if (transaction.status === 'confirmed') {
-      transaction.timestamps.push({state: transaction.status, timestamp: Date.now()});
+      transaction.timestamps.push({state: transaction.status, timestamp: Date.now(), confirmation: transaction.confirmationCount});
     }
     if (transaction.status === 'success') {
-      transaction.timestamps.push({state: transaction.status, timestamp: Date.now()});
+      transaction.timestamps.push({state: transaction.status, timestamp: Date.now(), confirmation: transaction.confirmationCount});
     }
 
     const combinedTx = Object.assign({}, transactions[`tx${updatedTransaction.created}`], transaction);
