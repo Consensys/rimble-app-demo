@@ -513,6 +513,18 @@ class RimbleTransaction extends React.Component {
     }, 1000);
   };
 
+  getTransactionGas = async (transaction) => {
+    try {
+      return this.state.web3.eth.getTransaction(transaction.transactionHash, (error, result) => {
+        console.log("getTransaction:", result);
+        transaction.details = result;
+        console.log("transaction:", transaction);
+      });
+    } catch(error) {
+      console.log("getTransactionGas failed", error);
+    }
+  }
+
   contractMethodSendWrapper = (contractMethod, callback) => {
     console.log("contractMethodSendWrapper Callback: ", callback);
     // Is it web3 capable?
@@ -563,6 +575,7 @@ class RimbleTransaction extends React.Component {
           transaction.transactionHash = hash;
           transaction.status = "pending";
           transaction.recentEvent = "transactionHash";
+
           this.updateTransaction(transaction);
           if (callback) {
             callback("transactionHash", transaction);
@@ -571,6 +584,11 @@ class RimbleTransaction extends React.Component {
         .on("confirmation", (confirmationNumber, receipt) => {
           // Update confirmation count on each subsequent confirmation that's received
           transaction.confirmationCount += 1;
+
+          // Get tx details
+          if (transaction.confirmationCount === 1) {
+            this.getTransactionGas(transaction);
+          }
 
           // How many confirmations should be received before informing the user
           const confidenceThreshold = this.props.config.txConfirmations;

@@ -48,6 +48,7 @@ class TransactionsCard extends React.Component {
                 <th>Timestamps</th>
                 <th>Confirmation count</th>
                 <th>Total elapsed time</th>
+                <th>Details</th>
                 <th>Etherscan link</th>
               </tr>
             ) : null}
@@ -112,6 +113,15 @@ class TransactionsCard extends React.Component {
                     </td>
                     <td>
                       {eventUpdated && this.formatToMinSeconds(this.getTimeDifference(eventCreated, eventUpdated))}
+                    </td>
+                    <td>
+                      {/* <pre>{JSON.stringify(this.props.transactions[keyName].details, null, 2) }</pre> */}
+                      {this.props.transactions[keyName].details && (
+                        <>
+                          {this.props.transactions[keyName].details.gas} gas <br />
+                          {this.props.transactions[keyName].details.gasPrice} gasPrice
+                        </>
+                      )}
                     </td>
                     <td>
                       <Link href={'//rinkeby.etherscan.io/tx/'+txHash} target='_blank'>
