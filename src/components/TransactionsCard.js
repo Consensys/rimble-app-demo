@@ -56,10 +56,12 @@ class TransactionsCard extends React.Component {
 
           <tbody>
             {Object.keys(this.props.transactions).length < 1 ? (
-              <Text textAlign={"center"} p={3}>
-                No transactions yet. Increase or decrease the smart contract value
-                to start a transaction.
-              </Text>
+              <tr>
+                <Text textAlign={"center"} p={3} as="td">
+                  No transactions yet. Increase or decrease the smart contract value
+                  to start a transaction.
+                </Text>
+              </tr>
             ) : (
               Object.keys(this.props.transactions).map((keyName, keyIndex) => {
                 let txHash = "";
@@ -83,29 +85,32 @@ class TransactionsCard extends React.Component {
                     </td>
                     <td>
                       <Table>
-                        <tr>
-                          {Object.keys(timestamps).map((timestampName, timestampIndex) => {
-                            const entry = timestamps[timestampName];
-                            return (                                
-                              <th key={timestampIndex}>{entry.state} {entry.confirmation}</th>
-                            )
-                          })}
-                        </tr>
-                        
-                        <tr>
-                          {Object.keys(timestamps).map((timestampName, timestampIndex) => {
-                            const entry = timestamps[timestampName];
-                            const formattedTime = this.formatToMinSeconds(this.getTimeDifference(eventCreated, entry.timestamp));
+                        <thead>
+                          <tr>
+                            {Object.keys(timestamps).map((timestampName, timestampIndex) => {
+                              const entry = timestamps[timestampName];
+                              return (                                
+                                <th key={timestampIndex}>{entry.state} {entry.confirmation}</th>
+                              )
+                            })}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            {Object.keys(timestamps).map((timestampName, timestampIndex) => {
+                              const entry = timestamps[timestampName];
+                              const formattedTime = this.formatToMinSeconds(this.getTimeDifference(eventCreated, entry.timestamp));
 
-                            return (
-                              <td key={timestampIndex}>
-                                <pre>
-                                  {formattedTime}
-                                </pre>
-                              </td>
-                            )
-                          })}
-                        </tr>
+                              return (
+                                <td key={timestampIndex}>
+                                  <pre>
+                                    {formattedTime}
+                                  </pre>
+                                </td>
+                              )
+                            })}
+                          </tr>
+                        </tbody>
                       </Table>
                     </td>
                     <td>
@@ -120,6 +125,8 @@ class TransactionsCard extends React.Component {
                         <>
                           {this.props.transactions[keyName].details.gas} gas <br />
                           {this.props.transactions[keyName].details.gasPrice} gasPrice <br />
+                          {this.props.transactions[keyName].details.gwei} gasPrice in Gwei <br />
+                          {this.props.transactions[keyName].details.estimatedTimeRemaining} estimatedTimeRemaining(from gas) <br />
                         </>
                       )}
                       
@@ -142,13 +149,6 @@ class TransactionsCard extends React.Component {
           </tbody>
 
         </TransactionTable>
-
-        <Box>
-          <Text>Gas Station Prediction results</Text>
-          <pr>{JSON.stringify(this.props.gasStationInfo, null, 2) }</pr>
-        </Box>
-
-
       </Card>
     );
   }

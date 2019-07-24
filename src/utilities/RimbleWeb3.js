@@ -517,9 +517,25 @@ class RimbleTransaction extends React.Component {
   getTransactionGas = async (transaction) => {
     try {
       return this.state.web3.eth.getTransaction(transaction.transactionHash, (error, result) => {
-        console.log("getTransaction:", result);
-        transaction.details = result;
-        console.log("transaction:", transaction);
+        if (result === null) {
+          return;
+        }
+        // result from chain
+        console.log("getTransactionGas:", result);
+
+        // normalize units
+        const gwei = this.state.web3.utils.fromWei(result.gasPrice.toString(), "gwei");
+        console.log("gwei", this.state.web3.utils.fromWei(result.gasPrice.toString(), "gwei"));
+
+        // Get time estimate
+        const estimatedTimeRemaining = this.getEstimatedTimeRemaining(gwei);
+        console.log("estimatedTimeRemaining", estimatedTimeRemaining)
+
+        // update object with new properties
+        // Object.assign(transaction.details, {...result, gwei});
+        transaction["details"] = {...result, gwei, estimatedTimeRemaining}
+        console.log("transaction.details", transaction.details);
+
         this.updateTransaction(transaction);
       });
     } catch(error) {
@@ -548,7 +564,7 @@ class RimbleTransaction extends React.Component {
           return response.json();
         })
         .then(results => {
-          console.log(JSON.stringify(results));
+          // console.log(JSON.stringify(results));
           this.setState({ gasStationInfo: results });
           return results;
         });
@@ -557,6 +573,42 @@ class RimbleTransaction extends React.Component {
       console.log("Error: ", error);
     }
   };
+
+  getEstimatedTimeRemaining = (gas) => {
+    console.log("getEstimatedTimeRemaining");
+    const prediction = this.findClosestPrediction(gas);
+
+    console.log("expectedTime: ", prediction.expectedTime);
+
+    return prediction.expectedTime;
+  };
+
+  findClosestPrediction = (gas) => {
+    console.log("findClosestPrediction()");
+    //const counts = [4, 9, 15, 6, 2];
+    const counts = this.state.gasStationInfo.map((entry) => {
+      return entry.gasprice;
+    });
+
+    console.log("counts", counts);
+    console.log("gas", gas)
+    const goal = gas;
+
+    const closest = counts.reduce(function(prev, curr) {
+      return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
+    });
+    
+    console.log("closest", closest);
+    const index = counts.indexOf(closest);
+    console.log("index", index);
+
+    const closestGas = this.state.gasStationInfo[index];
+    console.log("closestGas", closestGas);
+    
+    return closestGas;
+  };
+
+  
 
   contractMethodSendWrapper = (contractMethod, callback) => {
     console.log("contractMethodSendWrapper Callback: ", callback);
