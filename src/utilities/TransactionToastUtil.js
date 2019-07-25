@@ -1,6 +1,7 @@
 import React from "react";
 import TransactionToastMessages from "./content/TransactionToastMessages";
 import { ToastMessage } from "rimble-ui";
+import ProgressAlertProvider from "./components/ProgressAlertProvider";
 
 class TransactionToastUtil extends React.Component {
   // Determines if collections are same size
@@ -97,8 +98,20 @@ class TransactionToastUtil extends React.Component {
     // Get text info for toast
     let toastMeta = this.getTransactionToastMeta(transaction);
 
-    // Show toast
+    console.log("showTransactionToast", transaction);
+
+    if (transaction.status === "pending" || transaction.status === "success" || transaction.status === "error") {
+      window.progressAlertProvider.addMessage("Processing", {
+        message: "Changing value...",
+        transaction:
+          "0xa239aaaf8020f72e6673104a09cd9a0a7bd8ef54355f68648e7f5b48f07de48d",
+        timeEstimate: 10,
+        error: false
+      });
+    } else {
+      // Show non-pending toast
     window.toastProvider.addMessage(".", toastMeta);
+    }
   };
 
   getTransactionToastMeta = transaction => {
@@ -139,6 +152,7 @@ class TransactionToastUtil extends React.Component {
     return (
       <div>
         <ToastMessage.Provider ref={node => (window.toastProvider = node)} />
+        <ProgressAlertProvider ref={node => (window.progressAlertProvider = node)} />
       </div>
     );
   }
