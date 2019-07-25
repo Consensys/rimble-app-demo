@@ -102,11 +102,11 @@ class TransactionToastUtil extends React.Component {
 
     if (transaction.status === "pending" || transaction.status === "success" || transaction.status === "error") {
       window.progressAlertProvider.addMessage("Processing", {
-        message: "Changing value...",
+        message: "Attempting to " + transaction.method,
         transaction:
-          "0xa239aaaf8020f72e6673104a09cd9a0a7bd8ef54355f68648e7f5b48f07de48d",
-        timeEstimate: 10,
-        error: false
+          transaction.hash,
+        timeEstimate: transaction.timeEstimate,
+        error: transaction.error
       });
     } else {
       // Show non-pending toast
