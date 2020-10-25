@@ -8,7 +8,7 @@ import {
   Flex,
   Box,
   Button,
-  PublicAddress,
+  EthAddress,
   QR,
   Link
 } from "rimble-ui";
@@ -201,7 +201,7 @@ class LowFundsModal extends React.Component {
                     />
                   </Flex>
 
-                  <PublicAddress my={4} address={this.props.account} />
+                  <EthAddress my={4} address={this.props.account} />
                   <Flex mb={3} />
                   {/* End secondary content */}
                 </Box>
